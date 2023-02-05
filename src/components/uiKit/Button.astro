@@ -1,12 +1,19 @@
 ---
+import classNames from "classNames";
 export interface Props {
     size?: "medium" | "large";
+    color?: "primary" | "primary-dim";
 }
 
-const { size = "medium" } = Astro.props;
+const { size = "medium", color } = Astro.props;
 ---
 
-<button class:list={["button", { large: size === "large" }]}>
+<button
+    class={classNames("button", {
+        ["large"]: size === "large",
+        ["color-primary-dim"]: color === "primary-dim",
+    })}
+>
     <slot />
 </button>
 
@@ -45,11 +52,24 @@ const { size = "medium" } = Astro.props;
 
         &.large {
             font-size: 1.5rem;
+            line-height: 1.5;
+        }
+
+        &.color-primary-dim {
+            box-shadow: none;
+            background: change-color($color-prime-dim, $alpha: 0.16);
+            transition: background $animation-slow;
+
+            &:hover {
+                box-shadow: none;
+                background: change-color($color-prime-dim, $alpha: 0.24);
+                transition: background $animation-normal;
+            }
         }
 
         &:hover {
             text-decoration: none;
-            box-shadow: 0 0 2.5rem change-color($color-prime-main, $alpha: 0.6);
+            box-shadow: 0 0 2.5rem change-color($color-prime-main, $alpha: 0.8);
             transition: box-shadow $animation-normal;
         }
     }

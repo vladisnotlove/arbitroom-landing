@@ -1,7 +1,11 @@
 {
     "@common.signup": "Зарегистрироваться",
-    "@landing.@menu.howCashGenerated": "Как генерируется прибыль?",
+    "@common.startNow": "Начать сейчас",
+    "@common.watchVideo": "Смотреть видео",
     "@landing.@menu.advantagesOfNeuralNetwork": "Преимущества нейросети",
+    "@landing.@menu.clientsAboutUs": "Что говорят наши клиенты?",
+    "@landing.@menu.howCashGenerated": "Как генерируется прибыль?",
     "@landing.@menu.whatFirst": "С чего начать?",
-    "@landing.@menu.clientsAboutUs": "Что говорят наши клиенты?"
+    "@landing.@welcome.description": "Любой пользователь может зарабатывать на арбитраже криптовалют с минимум затраченных усилий и экономией  личного времени с помощью автоматизированных инструментов анализа рынка.",
+    "@landing.@welcome.title": "Заработай на\u00a0крипто арбитраже"
 }

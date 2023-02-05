@@ -51,5 +51,10 @@ html {
 
 * {
     font-family: Golos;
-    color: $color-text-prime
+}
+
+div,
+span,
+a {
+    color: $color-text-prime;
 }

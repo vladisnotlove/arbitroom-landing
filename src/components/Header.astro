@@ -14,7 +14,7 @@ export interface Props {
 const { className, menuItems } = Astro.props;
 ---
 
-<Container as="header" className={classNames("header", className)}>
+<Container as="header" className={classNames(className, "header")}>
     <a class="header__logo" href="/">
         <img src="/layout-assets/images/logo.svg" />
     </a>

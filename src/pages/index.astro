@@ -1,7 +1,8 @@
 ---
 import { t } from "../utils/i18next/i18next";
-import LandingLayout from "../layouts/LandingLayout.astro";
 import routes from "../store/routes";
+import LandingLayout from "../layouts/LandingLayout.astro";
+import Welcome from "../components/Welcome.astro";
 ---
 
 <LandingLayout
@@ -33,6 +34,6 @@ import routes from "../store/routes";
         label: t("@common.signup"),
     }}
 >
-    <div slot="welcome">welcome</div>
+    <Welcome slot="welcome" />
     content
 </LandingLayout>
