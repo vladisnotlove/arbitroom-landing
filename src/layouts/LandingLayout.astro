@@ -16,12 +16,39 @@ const { title, menuActionButton, menuItems } = Astro.props;
 ---
 
 <BaseLayout title={title}>
-    <Header menuItems={menuItems}>
-        <a slot="actions" href={menuActionButton.href}>
-            <Button>
-                {menuActionButton.label}
-            </Button>
-        </a>
-    </Header>
+    <div class="header-with-welcome">
+        <!-- header -->
+        <Header menuItems={menuItems}>
+            <a slot="actions" href={menuActionButton.href}>
+                <Button>
+                    {menuActionButton.label}
+                </Button>
+            </a>
+        </Header>
+        <!-- welcome block -->
+        <div class="welcome-wrapper">
+            <slot name="welcome" />
+        </div>
+    </div>
+    <!-- other content -->
     <slot />
+    <!-- footer -->
 </BaseLayout>
+
+<style lang="scss">
+    .header-with-welcome {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        width: 100%;
+        height: 100vh;
+        max-width: 100vw;
+        max-height: 100vh;
+    }
+
+    .welcome-wrapper {
+        flex-grow: 1;
+        min-height: 0;
+    }
+</style>
