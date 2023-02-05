@@ -1,8 +1,26 @@
 ---
-import { t } from "../utils/i18n";
-import Layout from "../layouts/PageLayout.astro";
+import { t } from "../utils/i18next/i18next";
+import LandingLayout from "../layouts/LandingLayout.astro";
 ---
 
-<Layout title="Arbitroom">
-    {t("test")}
-</Layout>
+<LandingLayout
+    title="Arbitroom"
+    menuItems={[
+        {
+            id: "1",
+            href: "/1",
+            label: "item 1",
+        },
+        {
+            id: "2",
+            href: "/2",
+            label: "item 2",
+        },
+    ]}
+    menuActionButton={{
+        href: "/login",
+        label: t("common.signup"),
+    }}
+>
+    Test
+</LandingLayout>

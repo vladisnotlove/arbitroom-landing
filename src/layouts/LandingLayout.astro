@@ -1,0 +1,27 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Header, { Props as HeaderProps } from "../components/Header.astro";
+import Button from "../components/uiKit/Button.astro";
+
+export interface Props {
+    title: string;
+    menuItems: HeaderProps["menuItems"];
+    menuActionButton: {
+        href: string;
+        label: string;
+    };
+}
+
+const { title, menuActionButton, menuItems } = Astro.props;
+---
+
+<BaseLayout title={title}>
+    <Header menuItems={menuItems}>
+        <a slot="actions" href={menuActionButton.href}>
+            <Button>
+                {menuActionButton.label}
+            </Button>
+        </a>
+    </Header>
+    <slot />
+</BaseLayout>

@@ -9,9 +9,9 @@ const t = (tKey: string) => {
     return flatRu[tKey] || tKey
 }
 
-const i18n = {
+const i18next = {
     language: "ru"
 }
 
-export default i18n
+export default i18next
 export { t }

@@ -1,0 +1,12 @@
+@function strip-unit($number) {
+    @if type-of($number)=='number' and not unitless($number) {
+        @return math.div($number, $number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+@function get-adaptive-value($big-value, $small-value, $big-screen: $desktop, $small-screen: $mobile) {
+    $increment: $big-value - $small-value;
+    @return clamp(#{$small-value}, #{$small-value} + #{strip-unit($increment)} * (100vw - #{$small-screen}) / (#{strip-unit($big-screen - $small-screen)} / var(--rem)), #{$big-value});
+}

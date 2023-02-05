@@ -1,15 +1,15 @@
 ---
-import i18n from "../utils/i18n";
+import i18next from "../utils/i18next/i18next";
 
 export interface Props {
 	title: string;
 }
 
-const { title } = Astro.props;
+const { title, theme } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang={i18n.language}>
+<html lang={i18next.language}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -41,3 +41,15 @@ const { title } = Astro.props;
 		<slot />
 	</body>
 </html>
+
+<style is:global lang="scss">
+	// global styles
+	@import "../styles/reset";
+	@import "../styles/fonts";
+	@import "../styles/base";
+	@import "../styles/variables.scss";
+
+	body {
+		background: $color-background;
+	}
+</style>

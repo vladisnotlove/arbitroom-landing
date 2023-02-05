@@ -1,0 +1,56 @@
+---
+export interface Props {
+    size?: "medium" | "large";
+}
+
+const { size = "medium" } = Astro.props;
+---
+
+<button class:list={["button", { large: size === "large" }]}>
+    <slot />
+</button>
+
+<style lang="scss">
+    @import "../../styles/variables.scss";
+
+    .button {
+        // default medium
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+
+        border: none;
+        border-radius: 4rem;
+        outline: 0;
+        padding: 0.875rem 1.5rem;
+
+        font-weight: 500;
+        font-size: 1rem;
+        line-height: 1.25;
+        white-space: nowrap;
+
+        color: $color-prime-contrast;
+        background: $color-prime-main;
+
+        cursor: pointer;
+        box-shadow: 0 0 1.5rem change-color($color-prime-main, $alpha: 0.4);
+        transition: box-shadow $animation-slow;
+
+        .icon {
+            margin-top: -50%;
+            margin-bottom: -50%;
+        }
+
+        &.large {
+            font-size: 1.5rem;
+        }
+
+        &:hover {
+            text-decoration: none;
+            box-shadow: 0 0 2.25rem change-color($color-prime-main, $alpha: 0.4);
+            transition: box-shadow $animation-normal;
+        }
+    }
+</style>
