@@ -1,4 +1,7 @@
 ---
+import classNames from "classNames";
+import Container from "./uiKit/Container.astro";
+
 export interface Props {
     className?: string;
     menuItems: Array<{
@@ -11,16 +14,16 @@ export interface Props {
 const { className, menuItems } = Astro.props;
 ---
 
-<header class:list={["header", className]}>
-    <div class="header__logo">
+<Container as="header" className={classNames("header", className)}>
+    <a class="header__logo" href="/">
         <img src="/layout-assets/images/logo.svg" />
-    </div>
+    </a>
     <div class="header__menu">
         {
             menuItems.map((menuItem) => (
                 <>
                     <a
-                        class="header__menuItem"
+                        class="header__menu-item"
                         href={menuItem.href}
                         data-key={menuItem.id}
                     >
@@ -30,7 +33,64 @@ const { className, menuItems } = Astro.props;
             ))
         }
     </div>
-    <div>
+    <div class="header__actions">
         <slot name="actions" />
     </div>
-</header>
+</Container>
+
+<style lang="scss">
+    @import "../styles/variables.scss";
+
+    $header-gap: 1rem;
+
+    .header {
+        background: $color-background-upper1;
+        height: $header-height-desktop;
+
+        display: flex;
+        align-items: center;
+    }
+
+    .header__logo {
+        margin-right: calc(41px - #{$header-gap});
+    }
+
+    .header__menu {
+        padding: $header-gap;
+        flex-grow: 1;
+        min-width: 0;
+        overflow: hidden;
+
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    $header-menu-item-padding: 0.5rem;
+
+    .header__menu-item {
+        overflow: visible;
+        padding: $header-menu-item-padding;
+        white-space: nowrap;
+
+        background-image: linear-gradient(
+            to right,
+            $color-prime-main,
+            $color-prime-main
+        );
+        background-position: bottom center;
+        background-size: 0 2px;
+        background-repeat: no-repeat;
+
+        transition: background-size 0s;
+
+        &:hover {
+            background-size: calc(100% - #{$header-menu-item-padding * 2}) 2px;
+            transition: background-size $animation-normal;
+            // box-shadow: 0 0 $header-gap * 0.75
+            //     change-color(
+            //         $color-text-prime,
+            //         $alpha: $color-action-hover-opacity
+            //     );
+        }
+    }
+</style>

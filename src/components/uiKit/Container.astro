@@ -1,0 +1,32 @@
+---
+export interface Props {
+    as?: string;
+    className?: string;
+}
+
+const { as: Tag = "div", className } = Astro.props;
+---
+
+<Tag class:list={["container", className]}>
+    <slot />
+</Tag>
+
+<style lang="scss">
+    @import "../../styles/variables.scss";
+
+    .container {
+        padding: 0 $container-padding-desktop;
+    }
+
+    @media (max-width: $desktop) {
+        .container {
+            padding: 0 $container-padding-adaptive;
+        }
+    }
+
+    @media (max-width: $mobile) {
+        .container {
+            padding: 0 $container-padding-mobile;
+        }
+    }
+</style>

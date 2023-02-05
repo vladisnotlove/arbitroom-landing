@@ -44,12 +44,11 @@ const { title, theme } = Astro.props;
 
 <style is:global lang="scss">
 	// global styles
-	@import "../styles/reset";
-	@import "../styles/fonts";
-	@import "../styles/base";
-	@import "../styles/variables.scss";
+	@import "../styles/reset.scss";
+	@import "../styles/base.scss"; // already include "variables.scss"
 
 	body {
 		background: $color-background;
+		min-height: 100vh;
 	}
 </style>

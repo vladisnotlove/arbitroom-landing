@@ -1,25 +1,36 @@
 ---
 import { t } from "../utils/i18next/i18next";
 import LandingLayout from "../layouts/LandingLayout.astro";
+import routes from "../store/routes";
 ---
 
 <LandingLayout
     title="Arbitroom"
     menuItems={[
         {
-            id: "1",
-            href: "/1",
-            label: "item 1",
+            id: "howCashGenerated",
+            href: routes.index.pathWithFragment("howCashGenerated"),
+            label: t("@landing.@menu.howCashGenerated"),
         },
         {
-            id: "2",
-            href: "/2",
-            label: "item 2",
+            id: "advantagesOfNeuralNetwork",
+            href: routes.index.pathWithFragment("advantagesOfNeuralNetwork"),
+            label: t("@landing.@menu.advantagesOfNeuralNetwork"),
+        },
+        {
+            id: "whatFirst",
+            href: routes.index.pathWithFragment("whatFirst"),
+            label: t("@landing.@menu.whatFirst"),
+        },
+        {
+            id: "clientsAboutUs",
+            href: routes.index.pathWithFragment("clientsAboutUs"),
+            label: t("@landing.@menu.clientsAboutUs"),
         },
     ]}
     menuActionButton={{
         href: "/login",
-        label: t("common.signup"),
+        label: t("@common.signup"),
     }}
 >
     Test

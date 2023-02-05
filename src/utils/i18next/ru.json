@@ -1,5 +1,7 @@
 {
-    "common": {
-        "signup": "Зарегистрироваться"
-    }
+    "@common.signup": "Зарегистрироваться",
+    "@landing.@menu.howCashGenerated": "Как генерируется прибыль?",
+    "@landing.@menu.advantagesOfNeuralNetwork": "Преимущества нейросети",
+    "@landing.@menu.whatFirst": "С чего начать?",
+    "@landing.@menu.clientsAboutUs": "Что говорят наши клиенты?"
 }

@@ -1,6 +1,21 @@
 @use "sass:color";
 @use "sass:math";
-@import "./functions.scss";
+
+// helper
+
+@function strip-unit($number) {
+	@if type-of($number)=='number' and not unitless($number) {
+		@return math.div($number, $number * 0 + 1);
+	}
+
+	@return $number;
+}
+
+@function get-adaptive-value($big-value, $small-value, $big-screen: $desktop, $small-screen: $mobile) {
+	$increment: $big-value - $small-value;
+	@return clamp(#{$small-value}, #{$small-value} + #{strip-unit($increment)} * (100vw - #{$small-screen}) / (#{strip-unit($big-screen - $small-screen)}), #{$big-value});
+}
+
 
 // VARIABLES
 
@@ -8,6 +23,14 @@
 
 $color-prime-main: #6320F0;
 $color-prime-contrast: #fff;
+
+@mixin color-secodary-gradient-for-text {
+	background: linear-gradient(143.45deg, #20FFFA -30.19%, #FF20FF 46.69%, #FF741A 77.04%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+}
 
 $color-background-upper1: #11101A;
 $color-background: #0A090F;
@@ -229,6 +252,6 @@ $scrollbar-width: 0.5rem;
 $header-height-desktop: 5.5rem;
 $header-height-mobile: 4rem;
 
-$container-padding-desktop: 11.25rem;
-$container-padding-mobile: 1.5rem;
+$container-padding-desktop: 180px;
+$container-padding-mobile: 24px;
 $container-padding-adaptive: get-adaptive-value($container-padding-desktop, $container-padding-mobile);
