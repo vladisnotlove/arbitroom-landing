@@ -25,7 +25,7 @@ $color-prime-main: #6320F0;
 $color-prime-dim: rgba(157, 111, 255, 0.16);
 $color-prime-contrast: #fff;
 
-@mixin color-secodary-gradient-for-text {
+@mixin color-secondary-gradient-for-text {
 	background: linear-gradient(143.45deg, #20FFFA -30.19%, #FF20FF 46.69%, #FF741A 77.04%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;

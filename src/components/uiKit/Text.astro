@@ -5,6 +5,7 @@ export interface Props {
     className?: string;
     as?: keyof HTMLElementTagNameMap;
     variant?: "h2" | "h3" | "h4" | "h5" | "body1" | "body2" | "caption";
+    color?: "text-primary" | "text-secondary" | "secondary-gradient";
     disableMobileAdaptive?: boolean;
     disableAdaptive?: boolean;
 }
@@ -12,7 +13,8 @@ export interface Props {
 const {
     className,
     as: Tag = "div",
-    variant = "body1",
+    variant,
+    color,
     disableMobileAdaptive,
     disableAdaptive,
 } = Astro.props;
@@ -20,6 +22,8 @@ const {
 
 <Tag
     class={classNames(className, "text", variant, {
+        ["color-text-secondary"]: color === "text-secondary",
+        ["color-secondary-gradient"]: color === "secondary-gradient",
         ["disable-mobile-adaptive"]: disableMobileAdaptive,
         ["disable-adaptive"]: disableAdaptive,
     })}
@@ -31,6 +35,8 @@ const {
     @import "../../styles/variables.scss";
 
     .text {
+        color: $color-text-prime;
+
         &.h2 {
             @include typography-h2;
         }
@@ -51,6 +57,16 @@ const {
         }
         &.caption {
             @include typography-caption;
+        }
+
+        // color variants
+
+        &.color-text-secondary {
+            color: $color-text-secondary;
+        }
+
+        &.color-secondary-gradient {
+            @include color-secondary-gradient-for-text;
         }
     }
 </style>

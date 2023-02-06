@@ -1,0 +1,80 @@
+---
+import classNames from "classNames";
+import routes from "../store/routes";
+import { t } from "../utils/i18next/i18next";
+import Trans from "../utils/i18next/Trans.astro";
+import Container from "./uiKit/Container.astro";
+import Text from "./uiKit/Text.astro";
+
+export interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<Container
+    className={classNames(className, "about-neural")}
+    id={routes.index.fragments.howCashGenerated}
+>
+    <div class="about-neural__poster"></div>
+    <div class="about-neural__content">
+        <Text className="about-neural__subtitle" variant={"h5"}>
+            {t("@landing.@menu.howCashGenerated")}
+        </Text>
+        <Text className="about-neural__title" variant={"h3"}>
+            <Trans i18nKey="@landing.@aboutNeural.title">
+                Собственная разработка компании Arbitroom —
+                <Text color="secondary-gradient">
+                    нейросеть для крипто арбитража
+                </Text>
+            </Trans>
+        </Text>
+        <Text
+            className={"about-neural__description"}
+            variant={"body1"}
+            color="text-secondary"
+        >
+            <Trans i18nKey="@landing.@aboutNeural.description">
+                Параграф 1
+                <div class="divider"></div>
+                Параграф 2
+                <div class="divider"></div>
+                Параграф 3
+            </Trans>
+        </Text>
+    </div>
+</Container>
+
+<style lang="scss">
+    .about-neural {
+        display: flex;
+        align-items: stretch;
+        gap: 4rem;
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+    }
+    .about-neural__poster {
+        min-width: 0;
+        flex-basis: 0;
+        flex-grow: 1;
+    }
+    .about-neural__content {
+        min-width: 0;
+        flex-basis: 0;
+        flex-grow: 1;
+        padding: 0.875rem 0;
+    }
+
+    .about-neural__subtitle {
+        margin-bottom: 1rem;
+    }
+
+    .about-neural__title {
+        margin-bottom: 3rem;
+    }
+
+    .divider {
+        height: 1rem;
+    }
+</style>

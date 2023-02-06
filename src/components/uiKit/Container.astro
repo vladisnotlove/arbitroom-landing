@@ -3,12 +3,13 @@ import classNames from "classNames";
 export interface Props {
     as?: keyof HTMLElementTagNameMap;
     className?: string;
+    id?: string;
 }
 
-const { as: Tag = "div", className } = Astro.props;
+const { as: Tag = "div", className, id } = Astro.props;
 ---
 
-<Tag class={classNames(className, "container")}>
+<Tag class={classNames(className, "container")} id={id}>
     <slot />
 </Tag>
 

@@ -16,19 +16,17 @@ const { title, menuActionButton, menuItems } = Astro.props;
 ---
 
 <BaseLayout title={title}>
-    <div class="header-with-welcome">
-        <!-- header -->
-        <Header menuItems={menuItems}>
-            <a slot="actions" href={menuActionButton.href}>
-                <Button>
-                    {menuActionButton.label}
-                </Button>
-            </a>
-        </Header>
-        <!-- welcome block -->
-        <div class="welcome-wrapper">
-            <slot name="welcome" />
-        </div>
+    <!-- header -->
+    <Header menuItems={menuItems}>
+        <a slot="actions" href={menuActionButton.href}>
+            <Button>
+                {menuActionButton.label}
+            </Button>
+        </a>
+    </Header>
+    <!-- welcome block -->
+    <div class="welcome-wrapper">
+        <slot name="welcome" />
     </div>
     <!-- other content -->
     <slot />
@@ -38,20 +36,18 @@ const { title, menuActionButton, menuItems } = Astro.props;
 <style lang="scss">
     @import "../styles/variables.scss";
 
-    .header-with-welcome {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-
-        height: 100vh;
+    .welcome-wrapper {
+        height: calc(100vh - #{$header-height-desktop});
+        min-height: calc(100vh - #{$header-height-desktop});
         width: 100%;
-        min-height: 100vh;
         max-width: 100vw;
+        background: $color-background;
     }
 
-    .welcome-wrapper {
-        flex-grow: 1;
-        min-height: 0;
-        background: $color-background;
+    @media (max-width: $mobile) {
+        .welcome-wrapper {
+            height: calc(100vh - #{$header-height-desktop});
+            min-height: calc(100vh - #{$header-height-desktop});
+        }
     }
 </style>

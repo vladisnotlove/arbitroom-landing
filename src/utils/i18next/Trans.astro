@@ -1,0 +1,13 @@
+---
+import type { TKey } from "./main";
+import { interpolate } from "./utils";
+
+export interface Props {
+    i18nKey: string;
+}
+const { i18nKey } = Astro.props;
+
+const referenceString = await Astro.slots.render("default");
+---
+
+<Fragment set:html={interpolate(i18nKey as TKey, referenceString)} />

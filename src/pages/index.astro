@@ -3,7 +3,8 @@ import { t } from "../utils/i18next/i18next";
 import routes from "../store/routes";
 import LandingLayout from "../layouts/LandingLayout.astro";
 import Welcome from "../components/Welcome.astro";
-import ProfitBlock from "../components/ProfitBlock.astro";
+import Profits from "../components/Profits.astro";
+import AboutNeural from "../components/AboutNeural.astro";
 ---
 
 <LandingLayout
@@ -36,6 +37,7 @@ import ProfitBlock from "../components/ProfitBlock.astro";
     }}
 >
     <Welcome slot="welcome" />
-    <ProfitBlock />
+    <Profits />
+    <AboutNeural />
     content
 </LandingLayout>

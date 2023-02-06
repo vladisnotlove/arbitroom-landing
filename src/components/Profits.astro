@@ -14,24 +14,24 @@ const { className } = Astro.props;
 const profitCards = [
     {
         iconSrc: "/layout-assets/images/card-icons/wallet.svg",
-        label: t("@landing.@profitBlock.availableSum"),
+        label: t("@landing.@profits.availableSum"),
     },
     {
         iconSrc: "/layout-assets/images/card-icons/trend-up.svg",
-        label: t("@landing.@profitBlock.profitPerMonth"),
+        label: t("@landing.@profits.profitPerMonth"),
     },
     {
         iconSrc: "/layout-assets/images/card-icons/money-hand.svg",
-        label: t("@landing.@profitBlock.abilityToCashOut"),
+        label: t("@landing.@profits.abilityToCashOut"),
     },
 ];
 ---
 
-<Container className={classNames(className, "profit-block")}>
-    <Text className="profit-block__title" variant={"h3"}>
-        {t("@landing.@profitBlock.title")}
+<Container className={classNames(className, "profits")}>
+    <Text className="profits__title" variant={"h3"}>
+        {t("@landing.@profits.title")}
     </Text>
-    <div class="profit-block__cards">
+    <div class="profits__cards">
         {
             profitCards.map((profitCard) => (
                 <Paper className="profit-card">
@@ -50,15 +50,15 @@ const profitCards = [
 <style lang="scss">
     @import "../styles/variables.scss";
 
-    .profit-block {
+    .profits {
         padding-top: 8rem;
         padding-bottom: 8rem;
     }
-    .profit-block__title {
+    .profits__title {
         text-align: center;
         margin-bottom: 4rem;
     }
-    .profit-block__cards {
+    .profits__cards {
         display: flex;
         gap: 1rem;
 
