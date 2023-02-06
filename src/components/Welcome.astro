@@ -4,6 +4,7 @@ import { t } from "../utils/i18next/i18next";
 import Button from "./uiKit/Button.astro";
 import Container from "./uiKit/Container.astro";
 import Icon from "./uiKit/Icon.astro";
+import Text from "./uiKit/Text.astro";
 
 export interface Props {
     className?: string;
@@ -15,9 +16,9 @@ const { className } = Astro.props;
 <Container className={classNames(className, "welcome")}>
     <div class="welcome__main-content">
         <div class="welcome__title">{t("@landing.@welcome.title")}</div>
-        <div class="welcome__description">
+        <Text className="welcome__description" variant={"h5"}>
             {t("@landing.@welcome.description")}
-        </div>
+        </Text>
         <div class="welcome__actions">
             <Button size={"large"}>
                 {t("@common.startNow")}
@@ -58,7 +59,6 @@ const { className } = Astro.props;
         margin-bottom: 4rem;
     }
     .welcome__description {
-        @include typography-h5;
         margin-bottom: 3.5rem;
     }
     .welcome__actions {

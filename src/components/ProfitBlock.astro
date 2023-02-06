@@ -1,0 +1,88 @@
+---
+import classNames from "classNames";
+import { t } from "../utils/i18next/i18next";
+import Container from "./uiKit/Container.astro";
+import Paper from "./uiKit/Paper.astro";
+import Text from "./uiKit/Text.astro";
+
+export interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+
+const profitCards = [
+    {
+        iconSrc: "/layout-assets/images/card-icons/wallet.svg",
+        label: t("@landing.@profitBlock.availableSum"),
+    },
+    {
+        iconSrc: "/layout-assets/images/card-icons/trend-up.svg",
+        label: t("@landing.@profitBlock.profitPerMonth"),
+    },
+    {
+        iconSrc: "/layout-assets/images/card-icons/money-hand.svg",
+        label: t("@landing.@profitBlock.abilityToCashOut"),
+    },
+];
+---
+
+<Container className={classNames(className, "profit-block")}>
+    <Text className="profit-block__title" variant={"h3"}>
+        {t("@landing.@profitBlock.title")}
+    </Text>
+    <div class="profit-block__cards">
+        {
+            profitCards.map((profitCard) => (
+                <Paper className="profit-card">
+                    <div class="profit-card__icon-wrapper">
+                        <img src={profitCard.iconSrc} />
+                    </div>
+                    <Text className="profit-card__label" variant={"h5"}>
+                        {profitCard.label}
+                    </Text>
+                </Paper>
+            ))
+        }
+    </div>
+</Container>
+
+<style lang="scss">
+    @import "../styles/variables.scss";
+
+    .profit-block {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+    }
+    .profit-block__title {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    .profit-block__cards {
+        display: flex;
+        gap: 1rem;
+
+        & > * {
+            flex-grow: 1;
+        }
+    }
+    .profit-card {
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    .profit-card__icon-wrapper {
+        padding: 0.75rem;
+
+        img {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+    }
+    .profit-card__label {
+        text-align: center;
+        width: 70%;
+    }
+</style>

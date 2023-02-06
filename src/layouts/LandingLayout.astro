@@ -36,19 +36,22 @@ const { title, menuActionButton, menuItems } = Astro.props;
 </BaseLayout>
 
 <style lang="scss">
+    @import "../styles/variables.scss";
+
     .header-with-welcome {
         display: flex;
         flex-direction: column;
         align-items: stretch;
 
-        width: 100%;
         height: 100vh;
+        width: 100%;
+        min-height: 100vh;
         max-width: 100vw;
-        max-height: 100vh;
     }
 
     .welcome-wrapper {
         flex-grow: 1;
         min-height: 0;
+        background: $color-background;
     }
 </style>

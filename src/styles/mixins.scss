@@ -1,0 +1,43 @@
+@import "./variables.scss";
+
+@mixin border-gradient($border-width: 1px,
+    $gradient: $gradient-border-main,
+    $disable-border-top: false,
+    $disable-border-bottom: false,
+    $disable-border-left: false,
+    $disable-border-right: false,
+    $z-index: -1,
+) {
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: inherit;
+        border: $border-width solid transparent;
+        background: $gradient border-box;
+        -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: destination-out;
+        mask-composite: exclude;
+        z-index: $z-index;
+
+        @if ($disable-border-top ==true) {
+            top: -1px;
+        }
+
+        @if ($disable-border-left ==true) {
+            left: -1px;
+        }
+
+        @if ($disable-border-bottom ==true) {
+            bottom: -1px;
+        }
+
+        @if ($disable-border-right ==true) {
+            right: -1px;
+        }
+    }
+}

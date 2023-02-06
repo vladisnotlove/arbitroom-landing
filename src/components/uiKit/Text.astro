@@ -1,0 +1,56 @@
+---
+import classNames from "classNames";
+
+export interface Props {
+    className?: string;
+    as?: keyof HTMLElementTagNameMap;
+    variant?: "h2" | "h3" | "h4" | "h5" | "body1" | "body2" | "caption";
+    disableMobileAdaptive?: boolean;
+    disableAdaptive?: boolean;
+}
+
+const {
+    className,
+    as: Tag = "div",
+    variant = "body1",
+    disableMobileAdaptive,
+    disableAdaptive,
+} = Astro.props;
+---
+
+<Tag
+    class={classNames(className, "text", variant, {
+        ["disable-mobile-adaptive"]: disableMobileAdaptive,
+        ["disable-adaptive"]: disableAdaptive,
+    })}
+>
+    <slot />
+</Tag>
+
+<style lang="scss">
+    @import "../../styles/variables.scss";
+
+    .text {
+        &.h2 {
+            @include typography-h2;
+        }
+        &.h3 {
+            @include typography-h3;
+        }
+        &.h4 {
+            @include typography-h4;
+        }
+        &.h5 {
+            @include typography-h5;
+        }
+        &.body1 {
+            @include typography-body1;
+        }
+        &.body2 {
+            @include typography-body2;
+        }
+        &.caption {
+            @include typography-caption;
+        }
+    }
+</style>

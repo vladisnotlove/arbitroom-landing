@@ -44,7 +44,11 @@ const { className, menuItems } = Astro.props;
     $header-gap: 1rem;
 
     .header {
-        background: $color-background-upper1;
+        position: sticky;
+        top: 0;
+
+        background: rgba(23, 26, 48, 0.12);
+        backdrop-filter: blur(32px);
         height: $header-height-desktop;
 
         display: flex;

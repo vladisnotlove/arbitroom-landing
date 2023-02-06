@@ -1,0 +1,29 @@
+---
+import classNames from "classNames";
+
+export interface Props {
+    className?: string;
+    variant?: "default" | "flat";
+}
+
+const { className, variant = "default" } = Astro.props;
+---
+
+<div class={classNames(className, "paper", { ["flat"]: variant === "flat" })}>
+    <slot />
+</div>
+
+<style lang="scss">
+    @import "../../styles/mixins.scss";
+
+    .paper {
+        border-radius: 1rem;
+        padding: 1.5rem;
+        background: $color-background-upper2;
+        backdrop-filter: blur(32px);
+
+        &:not(.flat) {
+            @include border-gradient;
+        }
+    }
+</style>

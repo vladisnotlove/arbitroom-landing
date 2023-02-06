@@ -6,6 +6,10 @@
     "@landing.@menu.clientsAboutUs": "Что говорят наши клиенты?",
     "@landing.@menu.howCashGenerated": "Как генерируется прибыль?",
     "@landing.@menu.whatFirst": "С чего начать?",
+    "@landing.@profitBlock.abilityToCashOut": "Возможность вывода актива в любой момент",
+    "@landing.@profitBlock.availableSum": "Доступная сумма актива\u00a0от\u00a0100 USDT",
+    "@landing.@profitBlock.profitPerMonth": "Ежемесячная прибыль от\u00a020%\u00a0до\u00a025% ",
+    "@landing.@profitBlock.title": "Получай пассивную прибыль ежедневно",
     "@landing.@welcome.description": "Любой пользователь может зарабатывать на арбитраже криптовалют с минимум затраченных усилий и экономией  личного времени с помощью автоматизированных инструментов анализа рынка.",
     "@landing.@welcome.title": "Заработай на\u00a0крипто арбитраже"
 }
