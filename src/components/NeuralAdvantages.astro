@@ -1,0 +1,239 @@
+---
+import classNames from "classNames";
+import { t } from "../utils/i18next/i18next";
+import Container from "./uiKit/Container.astro";
+import Paper from "./uiKit/Paper.astro";
+import Text from "./uiKit/Text.astro";
+
+export interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+
+const neuralAdvantageCards = [
+    {
+        iconSrc: "/layout-assets/images/card-icons/desktop-pulse.svg",
+        label: t("@landing.@neuralAdvantages.scanner"),
+        description: t("@landing.@neuralAdvantages.scannerDescription"),
+    },
+    {
+        iconSrc: "/layout-assets/images/card-icons/person-available.svg",
+        label: t("@landing.@neuralAdvantages.accounts"),
+        description: t("@landing.@neuralAdvantages.accountsDescription"),
+    },
+    {
+        iconSrc: "/layout-assets/images/card-icons/handshake.svg",
+        label: t("@landing.@neuralAdvantages.balance"),
+        description: t("@landing.@neuralAdvantages.balanceDescription"),
+    },
+    {
+        iconSrc: "/layout-assets/images/card-icons/bot.svg",
+        label: t("@landing.@neuralAdvantages.automatation"),
+        description: t("@landing.@neuralAdvantages.automatationDescription"),
+    },
+    {
+        iconSrc: "/layout-assets/images/card-icons/wallet-outlined.svg",
+        label: t("@landing.@neuralAdvantages.income"),
+        description: t("@landing.@neuralAdvantages.incomeDescription"),
+    },
+    {
+        iconSrc: "/layout-assets/images/card-icons/data.svg",
+        label: t("@landing.@neuralAdvantages.analysis"),
+        description: t("@landing.@neuralAdvantages.analysisDescription"),
+    },
+];
+
+const neuralAdvantageCompanies = [
+    {
+        logoSrc: "/layout-assets/images/logos/binance.svg",
+        name: "Binance",
+        subtitle: "exchange / p2p",
+    },
+    {
+        logoSrc: "/layout-assets/images/logos/mexc-global.png",
+        name: "MEXC Global",
+        subtitle: "exchange",
+    },
+    {
+        logoSrc: "/layout-assets/images/logos/1inch.svg",
+        name: "1inch",
+        subtitle: "DEX agregator",
+    },
+    {
+        logoSrc: "/layout-assets/images/logos/huobi.svg",
+        name: "Huobi",
+        subtitle: "exchange",
+    },
+    {
+        logoSrc: "/layout-assets/images/logos/garantex.png",
+        name: "Garantex",
+        subtitle: "exchange / p2p",
+    },
+    {
+        logoSrc: "/layout-assets/images/logos/pancakeswap.svg",
+        name: "PancakeSwap",
+        subtitle: "BSC DEX",
+    },
+    {
+        logoSrc: "/layout-assets/images/logos/crypto-com.svg",
+        name: "Crypto.com",
+        subtitle: "exchange",
+    },
+    {
+        logoSrc: "/layout-assets/images/logos/1sol.png",
+        name: "1Sol",
+        subtitle: "Solana DEX agregator",
+    },
+    {
+        logoSrc: "/layout-assets/images/logos/kucoin.svg",
+        name: "Kucoin",
+        subtitle: "exchange",
+    },
+    {
+        logoSrc: "/layout-assets/images/logos/bizlato.png",
+        name: "bizlato",
+        subtitle: "p2p / telegram bot p2p",
+    },
+];
+---
+
+<Container className={classNames(className, "neural-advantages")}>
+    <Text className="neural-advantages__title" variant="h2">
+        {t("@landing.@neuralAdvantages.title")}
+    </Text>
+    <div class="neural-advantages__cards">
+        {
+            neuralAdvantageCards.map((data) => (
+                <Paper className="neural-advantage-card">
+                    <div class="neural-advantage-card__icon-wrapper">
+                        <img src={data.iconSrc} alt="" />
+                    </div>
+                    <Text className="neural-advantage-card__title" variant="h4">
+                        {data.label}
+                    </Text>
+                    <Text
+                        className="neural-advantage-card__description"
+                        variant="body1"
+                        color="text-secondary"
+                    >
+                        {data.description}
+                    </Text>
+                </Paper>
+            ))
+        }
+    </div>
+    <div class="neural-advantages__companies">
+        {
+            neuralAdvantageCompanies.map((data) => (
+                <div class="neural-advantages__company">
+                    <Paper
+                        className="neural-advantages__company-logo-wrapper"
+                        backgroundColor="background-upper3"
+                    >
+                        <img src={data.logoSrc} alt={data.name} />
+                    </Paper>
+                    <Text
+                        className="neural-advantages__company-name"
+                        variant={"h5"}
+                    >
+                        {data.name}
+                    </Text>
+                    <Text
+                        className="neural-advantages__company-subtitle"
+                        variant={"body1"}
+                    >
+                        {data.subtitle}
+                    </Text>
+                </div>
+            ))
+        }
+    </div>
+</Container>
+
+<style lang="scss">
+    @import "../styles/variables.scss";
+
+    .neural-advantages {
+        background: $color-background;
+        padding-top: 10rem;
+        padding-bottom: 10rem;
+    }
+    .neural-advantages__title {
+        text-align: center;
+        margin-bottom: 5rem;
+    }
+    .neural-advantages__cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .neural-advantage-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .neural-advantage-card__icon-wrapper {
+        filter: drop-shadow(0px 0px 16px rgba(255, 35, 164, 0.64));
+
+        & > img {
+            filter: drop-shadow(0px 0px 16px rgba(255, 35, 164, 0.64));
+            width: 3rem;
+            height: 3rem;
+            object-fit: contain;
+        }
+    }
+
+    .neural-advantages__companies {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        column-gap: 1.5rem;
+        row-gap: 3.5rem;
+
+        align-items: flex-start;
+        justify-content: center;
+
+        margin-top: 5rem;
+    }
+
+    .neural-advantages__company {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .neural-advantages__company-logo-wrapper {
+        position: relative;
+        padding: 0;
+        width: 5rem;
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+
+        & > img {
+            width: 3rem;
+            height: 3rem;
+            z-index: 2;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            width: 3.625rem;
+            height: 3.625rem;
+            background: $color-background;
+            filter: blur(8px);
+
+            z-index: 1;
+        }
+    }
+</style>

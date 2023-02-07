@@ -21,15 +21,13 @@ const { className, menuItems } = Astro.props;
     <div class="header__menu">
         {
             menuItems.map((menuItem) => (
-                <>
-                    <a
-                        class="header__menu-item"
-                        href={menuItem.href}
-                        data-key={menuItem.id}
-                    >
-                        {menuItem.label}
-                    </a>
-                </>
+                <a
+                    class="header__menu-item"
+                    href={menuItem.href}
+                    data-key={menuItem.id}
+                >
+                    {menuItem.label}
+                </a>
             ))
         }
     </div>

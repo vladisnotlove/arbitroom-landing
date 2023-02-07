@@ -36,12 +36,6 @@ export const interpolate = (key: TKey, referenceString: string) => {
     });
     const interpolatedString = interpolatedParts.join("");
 
-    if (key === "@landing.@aboutNeural.description") {
-
-        console.log(referenceParts)
-        console.log(originalParts);
-    }
-
     if (!valid(`<div>${interpolatedString}</div>`)) {
         throw Error(`String: \n\n"${referenceString}"\n\n cannot be interpolated with key "${key}"`)
     }

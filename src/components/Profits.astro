@@ -14,15 +14,15 @@ const { className } = Astro.props;
 const profitCards = [
     {
         iconSrc: "/layout-assets/images/card-icons/wallet.svg",
-        label: t("@landing.@profits.availableSum"),
+        title: t("@landing.@profits.availableSum"),
     },
     {
         iconSrc: "/layout-assets/images/card-icons/trend-up.svg",
-        label: t("@landing.@profits.profitPerMonth"),
+        title: t("@landing.@profits.profitPerMonth"),
     },
     {
         iconSrc: "/layout-assets/images/card-icons/money-hand.svg",
-        label: t("@landing.@profits.abilityToCashOut"),
+        title: t("@landing.@profits.abilityToCashOut"),
     },
 ];
 ---
@@ -33,13 +33,13 @@ const profitCards = [
     </Text>
     <div class="profits__cards">
         {
-            profitCards.map((profitCard) => (
+            profitCards.map((data) => (
                 <Paper className="profit-card">
                     <div class="profit-card__icon-wrapper">
-                        <img src={profitCard.iconSrc} />
+                        <img src={data.iconSrc} />
                     </div>
-                    <Text className="profit-card__label" variant={"h5"}>
-                        {profitCard.label}
+                    <Text className="profit-card__title" variant={"h5"}>
+                        {data.title}
                     </Text>
                 </Paper>
             ))
@@ -68,6 +68,7 @@ const profitCards = [
     }
     .profit-card {
         padding: 2rem 1rem;
+        border-radius: 1rem;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -83,7 +84,7 @@ const profitCards = [
             height: 3.5rem;
         }
     }
-    .profit-card__label {
+    .profit-card__title {
         text-align: center;
         width: 70%;
     }

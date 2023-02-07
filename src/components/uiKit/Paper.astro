@@ -4,12 +4,22 @@ import classNames from "classNames";
 export interface Props {
     className?: string;
     variant?: "default" | "flat";
+    backgroundColor?: "background-upper2" | "background-upper3";
 }
 
-const { className, variant = "default" } = Astro.props;
+const {
+    className,
+    variant = "default",
+    backgroundColor = "background-upper2",
+} = Astro.props;
 ---
 
-<div class={classNames(className, "paper", { ["flat"]: variant === "flat" })}>
+<div
+    class={classNames(className, "paper", {
+        ["flat"]: variant === "flat",
+        ["background-color-upper3"]: backgroundColor === "background-upper3",
+    })}
+>
     <slot />
 </div>
 
@@ -17,10 +27,14 @@ const { className, variant = "default" } = Astro.props;
     @import "../../styles/mixins.scss";
 
     .paper {
-        border-radius: 1rem;
+        border-radius: 1.5rem;
         padding: 1.5rem;
         background: $color-background-upper2;
         backdrop-filter: blur(32px);
+
+        &.background-color-upper3 {
+            background: $color-background-upper3;
+        }
 
         &:not(.flat) {
             @include border-gradient;

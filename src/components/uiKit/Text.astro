@@ -4,7 +4,15 @@ import classNames from "classNames";
 export interface Props {
     className?: string;
     as?: keyof HTMLElementTagNameMap;
-    variant?: "h2" | "h3" | "h4" | "h5" | "body1" | "body2" | "caption";
+    variant?:
+        | "h2"
+        | "h3"
+        | "h3-adaptive"
+        | "h4"
+        | "h5"
+        | "body1"
+        | "body2"
+        | "caption";
     color?: "text-primary" | "text-secondary" | "secondary-gradient";
     disableMobileAdaptive?: boolean;
     disableAdaptive?: boolean;
@@ -43,6 +51,11 @@ const {
         &.h3 {
             @include typography-h3;
         }
+
+        &.h3-adaptive {
+            @include typography-h3-adaptive;
+        }
+
         &.h4 {
             @include typography-h4;
         }
