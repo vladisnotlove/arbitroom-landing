@@ -1,0 +1,69 @@
+---
+import classNames from "classNames";
+
+export interface Props {
+    className?: string;
+    // only global classes can be received
+    classes?: {
+        line?: string;
+    };
+    lineOptions?: {
+        radius?: number;
+    };
+}
+
+const { className, classes = {}, lineOptions = {} } = Astro.props;
+---
+
+<div
+    class={classNames(className, "connector")}
+    data-js
+    data-radius={lineOptions.radius}
+    data-line-class={classes.line}
+>
+    <slot />
+</div>
+
+<script>
+    import addOnResize from "../../utils/addOnResize";
+    import drawLine from "../../utils/drawLine";
+
+    window.addEventListener("load", () => {
+        const connectors = document.querySelectorAll(".connector[data-js]");
+
+        connectors.forEach((connector) => {
+            let lines: Element[] = [];
+
+            const drawLines = () => {
+                console.log("draw");
+
+                // clear lines
+                if (lines.length > 0) {
+                    lines.forEach((line) => line.remove());
+                    lines = [];
+                }
+                // draw lines
+                const children = connector.children;
+                const rawRadius = parseFloat(
+                    connector.getAttribute("data-radius") || "a"
+                );
+                const radius = isNaN(rawRadius) ? undefined : rawRadius;
+                const className = connector.getAttribute("data-line-class");
+
+                for (let i = 1; i < children.length; i++) {
+                    const prev = children[i - 1];
+                    const cur = children[i];
+                    const line = drawLine(prev, cur, {
+                        radius: radius ?? undefined,
+                    });
+                    if (line) {
+                        if (className) line.classList.add(className);
+                        lines.push(line);
+                    }
+                }
+            };
+
+            addOnResize(connector, drawLines, { throttle: 150 });
+        });
+    });
+</script>

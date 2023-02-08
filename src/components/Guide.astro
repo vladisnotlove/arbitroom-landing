@@ -1,0 +1,127 @@
+---
+import classNames from "classNames";
+import { t } from "../utils/i18next/i18next";
+import Button from "./uiKit/Button.astro";
+import Connector from "./uiKit/Connector.astro";
+import Container from "./uiKit/Container.astro";
+import Paper from "./uiKit/Paper.astro";
+import Text from "./uiKit/Text.astro";
+
+export interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+
+const steps = [
+    {
+        imgSrc: "/layout-assets/images/guide-steps/sign-up.svg",
+        description: t("@landing.@guide.signUp"),
+    },
+    {
+        imgSrc: "/layout-assets/images/guide-steps/replenish.svg",
+        description: t("@landing.@guide.replenish"),
+    },
+    {
+        imgSrc: "/layout-assets/images/guide-steps/deposit-funds.svg",
+        description: t("@landing.@guide.depositFunds"),
+    },
+    {
+        imgSrc: "/layout-assets/images/guide-steps/get-percents.svg",
+        description: t("@landing.@guide.getPercents"),
+    },
+    {
+        imgSrc: "/layout-assets/images/guide-steps/withdraw-funds.svg",
+        description: t("@landing.@guide.withdrawFunds"),
+    },
+];
+---
+
+<Container className={classNames(className, "guide")}>
+    <Text className="guide__title" variant="h2">
+        {t("@landing.@guide.title")}
+    </Text>
+    <Connector
+        className={"guide__steps"}
+        classes={{ line: "guide__line" }}
+        lineOptions={{ radius: 24 }}
+    >
+        {
+            steps.map((data, index) => (
+                <Paper className={"guide__step"}>
+                    <div class="guide__step-image-wrapper">
+                        <img src={data.imgSrc} />
+                    </div>
+                    <Text
+                        className="guide__step-number"
+                        variant={"body1"}
+                        color="text-secondary"
+                    >
+                        {t("@common.step") + " " + (index + 1)}
+                    </Text>
+                    <Text className="guide__step-description" variant={"h5"}>
+                        {data.description}
+                    </Text>
+                </Paper>
+            ))
+        }
+        <Paper className={"guide__step with-action"}>
+            <Button>
+                {t("@common.proceed")}
+            </Button>
+        </Paper>
+    </Connector>
+</Container>
+
+<style lang="scss">
+    .guide {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+    }
+    .guide__title {
+        margin-bottom: 4rem;
+    }
+    .guide__steps {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 3.5rem;
+    }
+    .guide__step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.5rem 2rem;
+        overflow: hidden;
+
+        &.with-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .guide__step-image-wrapper {
+        position: relative;
+        width: 80%;
+        aspect-ratio: 2.21;
+
+        & > img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 200%;
+            transform: translate(-50%, -50%);
+        }
+    }
+    .guide__step-description {
+        text-align: center;
+    }
+
+    :global(svg.guide__line) {
+        stroke: white;
+        stroke-opacity: 0.24;
+        stroke-width: 1;
+        stroke-dasharray: 8 8;
+    }
+</style>
