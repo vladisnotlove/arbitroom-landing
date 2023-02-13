@@ -1,0 +1,25 @@
+---
+export interface Props {
+    id: string;
+    hidden: boolean;
+}
+
+const { id, hidden } = Astro.props;
+---
+
+{
+    !hidden && (
+        <linearGradient
+            id={id}
+            x1="2.49336"
+            y1="-6.06126"
+            x2="15.991"
+            y2="12.9623"
+            gradientUnits="userSpaceOnUse"
+        >
+            <stop stop-color="#20FFFA" />
+            <stop offset="0.716998" stop-color="#FF20FF" />
+            <stop offset="1" stop-color="#FF741A" />
+        </linearGradient>
+    )
+}
