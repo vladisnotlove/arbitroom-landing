@@ -1,0 +1,183 @@
+---
+import classNames from "classNames";
+import { t, Trans } from "../utils/i18next";
+import Container from "./uiKit/Container.astro";
+import Paper from "./uiKit/Paper.astro";
+import Rating from "./uiKit/Rating.astro";
+import Text from "./uiKit/Text.astro";
+import WithDragToScroll from "./utils/WithDragToScroll.astro";
+
+export interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+
+const reviews = [
+    {
+        author: {
+            avatar: "/layout-assets/images/stubs/transparent.png",
+            name: "Александр Иванов",
+            role: t("@landing.@reviews.arbitroomUser"),
+        },
+        rating: 9,
+        text: "Проверенный множеством сделок, готовый продукт компании, который точно настраивается на интересующие торговые пары, а так же на крипто площадки, которые необходимо отслеживать. Проверенный множеством сделок, готовый продукт компании, который точно настраивается на интересующие торговые пары, а так же на крипто площадки, которые необходимо отслеживать.",
+    },
+    {
+        author: {
+            avatar: "/layout-assets/images/stubs/transparent.png",
+            name: "Александр Иванов",
+            role: t("@landing.@reviews.arbitroomUser"),
+        },
+        rating: 9,
+        text: "Проверенный множеством сделок, готовый продукт компании, который точно настраивается на интересующие торговые пары, а так же на крипто площадки, которые необходимо отслеживать. Проверенный множеством сделок, готовый продукт компании, который точно настраивается на интересующие торговые пары, а так же на крипто площадки, которые необходимо отслеживать.",
+    },
+    {
+        author: {
+            avatar: "/layout-assets/images/stubs/transparent.png",
+            name: "Александр Иванов",
+            role: t("@landing.@reviews.arbitroomUser"),
+        },
+        rating: 9,
+        text: "Проверенный множеством сделок, готовый продукт компании, который точно настраивается на интересующие торговые пары, а так же на крипто площадки, которые необходимо отслеживать. Проверенный множеством сделок, готовый продукт компании, который точно настраивается на интересующие торговые пары, а так же на крипто площадки, которые необходимо отслеживать.",
+    },
+];
+---
+
+<div class={classNames(className, "reviews")}>
+    <Container className={"reviews__header"}>
+        <Text className={"reviews__title"} variant={"h2"}>
+            {t("@landing.@reviews.title")}
+        </Text>
+        <div class={"reviews__amount"}>
+            <Text
+                className="reviews__amount-value"
+                as="span"
+                variant={"h3"}
+                color={"secondary-gradient"}
+            >
+                1280+
+            </Text>
+            <Text className="reviews__amount-label" variant={"body1"}>
+                <Trans i18nKey="@landing.@reviews.satisfiedClients">
+                    Довольных<br />клиентов
+                </Trans>
+            </Text>
+        </div>
+    </Container>
+
+    <WithDragToScroll>
+        <Container className="reviews__cards" attrs={{ ["data-js"]: "" }}>
+            {
+                reviews.map((data) => (
+                    <Paper className="reviews__card" variant={"flat"}>
+                        <div class="reviews__card-author">
+                            <div class="reviews__card-avatar-wrapper">
+                                <img src={data.author.avatar} alt="" />
+                            </div>
+                            <div class="reviews__card-name-role">
+                                <Text
+                                    className="reviews__card-name"
+                                    variant={"h5"}
+                                >
+                                    {data.author.name}
+                                </Text>
+                                <Text
+                                    className="reviews__card-role"
+                                    variant={"body1"}
+                                >
+                                    {data.author.role}
+                                </Text>
+                            </div>
+                        </div>
+                        <Rating
+                            className={"reviews__card-rating"}
+                            value={data.rating}
+                        />
+                        <Text className="reviews__card-text" variant={"body1"}>
+                            {data.text}
+                        </Text>
+                    </Paper>
+                ))
+            }
+        </Container>
+    </WithDragToScroll>
+</div>
+
+<script>
+    import variables from "../styles/variables";
+
+    // only for desktop
+    if (window.screen.width > variables.mobile) {
+        window.addEventListener("load", () => {
+            const cards = document.querySelector(".reviews__cards");
+
+            if (cards && cards.children.length > 2) {
+                const second = cards.children[1];
+                second.scrollIntoView({ inline: "center" });
+            }
+        });
+    }
+</script>
+
+<style lang="scss">
+    @import "../styles/mixins";
+
+    .reviews {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+    }
+
+    .reviews__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 4rem;
+    }
+    .reviews__title {
+        width: 50%;
+    }
+    .reviews__amount {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .reviews__cards {
+        display: flex;
+        gap: 1.5rem;
+        overflow: auto;
+
+        @include invisible-scrollbar;
+    }
+
+    .reviews__card {
+        min-width: max(50vw, 400px);
+        max-width: 953px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .reviews__card-author {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    .reviews__card-avatar-wrapper {
+        width: 5.375rem;
+        height: 5.375rem;
+        background: $color-background-upper3;
+        border-radius: 50%;
+        overflow: hidden;
+
+        & > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .reviews__card-role {
+        color: $color-text-more-secondary;
+    }
+</style>

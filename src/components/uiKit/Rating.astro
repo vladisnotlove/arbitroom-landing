@@ -1,0 +1,56 @@
+---
+import classNames from "classNames";
+import { clampNumber } from "../../utils/numberUtils";
+import Icon from "./Icon/Icon.astro";
+
+export interface Props {
+    className?: string;
+    value: number;
+}
+
+const { className, value } = Astro.props;
+const min = 0;
+const max = 10;
+
+const fixedValue = Math.round(clampNumber(value, min, max));
+const stars: ("full" | "half" | "empty")[] = [];
+
+for (let i = 2; i <= max; i += 2) {
+    if (i <= fixedValue) {
+        stars.push("full");
+    } else if (i - 1 <= fixedValue) {
+        stars.push("half");
+    } else {
+        stars.push("empty");
+    }
+}
+---
+
+<div class={classNames(className, "rating")}>
+    {
+        stars.map((star) => (
+            <>
+                {star === "full" && (
+                    <Icon iconName={"star"} color="gradient-primary" />
+                )}
+                {star === "half" && (
+                    <Icon iconName={"star-half"} color="gradient-primary" />
+                )}
+                {star === "empty" && (
+                    <Icon iconName={"star-empty"} color="gradient-primary" />
+                )}
+            </>
+        ))
+    }
+</div>
+
+<style lang="scss">
+    @import "../../styles/variables";
+
+    .rating {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        filter: drop-shadow(0px 0px 16px $color-secondary-shadow);
+    }
+</style>

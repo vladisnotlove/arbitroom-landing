@@ -13,9 +13,12 @@ const splitHTML = (html: string) => {
 
 export const interpolate = (key: TKey, referenceString: string) => {
     const originalString = rawT(key);
-
     const referenceParts = splitHTML(referenceString);
     const originalParts = splitHTML(originalString);
+
+    if (referenceParts.length !== originalParts.length) {
+        throw Error(`String: \n\n"${referenceString.trim()}"\n\n cannot be interpolated with key "${key}"`)
+    }
 
     let insideTag = false;
     const interpolatedParts = referenceParts.map((part, index) => {

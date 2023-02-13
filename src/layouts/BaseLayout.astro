@@ -1,5 +1,5 @@
 ---
-import i18next from "../utils/i18next/i18next";
+import i18next from "../utils/i18next";
 
 export interface Props {
 	title: string;
@@ -12,7 +12,7 @@ const { title, theme } = Astro.props;
 <html lang={i18next.language}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 		<link
 			rel="apple-touch-icon"

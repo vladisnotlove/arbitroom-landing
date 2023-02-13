@@ -33,6 +33,9 @@
     "@landing.@profits.availableSum": "Доступная сумма актива от 100 USDT",
     "@landing.@profits.profitPerMonth": "Ежемесячная прибыль от 20% до 25% ",
     "@landing.@profits.title": "Получай пассивную прибыль ежедневно",
+    "@landing.@reviews.title": "Что говорят наши клиенты?",
+    "@landing.@reviews.satisfiedClients": "Довольных<1 />клиентов",
+    "@landing.@reviews.arbitroomUser": "Пользователь Arbitroom",
     "@landing.@welcome.description": "Любой пользователь может зарабатывать на арбитраже криптовалют с минимум затраченных усилий и экономией  личного времени с помощью автоматизированных инструментов анализа рынка.",
     "@landing.@welcome.title": "Заработай на крипто арбитраже"
 }

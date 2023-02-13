@@ -1,17 +1,18 @@
 ---
 import classNames from "classNames";
-export interface Props {
-    as?: keyof HTMLElementTagNameMap;
+export interface Props<TagName extends keyof HTMLElementTagNameMap> {
+    as?: TagName;
     className?: string;
     id?: string;
+    attrs?: HTMLElementTagNameMap[TagName];
 }
 
-const { as: Tag = "div", className, id } = Astro.props;
+const { as: As = "div", className, id, attrs } = Astro.props;
 ---
 
-<Tag class={classNames(className, "container")} id={id}>
+<As class={classNames(className, "container")} id={id} {...attrs}>
     <slot />
-</Tag>
+</As>
 
 <style lang="scss">
     @import "../../styles/variables.scss";

@@ -65,11 +65,10 @@ const calculateAnchors = (startRect: DOMRect, endRect: DOMRect) => {
             endAnchor: endCandidates.right,
         }
     }
-    if (startCandidates.right.x < endCandidates.left.x) {
-        return {
-            startAnchor: startCandidates.right,
-            endAnchor: endCandidates.left,
-        }
+    // if (startCandidates.right.x < endCandidates.left.x) 
+    return {
+        startAnchor: startCandidates.right,
+        endAnchor: endCandidates.left,
     }
 }
 

@@ -1,0 +1,91 @@
+---
+import { parse, HTMLElement } from "node-html-parser";
+
+const html = await Astro.slots.render("default");
+const dom = parse(html);
+
+dom.childNodes.forEach((node) => {
+    // ELEMENT
+    if (node instanceof HTMLElement) {
+        node.setAttribute("data-js", "");
+        node.setAttribute("data-drag-to-scroll", "");
+    }
+});
+---
+
+<Fragment set:html={dom.toString()} />
+
+<script>
+    window.addEventListener("load", () => {
+        document
+            .querySelectorAll("[data-js][data-drag-to-scroll]")
+            .forEach((element) => {
+                if (!(element instanceof HTMLElement)) return;
+
+                let pos = { top: 0, left: 0, x: 0, y: 0 };
+                let mousePosBefore = { x: 0, y: 0 };
+
+                const onMouseDown = function (e: MouseEvent) {
+                    pos = {
+                        // The current scroll
+                        left: element.scrollLeft,
+                        top: element.scrollTop,
+                        // Get the current mouse position
+                        x: e.clientX,
+                        y: e.clientY,
+                    };
+                    mousePosBefore = {
+                        x: e.clientX,
+                        y: e.clientY,
+                    };
+
+                    element.style.cursor = "grabbing";
+                    element.style.userSelect = "none";
+                    element
+                        .querySelectorAll("img")
+                        .forEach((img) => (img.draggable = false));
+
+                    document.addEventListener("mousemove", onMouseMove);
+                    document.addEventListener("mouseup", onMouseUp);
+                };
+
+                const onMouseMove = function (e: MouseEvent) {
+                    // How far the mouse has been moved
+                    const dx = e.clientX - pos.x;
+                    const dy = e.clientY - pos.y;
+
+                    // Scroll the element
+                    element.scrollTop = pos.top - dy;
+                    element.scrollLeft = pos.left - dx;
+                };
+
+                const onMouseUp = function (e: MouseEvent) {
+                    document.removeEventListener("mousemove", onMouseMove);
+                    document.removeEventListener("mouseup", onMouseUp);
+
+                    element.style.cursor = "grab";
+                    element.style.removeProperty("user-select");
+                };
+
+                const preventClickIfMove = function (e: MouseEvent) {
+                    const diff = {
+                        x: mousePosBefore.x - e.clientX,
+                        y: mousePosBefore.y - e.clientY,
+                    };
+                    const diffLength = Math.sqrt(
+                        diff.x * diff.x + diff.y * diff.y
+                    );
+
+                    if (diffLength > 4) {
+                        e.stopPropagation();
+                    }
+                };
+
+                element.style.cursor = "grab";
+                element.addEventListener("mousedown", onMouseDown);
+                element.addEventListener("click", preventClickIfMove, {
+                    capture: true,
+                });
+            });
+    });
+</script>

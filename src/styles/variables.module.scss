@@ -1,0 +1,11 @@
+@import "./variables.scss";
+
+:export {
+    desktop: $desktop;
+    small-desktop: $small-desktop;
+    laptop: $laptop;
+    small-laptop: $small-laptop;
+    tablet: $tablet;
+    small-tablet: $small-tablet;
+    mobile: $mobile;
+}

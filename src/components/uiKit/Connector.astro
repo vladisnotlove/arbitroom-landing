@@ -35,8 +35,6 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
             let lines: Element[] = [];
 
             const drawLines = () => {
-                console.log("draw");
-
                 // clear lines
                 if (lines.length > 0) {
                     lines.forEach((line) => line.remove());
