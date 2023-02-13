@@ -1,5 +1,6 @@
 ---
 import classNames from "classNames";
+import routes from "../store/routes";
 import { t } from "../utils/i18next/i18next";
 import Button from "./uiKit/Button.astro";
 import Connector from "./uiKit/Connector.astro";
@@ -37,7 +38,10 @@ const steps = [
 ];
 ---
 
-<Container className={classNames(className, "guide")}>
+<Container
+    className={classNames(className, "guide")}
+    id={routes.index.fragments.whatFirst}
+>
     <Text className="guide__title" variant="h2">
         {t("@landing.@guide.title")}
     </Text>

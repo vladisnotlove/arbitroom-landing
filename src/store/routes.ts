@@ -1,4 +1,6 @@
 
+import urlJoin from "url-join"
+
 // base type
 
 type Route = {
@@ -8,7 +10,7 @@ type Route = {
 const routeWithFragments = <T extends Record<string, string>>(route: Route, fragments: T) => {
     return {
         ...route,
-        pathWithFragment: (fragmentName: keyof T) => route.path + "/#" + fragments[fragmentName],
+        pathWithFragment: (fragmentName: keyof T) => urlJoin(route.path, "/#" + fragments[fragmentName]),
         fragments,
     }
 }

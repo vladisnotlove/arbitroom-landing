@@ -1,5 +1,6 @@
 ---
 import classNames from "classNames";
+import routes from "../store/routes";
 import { t } from "../utils/i18next/i18next";
 import Container from "./uiKit/Container.astro";
 import Paper from "./uiKit/Paper.astro";
@@ -98,7 +99,10 @@ const neuralAdvantageCompanies = [
 ];
 ---
 
-<Container className={classNames(className, "neural-advantages")}>
+<Container
+    className={classNames(className, "neural-advantages")}
+    id={routes.index.fragments.advantagesOfNeuralNetwork}
+>
     <Text className="neural-advantages__title" variant="h2">
         {t("@landing.@neuralAdvantages.title")}
     </Text>
