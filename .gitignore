@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # temp page
 src/pages/test.astro
+
+# IDE
+.idea
+.vscode

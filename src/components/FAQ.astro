@@ -1,0 +1,79 @@
+---
+import classNames from "classNames";
+import { t } from "../utils/i18next";
+import CollapseCard from "./CollapseCard.astro";
+import Container from "./uiKit/Container.astro";
+import Text from "./uiKit/Text.astro";
+
+export interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+const questions = [
+    {
+        question: "Что такое Arbitroom?",
+        answer: "Arbitroom.io - это это автоматизированная площадка арбитража криптовалют.",
+    },
+    {
+        question: "Какие виды арбитража использует Arbitroom?",
+        answer: "В большинстве случаев Arbitroom использует межбиржевой и внутребиржевой арбитраж.",
+    },
+    {
+        question: "Когда вы начали работать?",
+        answer: "Платформа работает с 2021 года",
+    },
+    {
+        question: "Что нужно для начала работы?",
+        answer: "Для начала работы вам необходимо ознакомиться с условиями и принять правила пользования сайтом, после чего пройти регистрацию на платформе.",
+    },
+    {
+        question: "Что нужно для регистрации?",
+        answer: "Для регистрации вам потребуется рабочая почта и надежный пароль.",
+    },
+    {
+        question: "Насколько безопасно инвестировать на платформе Arbitroom?",
+        answer: "Инвестирование, особенно в криптовалютную тематику, всегда связано с большими рисками, наша команда минимизирует риски за счет быстрых сделок в арбитражных ситуациях. Оборотная ликвидность всегда под контролем и не задерживается на биржах дольше, чем этого требует конкретная сделка.",
+    },
+    {
+        question: "Какие риски потери средств?",
+        answer: "Вы рискуете потерять средства только в том случае, если криптовалюта перестанет существовать или ее нельзя будет обналичивать.",
+    },
+];
+---
+
+<Container className={classNames(className, "faq")}>
+    <Text className={"faq__title"} variant={"h2"}>
+        {t("@landing.@faq.title")}
+    </Text>
+    <div class="faq__cards">
+        {
+            questions.map(({ question, answer }) => (
+                <CollapseCard title={question}>{answer}</CollapseCard>
+            ))
+        }
+    </div>
+</Container>
+
+<style lang="scss">
+    .faq {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+        display: flex;
+        gap: 3rem;
+    }
+    .faq__title {
+        min-width: 0;
+        flex-basis: 0;
+        flex-grow: 1;
+    }
+    .faq__cards {
+        min-width: 0;
+        flex-basis: 0;
+        flex-grow: 1;
+
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+</style>

@@ -1,0 +1,126 @@
+---
+import classNames from "classNames";
+import Paper, { Props as TPaperProps } from "./uiKit/Paper.astro";
+import Text from "./uiKit/Text.astro";
+
+export interface Props {
+    className?: string;
+    title?: string;
+    PaperProps?: TPaperProps;
+}
+
+const { className, title, PaperProps } = Astro.props;
+---
+
+<Paper className={classNames(className, "collapse-card")} {...PaperProps}>
+    <div class="collapse-card__header">
+        <Text className="collapse-card__title" variant={"h5"}>{title}</Text>
+        <div class="collapse-card__expand-btn">
+            <div class="collapse-card__plus-minus-icon">
+                <div class="dash"></div>
+                <div class="dash"></div>
+            </div>
+        </div>
+    </div>
+    <div class="collapse-card__content-wrapper">
+        <Text className="collapse-card__content" variant={"body1"}>
+            <slot />
+        </Text>
+    </div>
+</Paper>
+
+<style lang="scss">
+    @import "../styles/variables.scss";
+
+    .collapse-card {
+        cursor: pointer;
+
+        &.expanded {
+            .collapse-card__plus-minus-icon {
+                & > .dash {
+                    &:nth-child(1) {
+                        rotate: 180deg;
+                    }
+                    &:nth-child(2) {
+                        rotate: 180deg;
+                    }
+                }
+            }
+        }
+    }
+
+    .collapse-card__content-wrapper {
+        height: 0;
+        overflow: hidden;
+    }
+
+    .collapse-card__content {
+        padding-top: 1rem;
+    }
+
+    .collapse-card__header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .collapse-card__expand-btn {
+        padding: 0.75rem;
+        margin: -0.75rem;
+    }
+
+    // initial state is plus
+    .collapse-card__plus-minus-icon {
+        position: relative;
+        width: 2rem;
+        height: 2rem;
+
+        & > .dash {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+
+            width: 1.5rem;
+            height: 2.5px;
+            border-radius: 2px;
+            background: $color-prime-main;
+
+            transition: rotate $animation-normal;
+
+            &:nth-child(2) {
+                rotate: -90deg;
+            }
+        }
+    }
+</style>
+
+<script>
+    document.querySelectorAll(".collapse-card").forEach((card) => {
+        card.addEventListener("click", () => {
+            const content = card.querySelector(".collapse-card__content");
+            const contentWrapper = card.querySelector(
+                ".collapse-card__content-wrapper"
+            );
+            const expanded = card.classList.contains("expanded");
+
+            if (
+                contentWrapper instanceof HTMLElement &&
+                content instanceof HTMLElement
+            ) {
+                if (expanded) {
+                    contentWrapper.style.transition = `height ${
+                        Math.sqrt(content.clientHeight) / 24
+                    }s`;
+                    contentWrapper.style.height = "0px";
+                } else {
+                    contentWrapper.style.transition = `height ${
+                        Math.sqrt(content.clientHeight) / 24
+                    }s`;
+                    contentWrapper.style.height = `${content.clientHeight}px`;
+                }
+            }
+
+            card.classList.toggle("expanded");
+        });
+    });
+</script>
