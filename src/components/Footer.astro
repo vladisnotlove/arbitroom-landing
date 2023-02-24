@@ -1,0 +1,218 @@
+---
+import classNames from "classNames";
+import { t } from "../utils/i18next";
+import Trans from "../utils/i18next/Trans.astro";
+import Button from "./uiKit/Button.astro";
+import Container from "./uiKit/Container.astro";
+import Icon, { Props as IconProps } from "./uiKit/Icon/Icon.astro";
+import Text from "./uiKit/Text.astro";
+
+export interface Props {
+    className?: string;
+    menuItems: Array<{
+        id: string;
+        href: string;
+        label: string;
+    }>;
+}
+
+const { className, menuItems } = Astro.props;
+
+const socials: Array<{
+    iconName: IconProps["iconName"];
+    title: string;
+    href: string;
+}> = [
+    {
+        iconName: "social-telegram",
+        title: t("@common.telegramChannel"),
+        href: "https://t.me/arbitroom_io",
+    },
+    {
+        iconName: "social-telegram",
+        title: t("@common.telegramChat"),
+        href: "https://t.me/+Z0XUvV93_RUyODli",
+    },
+    {
+        iconName: "social-mail",
+        title: t("@common.mail"),
+        href: "mailto:support@arbitroom.io",
+    },
+    {
+        iconName: "social-youtube",
+        title: "YouTube",
+        href: "https://youtube.com/channel/UCVmzaOzDoPOwIHs3nIQbEwg",
+    },
+];
+---
+
+<Container as="footer" className={classNames(className, "footer")}>
+    <div class="footer__main">
+        <Text className={"footer__title"} variant={"h3"}>
+            <Trans i18nKey="@landing.@footer.title">
+                <Text as="span" color="secondary-gradient">
+                    Получай прибыль
+                </Text> уже сейчас независимо от тренда
+            </Trans>
+        </Text>
+        <Button size={"large"}>
+            {t("@common.join")}
+        </Button>
+    </div>
+    <div class="footer__img-wrapper">
+        <img
+            class="footer__img"
+            src="/layout-assets/images/image-for-footer.png"
+            alt=""
+        />
+    </div>
+    <div class="footer__nav">
+        <img class="footer__logo" src="/layout-assets/images/logo.svg" alt="" />
+        <div class="footer__menu">
+            {
+                menuItems.map((menuItem) => (
+                    <Text
+                        variant={"body2"}
+                        className="footer__menu-item"
+                        as="a"
+                        attrs={{
+                            ["href"]: menuItem.href,
+                            ["data-key"]: menuItem.id,
+                        }}
+                    >
+                        {menuItem.label}
+                    </Text>
+                ))
+            }
+        </div>
+    </div>
+    <div class="footer__links">
+        <div class="footer__socials">
+            {
+                socials.map((social) => (
+                    <Text
+                        as="a"
+                        attrs={{ href: social.href, target: "_blank" }}
+                        variant={"body1"}
+                        className={"footer__social"}
+                    >
+                        <Icon iconName={social.iconName} />
+                        {social.title}
+                    </Text>
+                ))
+            }
+        </div>
+        <div class="footer__meta">
+            <Text variant={"body2"} className={"footer__copyright"}>
+                © {new Date().getFullYear()} Arbitroom. All rights reserved.
+            </Text>
+            <Text
+                as="a"
+                attrs={{ href: "#" }}
+                variant={"body2"}
+                className={"footer__private-policy"}
+            >
+                {t("@common.privacyPolicy")}
+            </Text>
+        </div>
+    </div>
+</Container>
+
+<style lang="scss">
+    @import "../styles/variables";
+
+    .footer {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-areas:
+            "m i"
+            "n n"
+            "l l";
+        padding-top: 11.25rem;
+        padding-bottom: 4rem;
+    }
+    .footer__main {
+        grid-area: m;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 3rem;
+    }
+    .footer__img-wrapper {
+        grid-area: i;
+        position: relative;
+        width: clamp(180px, 18.75vw, 360px);
+        height: 290px;
+    }
+    .footer__img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 119%;
+    }
+
+    .footer__nav {
+        grid-area: n;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-top: 8rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid $color-text-more-secondary;
+        margin-bottom: 1.5rem;
+        min-width: 0;
+    }
+    .footer__menu {
+        flex-grow: 1;
+        min-width: 0;
+        overflow: hidden;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.75rem;
+    }
+    .footer__menu-item {
+        white-space: nowrap;
+        overflow: visible;
+        padding: 0.5rem;
+    }
+
+    .footer__links {
+        grid-area: l;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: flex-end;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        row-gap: 1.5rem;
+        column-gap: 0.75rem;
+    }
+    .footer__meta {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .footer__copyright {
+        color: $color-text-more-secondary;
+    }
+    .footer__private-policy {
+        text-decoration: underline;
+    }
+    .footer__socials {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    .footer__social {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.625rem;
+    }
+</style>

@@ -4,6 +4,7 @@ import classNames from "classNames";
 export interface Props {
     className?: string;
     as?: keyof HTMLElementTagNameMap;
+    attrs?: Record<string, string>;
     variant?:
         | "h2"
         | "h3"
@@ -21,6 +22,7 @@ export interface Props {
 const {
     className,
     as: Tag = "div",
+    attrs,
     variant,
     color,
     disableMobileAdaptive,
@@ -35,6 +37,7 @@ const {
         ["disable-mobile-adaptive"]: disableMobileAdaptive,
         ["disable-adaptive"]: disableAdaptive,
     })}
+    {...attrs}
 >
     <slot />
 </Tag>

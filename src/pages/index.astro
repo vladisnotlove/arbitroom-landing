@@ -9,32 +9,35 @@ import NeuralAdvantages from "../components/NeuralAdvantages.astro";
 import Guide from "../components/Guide.astro";
 import Reviews from "../components/Reviews.astro";
 import FAQ from "../components/FAQ.astro";
+import Footer from "../components/Footer.astro";
+
+const menuItems = [
+    {
+        id: "howCashGenerated",
+        href: routes.index.pathWithFragment("howCashGenerated"),
+        label: t("@landing.@menu.howCashGenerated"),
+    },
+    {
+        id: "advantagesOfNeuralNetwork",
+        href: routes.index.pathWithFragment("advantagesOfNeuralNetwork"),
+        label: t("@landing.@menu.advantagesOfNeuralNetwork"),
+    },
+    {
+        id: "whatFirst",
+        href: routes.index.pathWithFragment("whatFirst"),
+        label: t("@landing.@menu.whatFirst"),
+    },
+    {
+        id: "clientsAboutUs",
+        href: routes.index.pathWithFragment("clientsAboutUs"),
+        label: t("@landing.@menu.clientsAboutUs"),
+    },
+];
 ---
 
 <LandingLayout
     title="Arbitroom"
-    menuItems={[
-        {
-            id: "howCashGenerated",
-            href: routes.index.pathWithFragment("howCashGenerated"),
-            label: t("@landing.@menu.howCashGenerated"),
-        },
-        {
-            id: "advantagesOfNeuralNetwork",
-            href: routes.index.pathWithFragment("advantagesOfNeuralNetwork"),
-            label: t("@landing.@menu.advantagesOfNeuralNetwork"),
-        },
-        {
-            id: "whatFirst",
-            href: routes.index.pathWithFragment("whatFirst"),
-            label: t("@landing.@menu.whatFirst"),
-        },
-        {
-            id: "clientsAboutUs",
-            href: routes.index.pathWithFragment("clientsAboutUs"),
-            label: t("@landing.@menu.clientsAboutUs"),
-        },
-    ]}
+    menuItems={menuItems}
     menuActionButton={{
         href: "/login",
         label: t("@common.signup"),
@@ -47,4 +50,5 @@ import FAQ from "../components/FAQ.astro";
     <Guide />
     <Reviews />
     <FAQ />
+    <Footer menuItems={menuItems} />
 </LandingLayout>
