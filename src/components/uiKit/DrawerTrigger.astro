@@ -1,0 +1,45 @@
+---
+import classNames from "classNames";
+
+export interface Props {
+    className?: string;
+    drawerId: string;
+}
+
+const { className, drawerId } = Astro.props;
+---
+
+<div class={classNames(className, "drawer-trigger")} data-drawer-id={drawerId}>
+    <slot />
+</div>
+
+<style lang="scss">
+    body.drawer-open {
+        overflow: hidden;
+    }
+</style>
+
+<script>
+    window.addEventListener("load", () => {
+        const triggers = document.querySelectorAll(".drawer-trigger");
+
+        triggers.forEach((trigger) => {
+            trigger.addEventListener("click", () => {
+                const drawerId = trigger.getAttribute("data-drawer-id");
+                const drawer = drawerId
+                    ? document.getElementById(drawerId)
+                    : null;
+
+                if (drawer) {
+                    drawer.classList.toggle("open");
+
+                    if (drawer.classList.contains("open")) {
+                        document.body.classList.add("drawer-open");
+                    } else {
+                        document.body.classList.remove("drawer-open");
+                    }
+                }
+            });
+        });
+    });
+</script>

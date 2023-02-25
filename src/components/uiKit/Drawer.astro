@@ -1,0 +1,160 @@
+---
+import classNames from "classNames";
+import Backdrop from "./Backdrop.astro";
+
+export interface Props {
+    className?: string;
+    side?: "left" | "right";
+    id?: string;
+}
+
+const { className, side = "right", id } = Astro.props;
+---
+
+<div class={classNames(className, "drawer", side)} id={id}>
+    <Backdrop className="drawer__backdrop" />
+    <div class="drawer__body">
+        <div class="drawer__content">
+            <slot />
+        </div>
+    </div>
+</div>
+
+<style lang="scss">
+    @import "../../styles/mixins";
+
+    .drawer {
+        position: fixed;
+        top: -200%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: $z-index-drawer;
+        color: $color-text-prime;
+
+        transition: top 0s $animation-slow;
+
+        &.left {
+            text-align: left;
+            .drawer__body {
+                padding-left: $container-padding-desktop;
+                transform: translateX(-100%);
+            }
+        }
+
+        &.right {
+            text-align: right;
+            .drawer__body {
+                padding-right: $container-padding-desktop;
+                transform: translateX(100%);
+            }
+        }
+
+        &.open {
+            top: 0;
+            transition: top 0s;
+
+            .drawer__backdrop {
+                opacity: 1;
+                transition: opacity $animation-normal;
+            }
+
+            &.left {
+                .drawer__body {
+                    transform: translateX(0);
+                    transition: transform $animation-normal;
+                }
+            }
+
+            &.right {
+                .drawer__body {
+                    transform: translateX(0);
+                    transition: transform $animation-normal;
+                }
+            }
+        }
+    }
+
+    .drawer__backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: $color-overlay;
+        opacity: 0;
+        z-index: 1;
+        transition: opacity $animation-slow;
+    }
+
+    .drawer__body {
+        position: relative;
+        display: inline-block;
+        height: 100%;
+        background: $color-background-upper1;
+        overflow: auto;
+        z-index: 2;
+        transition: transform $animation-slow;
+
+        @include custom-scrollbar;
+    }
+
+    .drawer__content {
+        display: inline-block;
+    }
+
+    @media (max-width: $desktop) {
+        .drawer {
+            &.left {
+                .drawer__body {
+                    padding-left: $container-padding-adaptive;
+                }
+            }
+
+            &.right {
+                .drawer__body {
+                    padding-right: $container-padding-adaptive;
+                }
+            }
+        }
+    }
+
+    @media (max-width: $mobile) {
+        .drawer {
+            &.left {
+                .drawer__body {
+                    display: block;
+                    padding: $container-padding-mobile;
+                }
+            }
+
+            &.right {
+                .drawer__body {
+                    display: block;
+                    padding-right: $container-padding-mobile;
+                }
+            }
+        }
+    }
+</style>
+
+<script>
+    window.addEventListener("load", () => {
+        const drawers = document.querySelectorAll(".drawer");
+
+        drawers.forEach((drawer) => {
+            drawer.addEventListener("click", (e) => {
+                if (!(e.target instanceof Element)) return;
+                if (e.target.closest(".drawer__body")) return;
+
+                drawer.classList.toggle("open");
+
+                if (drawer.classList.contains("open")) {
+                    document.body.classList.add("drawer-open");
+                } else {
+                    document.body.classList.remove("drawer-open");
+                }
+            });
+        });
+    });
+</script>
