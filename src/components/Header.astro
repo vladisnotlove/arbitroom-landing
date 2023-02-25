@@ -2,7 +2,8 @@
 import classNames from "classNames";
 import Container from "./uiKit/Container.astro";
 import { DrawerTrigger } from "./uiKit/Drawer";
-import Icon from "./uiKit/Icon/Icon.astro";
+import Icon from "./uiKit/Icon";
+import Text from "./uiKit/Text.astro";
 
 export interface Props {
     className?: string;
@@ -25,13 +26,17 @@ const { className, menuItems, sideMenuId } = Astro.props;
         <div class="header__menu">
             {
                 menuItems.map((menuItem) => (
-                    <a
-                        class="header__menu-item"
-                        href={menuItem.href}
-                        data-key={menuItem.id}
+                    <Text
+                        variant={"body2"}
+                        className="header__menu-item"
+                        as="a"
+                        attrs={{
+                            ["href"]: menuItem.href,
+                            ["data-key"]: menuItem.id,
+                        }}
                     >
                         {menuItem.label}
-                    </a>
+                    </Text>
                 ))
             }
         </div>
@@ -45,7 +50,7 @@ const { className, menuItems, sideMenuId } = Astro.props;
 </Container>
 
 <style lang="scss">
-    @import "../styles/variables.scss";
+    @import "../styles/mixins";
 
     $header-gap: 1rem;
 
@@ -117,21 +122,10 @@ const { className, menuItems, sideMenuId } = Astro.props;
         padding: $header-menu-item-padding;
         white-space: nowrap;
 
-        background-image: linear-gradient(
-            to right,
-            $color-prime-main,
-            $color-prime-main
+        @include animated-underaline(
+            $header-menu-item-padding,
+            $header-menu-item-padding
         );
-        background-position: bottom center;
-        background-size: 0 2px;
-        background-repeat: no-repeat;
-
-        transition: background-size 0s;
-
-        &:hover {
-            background-size: calc(100% - #{$header-menu-item-padding * 2}) 2px;
-            transition: background-size $animation-normal;
-        }
     }
 
     .header__actions {

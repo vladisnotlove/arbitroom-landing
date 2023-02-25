@@ -1,0 +1,194 @@
+---
+import classNames from "classNames";
+import socials from "../store/socials";
+import { t } from "../utils/i18next";
+import Drawer, { DrawerTrigger } from "./uiKit/Drawer";
+import Icon from "./uiKit/Icon";
+import Text from "./uiKit/Text.astro";
+
+export interface Props {
+    className?: string;
+    menuItems: Array<{
+        id: string;
+        href: string;
+        label: string;
+    }>;
+    id: string;
+}
+
+const { className, menuItems, id } = Astro.props;
+---
+
+<Drawer className={classNames(className, "side-menu")} id={id} side={"right"}>
+    <div class="side-menu__header">
+        <a class="side-menu__logo" href="/">
+            <img src="/layout-assets/images/logo.svg" alt="" />
+        </a>
+        <DrawerTrigger className="side-menu__close" drawerId={id}>
+            <Icon iconName="close" />
+        </DrawerTrigger>
+    </div>
+    <div class="side-menu__body">
+        <div class="side-menu__actions">
+            <slot name="actions" />
+        </div>
+        <div class="side-menu__items">
+            {
+                menuItems.map((menuItem) => (
+                    <Text
+                        as="a"
+                        variant={"body2"}
+                        className="side-menu__item"
+                        attrs={{
+                            ["href"]: menuItem.href,
+                            ["data-key"]: menuItem.id,
+                        }}
+                    >
+                        {menuItem.label}
+                    </Text>
+                ))
+            }
+        </div>
+    </div>
+    <div class="side-menu__footer">
+        <div class="side-menu__socials">
+            {
+                socials.map((social) => (
+                    <Text
+                        as="a"
+                        variant={"body2"}
+                        className="side-menu__social"
+                        attrs={{
+                            href: social.href,
+                        }}
+                    >
+                        {t(social.tkey)}
+                    </Text>
+                ))
+            }
+        </div>
+        <div class="side-menu__meta">
+            <Text variant={"body2"} className={"side-menu__copyright"}>
+                © {new Date().getFullYear()} Arbitroom. All rights reserved.
+            </Text>
+            <Text
+                as="a"
+                variant={"body2"}
+                className={"side-menu__private-policy"}
+                attrs={{ href: "#" }}
+            >
+                {t("@common.privacyPolicy")}
+            </Text>
+        </div>
+    </div>
+</Drawer>
+
+<style lang="scss">
+    @import "../styles/mixins";
+
+    $side-menu-width: 280px;
+
+    .side-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding-left: 2rem;
+        padding-bottom: 2rem;
+        max-width: 100vw;
+    }
+
+    .side-menu__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        min-height: $header-height-desktop;
+
+        // desktop width
+        width: $side-menu-width;
+        max-width: 100%;
+        margin-bottom: -1rem;
+    }
+    .side-menu__close {
+        cursor: pointer;
+    }
+
+    .side-menu__body {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        // desktop width
+        width: $side-menu-width;
+        max-width: 100%;
+    }
+    .side-menu__items {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .side-menu__item {
+        padding: 0.5rem;
+
+        @include animated-underaline(0.5rem, 0.5rem, $position: left 0.5rem);
+    }
+
+    .side-menu__footer {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 2rem;
+
+        // desktop width
+        width: $side-menu-width;
+        max-width: 100%;
+    }
+    .side-menu__socials {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 1rem;
+        column-gap: 0.5rem;
+        max-width: $side-menu-width;
+    }
+    .side-menu__social {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        color: $color-text-prime;
+        border: 1px solid $color-text-prime;
+        border-radius: 2rem;
+
+        // animation
+        background: transparent;
+        cursor: pointer;
+        transition: background $animation-normal;
+
+        &:hover {
+            background: $color-action-hover;
+            transition: background $animation-fast;
+        }
+    }
+    .side-menu__meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .side-menu__copyright {
+        color: $color-text-more-secondary;
+    }
+
+    @media (max-width: $mobile) {
+        .side-menu__header,
+        .side-menu__body,
+        .side-menu__footer {
+            // mobile width
+            width: 100%;
+        }
+
+        .side-menu__header {
+            min-height: $header-height-mobile;
+        }
+    }
+</style>

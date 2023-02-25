@@ -16,7 +16,13 @@ const { className, drawerId } = Astro.props;
 <style lang="scss">
     html.drawer-open {
         overflow: hidden;
-        padding-right: 8px;
+    }
+
+    // padding instead of scrollbar (only for desktop)
+    @media (hover: hover) {
+        html.drawer-open {
+            padding-right: 8px;
+        }
     }
 </style>
 

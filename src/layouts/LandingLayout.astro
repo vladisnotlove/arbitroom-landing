@@ -2,6 +2,7 @@
 import BaseLayout from "./BaseLayout.astro";
 import Header, { Props as HeaderProps } from "../components/Header.astro";
 import Button from "../components/uiKit/Button.astro";
+import SideMenu from "../components/SideMenu.astro";
 
 export interface Props {
     title: string;
@@ -16,8 +17,16 @@ const { title, menuActionButton, menuItems } = Astro.props;
 ---
 
 <BaseLayout title={title}>
+    <!-- side menu -->
+    <SideMenu menuItems={menuItems} id="sideMenu">
+        <a slot="actions" href={menuActionButton.href}>
+            <Button>
+                {menuActionButton.label}
+            </Button>
+        </a>
+    </SideMenu>
     <!-- header -->
-    <Header menuItems={menuItems}>
+    <Header menuItems={menuItems} sideMenuId={"sideMenu"}>
         <a slot="actions" href={menuActionButton.href}>
             <Button>
                 {menuActionButton.label}

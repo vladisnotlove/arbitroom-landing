@@ -6,6 +6,7 @@ import Button from "./uiKit/Button.astro";
 import Container from "./uiKit/Container.astro";
 import Icon, { Props as IconProps } from "./uiKit/Icon/Icon.astro";
 import Text from "./uiKit/Text.astro";
+import socials from "../store/socials";
 
 export interface Props {
     className?: string;
@@ -17,33 +18,6 @@ export interface Props {
 }
 
 const { className, menuItems } = Astro.props;
-
-const socials: Array<{
-    iconName: IconProps["iconName"];
-    title: string;
-    href: string;
-}> = [
-    {
-        iconName: "social-telegram",
-        title: t("@common.telegramChannel"),
-        href: "https://t.me/arbitroom_io",
-    },
-    {
-        iconName: "social-telegram",
-        title: t("@common.telegramChat"),
-        href: "https://t.me/+Z0XUvV93_RUyODli",
-    },
-    {
-        iconName: "social-mail",
-        title: t("@common.mail"),
-        href: "mailto:support@arbitroom.io",
-    },
-    {
-        iconName: "social-youtube",
-        title: "YouTube",
-        href: "https://youtube.com/channel/UCVmzaOzDoPOwIHs3nIQbEwg",
-    },
-];
 ---
 
 <Container as="footer" className={classNames(className, "footer")}>
@@ -97,7 +71,7 @@ const socials: Array<{
                         className={"footer__social"}
                     >
                         <Icon iconName={social.iconName} />
-                        {social.title}
+                        {t(social.tkey)}
                     </Text>
                 ))
             }

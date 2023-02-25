@@ -71,3 +71,19 @@
         background: transparent;
     }
 }
+
+@mixin animated-underaline ($padding-left: 0, $padding-right: 0, $position: center) {
+    background-image: linear-gradient(to right,
+            $color-prime-main,
+            $color-prime-main );
+    background-position: bottom $position;
+    background-size: 0 2px;
+    background-repeat: no-repeat;
+
+    transition: background-size 0s;
+
+    &:hover {
+        background-size: calc(100% - #{$padding-left} - #{$padding-right}) 2px;
+        transition: background-size $animation-normal;
+    }
+}

@@ -1,4 +1,5 @@
-@import "./variables.scss";
+@import "./variables";
+@import "./mixins";
 
 // import fonts
 
@@ -47,6 +48,10 @@
 html {
     font-size: 16px;
     font-family: Golos;
+
+    @include custom-scrollbar;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 * {

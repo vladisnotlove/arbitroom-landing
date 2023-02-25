@@ -19,9 +19,11 @@ const { className, side = "right", id } = Astro.props;
 </div>
 
 <style lang="scss">
-    @import "../../styles/mixins";
+    @import "../../../styles/mixins";
 
     .drawer {
+        display: flex;
+
         position: fixed;
         top: -200%;
         left: 0;
@@ -33,16 +35,18 @@ const { className, side = "right", id } = Astro.props;
         transition: top 0s $animation-slow;
 
         &.left {
-            text-align: left;
+            justify-content: flex-start;
             .drawer__body {
+                min-width: 0;
                 padding-left: $container-padding-desktop;
                 transform: translateX(-100%);
             }
         }
 
         &.right {
-            text-align: right;
+            justify-content: flex-end;
             .drawer__body {
+                min-width: 0;
                 padding-right: $container-padding-desktop;
                 transform: translateX(100%);
             }
@@ -89,6 +93,7 @@ const { className, side = "right", id } = Astro.props;
         position: relative;
         display: inline-block;
         height: 100%;
+        text-align: left;
         background: $color-background-upper1;
         overflow-y: scroll;
         z-index: 2;
@@ -117,14 +122,14 @@ const { className, side = "right", id } = Astro.props;
         .drawer {
             &.left {
                 .drawer__body {
-                    display: block;
+                    width: 100%;
                     padding: $container-padding-mobile;
                 }
             }
 
             &.right {
                 .drawer__body {
-                    display: block;
+                    width: 100%;
                     padding-right: $container-padding-mobile;
                 }
             }
