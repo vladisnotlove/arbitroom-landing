@@ -1,6 +1,7 @@
 ---
 import classNames from "classNames";
 import Container from "./uiKit/Container.astro";
+import Icon from "./uiKit/Icon/Icon.astro";
 
 export interface Props {
     className?: string;
@@ -14,25 +15,30 @@ export interface Props {
 const { className, menuItems } = Astro.props;
 ---
 
-<Container as="header" className={classNames(className, "header")}>
+<Container as="header" className={classNames(className, "header")} id="header">
     <a class="header__logo" href="/">
         <img src="/layout-assets/images/logo.svg" />
     </a>
-    <div class="header__menu">
-        {
-            menuItems.map((menuItem) => (
-                <a
-                    class="header__menu-item"
-                    href={menuItem.href}
-                    data-key={menuItem.id}
-                >
-                    {menuItem.label}
-                </a>
-            ))
-        }
-    </div>
-    <div class="header__actions">
-        <slot name="actions" />
+    <div class="header__nav">
+        <div class="header__menu">
+            {
+                menuItems.map((menuItem) => (
+                    <a
+                        class="header__menu-item"
+                        href={menuItem.href}
+                        data-key={menuItem.id}
+                    >
+                        {menuItem.label}
+                    </a>
+                ))
+            }
+        </div>
+        <div class="header__actions">
+            <slot name="actions" />
+        </div>
+        <div class="header__burger">
+            <Icon iconName={"burger"} />
+        </div>
     </div>
 </Container>
 
@@ -53,10 +59,39 @@ const { className, menuItems } = Astro.props;
         align-items: center;
         gap: $header-gap;
         z-index: $z-index-header;
+
+        &.overflowed {
+            .header__burger {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+
+        &.normal {
+            .header__menu {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .header__actions {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
     }
 
     .header__logo {
         margin-right: calc(41px - #{$header-gap});
+    }
+
+    .header__nav {
+        position: relative;
+        flex-grow: 1;
+        min-width: 0;
+
+        display: flex;
+        align-items: center;
+        gap: $header-gap;
     }
 
     .header__menu {
@@ -66,6 +101,11 @@ const { className, menuItems } = Astro.props;
 
         display: flex;
         gap: 1.5rem;
+
+        // initial invisible
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity $animation-normal;
     }
 
     $header-menu-item-padding: 0.5rem;
@@ -91,4 +131,47 @@ const { className, menuItems } = Astro.props;
             transition: background-size $animation-normal;
         }
     }
+
+    .header__actions {
+        // initial invisible
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity $animation-normal;
+    }
+
+    $header-burger-padding: 0.5rem;
+
+    .header__burger {
+        position: absolute;
+        top: 50%;
+        right: -$header-burger-padding;
+        transform: translateY(-50%);
+
+        padding: $header-burger-padding;
+        cursor: pointer;
+
+        // initial invisible
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity $animation-normal;
+    }
 </style>
+
+<script>
+    import addOnOverflow from "../utils/addOnOverflow";
+
+    const header = document.getElementById("header");
+    const headerMenu = document.querySelector(".header__menu");
+
+    if (header && headerMenu) {
+        addOnOverflow(headerMenu, (state) => {
+            if (state === "overflow") {
+                header.classList.add("overflowed");
+                header.classList.remove("normal");
+            } else {
+                header.classList.add("normal");
+                header.classList.remove("overflowed");
+            }
+        });
+    }
+</script>
