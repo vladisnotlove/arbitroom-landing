@@ -1,6 +1,6 @@
 ---
 import classNames from "classNames";
-import Backdrop from "./Backdrop.astro";
+import Backdrop from "../Backdrop.astro";
 
 export interface Props {
     className?: string;
@@ -11,12 +11,10 @@ export interface Props {
 const { className, side = "right", id } = Astro.props;
 ---
 
-<div class={classNames(className, "drawer", side)} id={id}>
+<div class={classNames("drawer", side)} id={id}>
     <Backdrop className="drawer__backdrop" />
-    <div class="drawer__body">
-        <div class="drawer__content">
-            <slot />
-        </div>
+    <div class={classNames(className, "drawer__body")}>
+        <slot />
     </div>
 </div>
 
@@ -92,15 +90,11 @@ const { className, side = "right", id } = Astro.props;
         display: inline-block;
         height: 100%;
         background: $color-background-upper1;
-        overflow: auto;
+        overflow-y: scroll;
         z-index: 2;
         transition: transform $animation-slow;
 
         @include custom-scrollbar;
-    }
-
-    .drawer__content {
-        display: inline-block;
     }
 
     @media (max-width: $desktop) {
@@ -139,6 +133,8 @@ const { className, side = "right", id } = Astro.props;
 </style>
 
 <script>
+    import toggleDrawer from "./toggleDrawer";
+
     window.addEventListener("load", () => {
         const drawers = document.querySelectorAll(".drawer");
 
@@ -149,11 +145,7 @@ const { className, side = "right", id } = Astro.props;
 
                 drawer.classList.toggle("open");
 
-                if (drawer.classList.contains("open")) {
-                    document.body.classList.add("drawer-open");
-                } else {
-                    document.body.classList.remove("drawer-open");
-                }
+                toggleDrawer(drawer);
             });
         });
     });

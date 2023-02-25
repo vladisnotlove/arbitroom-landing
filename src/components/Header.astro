@@ -1,6 +1,7 @@
 ---
 import classNames from "classNames";
 import Container from "./uiKit/Container.astro";
+import { DrawerTrigger } from "./uiKit/Drawer";
 import Icon from "./uiKit/Icon/Icon.astro";
 
 export interface Props {
@@ -10,9 +11,10 @@ export interface Props {
         href: string;
         label: string;
     }>;
+    sideMenuId: string;
 }
 
-const { className, menuItems } = Astro.props;
+const { className, menuItems, sideMenuId } = Astro.props;
 ---
 
 <Container as="header" className={classNames(className, "header")} id="header">
@@ -36,9 +38,9 @@ const { className, menuItems } = Astro.props;
         <div class="header__actions">
             <slot name="actions" />
         </div>
-        <div class="header__burger">
+        <DrawerTrigger className="header__burger" drawerId={sideMenuId}>
             <Icon iconName={"burger"} />
-        </div>
+        </DrawerTrigger>
     </div>
 </Container>
 
@@ -160,18 +162,20 @@ const { className, menuItems } = Astro.props;
 <script>
     import addOnOverflow from "../utils/addOnOverflow";
 
-    const header = document.getElementById("header");
-    const headerMenu = document.querySelector(".header__menu");
+    window.addEventListener("load", () => {
+        const header = document.getElementById("header");
+        const headerMenu = document.querySelector(".header__menu");
 
-    if (header && headerMenu) {
-        addOnOverflow(headerMenu, (state) => {
-            if (state === "overflow") {
-                header.classList.add("overflowed");
-                header.classList.remove("normal");
-            } else {
-                header.classList.add("normal");
-                header.classList.remove("overflowed");
-            }
-        });
-    }
+        if (header && headerMenu) {
+            addOnOverflow(headerMenu, (state) => {
+                if (state === "overflow") {
+                    header.classList.add("overflowed");
+                    header.classList.remove("normal");
+                } else {
+                    header.classList.add("normal");
+                    header.classList.remove("overflowed");
+                }
+            });
+        }
+    });
 </script>

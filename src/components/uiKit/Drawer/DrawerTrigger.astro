@@ -14,12 +14,15 @@ const { className, drawerId } = Astro.props;
 </div>
 
 <style lang="scss">
-    body.drawer-open {
+    html.drawer-open {
         overflow: hidden;
+        padding-right: 8px;
     }
 </style>
 
 <script>
+    import toggleDrawer from "./toggleDrawer";
+
     window.addEventListener("load", () => {
         const triggers = document.querySelectorAll(".drawer-trigger");
 
@@ -30,15 +33,7 @@ const { className, drawerId } = Astro.props;
                     ? document.getElementById(drawerId)
                     : null;
 
-                if (drawer) {
-                    drawer.classList.toggle("open");
-
-                    if (drawer.classList.contains("open")) {
-                        document.body.classList.add("drawer-open");
-                    } else {
-                        document.body.classList.remove("drawer-open");
-                    }
-                }
+                if (drawer) toggleDrawer(drawer);
             });
         });
     });
