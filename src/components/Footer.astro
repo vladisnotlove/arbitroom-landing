@@ -20,7 +20,7 @@ export interface Props {
 const { className, menuItems } = Astro.props;
 ---
 
-<Container as="footer" className={classNames(className, "footer")}>
+<Container as="footer" className={classNames(className, "footer")} id="footer">
     <div class="footer__main">
         <Text className={"footer__title"} variant={"h3"}>
             <Trans i18nKey="@landing.@footer.title">
@@ -90,12 +90,14 @@ const { className, menuItems } = Astro.props;
             </Text>
         </div>
     </div>
+    <div class="footer__glow"></div>
 </Container>
 
 <style lang="scss">
     @import "../styles/variables";
 
     .footer {
+        position: relative;
         display: grid;
         grid-template-columns: auto auto;
         grid-template-areas:
@@ -112,6 +114,9 @@ const { className, menuItems } = Astro.props;
         align-items: flex-start;
         justify-content: center;
         gap: 3rem;
+    }
+    .footer__title {
+        max-width: 1000px;
     }
     .footer__img-wrapper {
         grid-area: i;
@@ -131,6 +136,7 @@ const { className, menuItems } = Astro.props;
         grid-area: n;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         gap: 1.5rem;
         margin-top: 8rem;
         padding-bottom: 1.5rem;
@@ -139,14 +145,21 @@ const { className, menuItems } = Astro.props;
         min-width: 0;
     }
     .footer__menu {
-        flex-grow: 1;
         min-width: 0;
         overflow: hidden;
 
         display: flex;
         align-items: center;
-        justify-content: flex-end;
         gap: 0.75rem;
+
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity $animation-normal;
+
+        &.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
     }
     .footer__menu-item {
         white-space: nowrap;
@@ -189,4 +202,52 @@ const { className, menuItems } = Astro.props;
         gap: 0.5rem;
         padding: 0.625rem;
     }
+
+    .footer__glow {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        width: 100%;
+        height: 1000px;
+        overflow: hidden;
+        z-index: -1;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 698px;
+            height: 698px;
+            left: -349px;
+            bottom: -151px;
+
+            background: radial-gradient(
+                    136.3% 147.46% at 22.04% -55.08%,
+                    rgba(32, 255, 250, 0.16) 0%,
+                    rgba(255, 32, 255, 0.16) 71.7%,
+                    rgba(255, 116, 26, 0.16) 100%
+                )
+                /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+            filter: blur(128px);
+        }
+    }
 </style>
+
+<script>
+    import addOnOverflow from "../utils/addOnOverflow";
+
+    window.addEventListener("load", () => {
+        const footer = document.getElementById("footer");
+        const footerMenu = footer?.querySelector(".footer__menu");
+
+        if (footerMenu) {
+            addOnOverflow(footerMenu, (state) => {
+                if (state === "overflow") {
+                    footerMenu.classList.remove("visible");
+                } else if (state === "normal") {
+                    footerMenu.classList.add("visible");
+                }
+            });
+        }
+    });
+</script>
