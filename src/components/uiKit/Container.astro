@@ -18,7 +18,10 @@ const { as: As = "div", className, id, attrs } = Astro.props;
     @import "../../styles/variables.scss";
 
     .container {
-        padding: 0 $container-padding-desktop;
+        padding: 0
+            calc(
+                (100vw - #{$desktop} + #{$container-padding-desktop * 2}) * 0.5
+            );
     }
 
     @media (max-width: $desktop) {

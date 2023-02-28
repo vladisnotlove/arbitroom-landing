@@ -39,10 +39,10 @@ const { className } = Astro.props;
     .welcome {
         display: flex;
         align-items: center;
-        gap: 76px;
+        gap: clamp(20px, 4vw, 76px);
         padding-top: 2rem;
-        padding-bottom: 2rem;
-        height: 100%;
+        padding-bottom: 3rem;
+        max-width: 100%;
     }
     .welcome__main-content {
         display: flex;
@@ -68,7 +68,7 @@ const { className } = Astro.props;
     .welcome__image-wrapper {
         position: relative;
         min-width: 0;
-        margin-bottom: 74px;
+        margin-bottom: clamp(0px, 4vw, 76px);
         img {
             width: 100%;
             height: 100%;
@@ -92,6 +92,126 @@ const { className } = Astro.props;
                 )
                 /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
             filter: blur(128px);
+        }
+    }
+
+    @media (max-width: $desktop) {
+        .welcome__title {
+            font-size: 6rem;
+            margin-bottom: 3.25rem;
+        }
+        .welcome__description {
+            margin-bottom: 3rem;
+        }
+    }
+
+    @media (max-width: $small-desktop) {
+        .welcome__title {
+            font-size: 4.75rem;
+            margin-bottom: 2.5rem;
+        }
+        .welcome__description {
+            margin-bottom: 2.5rem;
+        }
+    }
+
+    @media (max-width: $laptop) {
+        .welcome__title {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+        .welcome__description {
+            margin-bottom: 2rem;
+        }
+    }
+
+    @media (max-width: $small-laptop) {
+        .welcome {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+        .welcome__title {
+            font-size: 3.125rem;
+            margin-bottom: 1rem;
+            max-width: 500px;
+        }
+        .welcome__description {
+            font-size: 1rem !important;
+            margin-bottom: 1.5rem;
+        }
+        .welcome__main-content {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            min-width: 50%;
+        }
+    }
+
+    @media (max-width: $tablet) {
+        @media (max-height: 560px) {
+            .welcome__main-content {
+                max-width: unset;
+                width: unset;
+            }
+            .welcome__title {
+                font-size: 2.75rem;
+                max-width: 500px;
+            }
+            .welcome__image-wrapper {
+                display: none;
+            }
+        }
+
+        @media (min-height: 560px) {
+            .welcome {
+                flex-direction: column;
+                gap: 1.5rem;
+                justify-content: center;
+                align-items: flex-start;
+            }
+
+            .welcome__image-wrapper {
+                order: 1;
+                min-width: 0;
+                width: 400px;
+                max-width: 100%;
+                margin-bottom: 0;
+            }
+
+            .welcome__main-content {
+                order: 2;
+                min-width: 0;
+                width: unset;
+                max-width: 100%;
+                gap: 1.5rem;
+            }
+
+            .welcome__title {
+                font-size: 2.75rem;
+                line-height: 1.27;
+                margin-bottom: 0;
+            }
+
+            .welcome__description {
+                max-width: 600px;
+                margin-bottom: 0;
+            }
+
+            .welcome__actions {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                margin-bottom: 0;
+
+                :global(svg) {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    @media (max-width: $mobile) {
+        .welcome__title {
+            font-size: 2.75rem;
         }
     }
 </style>

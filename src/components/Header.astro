@@ -55,8 +55,10 @@ const { className, menuItems, sideMenuId } = Astro.props;
     $header-gap: 1rem;
 
     .header {
-        position: sticky;
+        position: fixed;
         top: 0;
+        left: 0;
+        width: 100%;
 
         background: rgba(23, 26, 48, 0.12);
         backdrop-filter: blur(32px);
@@ -150,6 +152,18 @@ const { className, menuItems, sideMenuId } = Astro.props;
         opacity: 0;
         pointer-events: none;
         transition: opacity $animation-normal;
+    }
+
+    @media (max-width: $tablet) {
+        .header {
+            height: $header-height-mobile;
+        }
+
+        .header__logo {
+            & > img {
+                height: 1.5rem;
+            }
+        }
     }
 </style>
 

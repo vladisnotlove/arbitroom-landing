@@ -85,4 +85,36 @@ const {
             @include gradient-primary-for-text;
         }
     }
+
+    @media (max-width: $small-desktop) {
+        .text {
+            &.h5 {
+                font-size: 1.375rem;
+            }
+        }
+    }
+
+    @media (max-width: $small-laptop) {
+        .text {
+            &.h5 {
+                font-size: 1.25rem;
+            }
+        }
+    }
+
+    @media (max-width: $small-tablet) {
+        .text {
+            &.h5 {
+                font-size: 1.125rem;
+            }
+        }
+    }
+
+    @media (max-width: $mobile) {
+        .text {
+            &.h5 {
+                font-size: 1rem;
+            }
+        }
+    }
 </style>
