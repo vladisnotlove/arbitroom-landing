@@ -32,6 +32,7 @@ const svgAttrs = {
     class: classNames(className, "icon", {
         ["color-text-primary"]: color === "text-primary",
     }),
+    ["data-icon-name"]: iconName,
     ...(fontSize !== undefined && {
         style: `font-size: ${fontSize}`,
     }),
