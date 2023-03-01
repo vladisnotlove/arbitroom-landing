@@ -6,6 +6,7 @@ import Button from "./uiKit/Button.astro";
 import Connector from "./uiKit/Connector.astro";
 import Container from "./uiKit/Container.astro";
 import Paper from "./uiKit/Paper.astro";
+import Section from "./uiKit/Section.astro";
 import Text from "./uiKit/Text.astro";
 
 export interface Props {
@@ -39,49 +40,51 @@ const steps = [
 ---
 
 <Container
-    className={classNames(className, "guide")}
+    className={classNames(className)}
     id={routes.index.fragments.whatFirst}
 >
-    <Text className="guide__title" variant="h2">
-        {t("@landing.@guide.title")}
-    </Text>
-    <Connector
-        className={"guide__steps"}
-        classes={{ line: "guide__line" }}
-        lineOptions={{ radius: 24 }}
-    >
-        {
-            steps.map((data, index) => (
-                <Paper className={"guide__step"}>
-                    <div class="guide__step-image-wrapper">
-                        <img src={data.imgSrc} />
-                    </div>
-                    <Text
-                        className="guide__step-number"
-                        variant={"body1"}
-                        color="text-secondary"
-                    >
-                        {t("@common.step") + " " + (index + 1)}
-                    </Text>
-                    <Text className="guide__step-description" variant={"h5"}>
-                        {data.description}
-                    </Text>
-                </Paper>
-            ))
-        }
-        <Paper className={"guide__step with-action"}>
-            <Button>
-                {t("@common.proceed")}
-            </Button>
-        </Paper>
-    </Connector>
+    <Section className={"guide"}>
+        <Text className="guide__title" variant="h2">
+            {t("@landing.@guide.title")}
+        </Text>
+        <Connector
+            className={"guide__steps"}
+            classes={{ line: "guide__line" }}
+            lineOptions={{ radius: 24 }}
+        >
+            {
+                steps.map((data, index) => (
+                    <Paper className={"guide__step"}>
+                        <div class="guide__step-image-wrapper">
+                            <img src={data.imgSrc} />
+                        </div>
+                        <Text
+                            className="guide__step-number"
+                            variant={"body1"}
+                            color="text-secondary"
+                        >
+                            {t("@common.step") + " " + (index + 1)}
+                        </Text>
+                        <Text
+                            className="guide__step-description"
+                            variant={"h5"}
+                        >
+                            {data.description}
+                        </Text>
+                    </Paper>
+                ))
+            }
+            <Paper className={"guide__step with-action"}>
+                <Button>
+                    {t("@common.proceed")}
+                </Button>
+            </Paper>
+        </Connector>
+    </Section>
 </Container>
 
 <style lang="scss">
-    .guide {
-        padding-top: 8rem;
-        padding-bottom: 8rem;
-    }
+    @import "../styles/mixins";
     .guide__title {
         margin-bottom: 4rem;
     }
@@ -127,5 +130,74 @@ const steps = [
         stroke-opacity: 0.24;
         stroke-width: 1;
         stroke-dasharray: 8 8;
+    }
+
+    @media (max-width: $small-desktop) {
+        .guide__title {
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    @media (max-width: $laptop) {
+        .guide__title {
+            margin-bottom: 3rem;
+        }
+    }
+
+    @media (max-width: $small-laptop) {
+        .guide__title {
+            margin-bottom: 2.5rem;
+        }
+    }
+
+    @media (max-width: $tablet) {
+        .guide__title {
+            margin-bottom: 2rem;
+        }
+
+        .guide__steps {
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+    }
+
+    @media (max-width: $small-tablet) {
+        .guide__title {
+            margin-bottom: 1.5rem;
+        }
+
+        .guide__steps {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .guide__step.with-action {
+            @include disable-paper;
+            display: flex;
+            flex-direction: row;
+
+            & > :global(*) {
+                flex-grow: 1;
+            }
+        }
+
+        .guide__step-image-wrapper {
+            width: 50%;
+            min-width: 240px;
+        }
+
+        .guide__step-description {
+            font-size: 1.25rem !important;
+        }
+    }
+
+    @media (max-width: $mobile) {
+        .guide__steps {
+            gap: 1.5rem;
+        }
+
+        .guide__step-image-wrapper {
+            width: 100%;
+        }
     }
 </style>

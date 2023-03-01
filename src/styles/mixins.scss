@@ -87,3 +87,15 @@
         transition: background-size $animation-normal;
     }
 }
+
+@mixin disable-paper {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    overflow: visible;
+
+    &::before {
+        display: none;
+    }
+}
