@@ -3,6 +3,7 @@ import classNames from "classNames";
 import routes from "../store/routes";
 import { t, Trans } from "../utils/i18next";
 import Container from "./uiKit/Container.astro";
+import Section from "./uiKit/Section.astro";
 import Text from "./uiKit/Text.astro";
 
 export interface Props {
@@ -13,67 +14,121 @@ const { className } = Astro.props;
 ---
 
 <Container
-    className={classNames(className, "about-neural")}
+    className={classNames(className)}
     id={routes.index.fragments.howCashGenerated}
 >
-    <div class="about-neural__poster"></div>
-    <div class="about-neural__content">
-        <Text className="about-neural__subtitle" variant={"h5"}>
-            {t("@landing.@menu.howCashGenerated")}
-        </Text>
-        <Text className="about-neural__title" variant={"h3"}>
-            <Trans i18nKey="@landing.@aboutNeural.title">
-                Собственная разработка компании Arbitroom —
-                <Text color="secondary-gradient">
-                    нейросеть для крипто арбитража
-                </Text>
-            </Trans>
-        </Text>
-        <Text
-            className={"about-neural__description"}
-            variant={"body1"}
-            color="text-secondary"
-        >
-            <Trans i18nKey="@landing.@aboutNeural.description">
-                Параграф 1
-                <div class="divider"></div>
-                Параграф 2
-                <div class="divider"></div>
-                Параграф 3
-            </Trans>
-        </Text>
-    </div>
+    <Section className="about-neural">
+        <div class="about-neural__poster"></div>
+        <div class="about-neural__header">
+            <Text className="about-neural__subtitle" variant={"h5"}>
+                {t("@landing.@menu.howCashGenerated")}
+            </Text>
+            <Text className="about-neural__title" variant={"h3"}>
+                <Trans i18nKey="@landing.@aboutNeural.title">
+                    Собственная разработка компании Arbitroom —
+                    <Text color="secondary-gradient">
+                        нейросеть для крипто арбитража
+                    </Text>
+                </Trans>
+            </Text>
+        </div>
+        <div class="about-neural__body">
+            <Text
+                className={"about-neural__description"}
+                variant={"body1"}
+                color="text-secondary"
+            >
+                <Trans i18nKey="@landing.@aboutNeural.description">
+                    Параграф 1
+                    <div class="divider"></div>
+                    Параграф 2
+                    <div class="divider"></div>
+                    Параграф 3
+                </Trans>
+            </Text>
+        </div>
+    </Section>
 </Container>
 
 <style lang="scss">
+    @import "../styles/variables";
+
     .about-neural {
-        display: flex;
-        align-items: stretch;
-        gap: 4rem;
-        padding-top: 8rem;
-        padding-bottom: 8rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "p h"
+            "p b";
+        column-gap: 4rem;
+        row-gap: 3rem;
     }
     .about-neural__poster {
+        grid-area: p;
         min-width: 0;
         flex-basis: 0;
         flex-grow: 1;
+        background-color: $color-background-upper2;
+        border-radius: 1.5rem;
     }
-    .about-neural__content {
-        min-width: 0;
-        flex-basis: 0;
-        flex-grow: 1;
-        padding: 0.875rem 0;
+    .about-neural__header {
+        grid-area: h;
+    }
+    .about-neural__body {
+        grid-area: b;
     }
 
     .about-neural__subtitle {
         margin-bottom: 1rem;
     }
 
-    .about-neural__title {
-        margin-bottom: 3rem;
-    }
-
     .divider {
         height: 1rem;
+    }
+
+    @media (max-width: $small-desktop) {
+        .about-neural {
+            column-gap: 3.25rem;
+            row-gap: 2.5rem;
+        }
+    }
+    @media (max-width: $laptop) {
+        .about-neural {
+            column-gap: 2.75rem;
+            row-gap: 2rem;
+        }
+    }
+    @media (max-width: $small-laptop) {
+        .about-neural {
+            column-gap: 2rem;
+            row-gap: 1.5rem;
+        }
+
+        .about-neural__subtitle {
+            margin-bottom: 0.75rem;
+        }
+    }
+    @media (max-width: $tablet) {
+        .about-neural {
+            grid-template-areas:
+                "p h"
+                "b b";
+        }
+    }
+    @media (max-width: $small-tablet) {
+        .about-neural {
+            grid-template-areas:
+                "h h"
+                "b b";
+        }
+
+        .about-neural__poster {
+            display: none;
+        }
+
+        .about-neural__subtitle {
+            font-size: 1.25rem !important;
+            font-weight: 400 !important;
+            line-height: 1.4 !important;
+        }
     }
 </style>
