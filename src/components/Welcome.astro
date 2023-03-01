@@ -136,7 +136,6 @@ const { className } = Astro.props;
             max-width: 500px;
         }
         .welcome__description {
-            font-size: 1rem !important;
             margin-bottom: 1.5rem;
         }
         .welcome__main-content {
@@ -148,13 +147,16 @@ const { className } = Astro.props;
     }
 
     @media (max-width: $tablet) {
-        @media (max-height: 560px) {
+        .welcome__title {
+            font-size: 2.75rem;
+        }
+
+        @media (max-height: 500px) {
             .welcome__main-content {
                 max-width: unset;
                 width: unset;
             }
             .welcome__title {
-                font-size: 2.75rem;
                 max-width: 500px;
             }
             .welcome__image-wrapper {
@@ -174,8 +176,14 @@ const { className } = Astro.props;
                 order: 1;
                 min-width: 0;
                 width: 400px;
+                max-height: clamp(100px, 25vh, 228px);
                 max-width: 100%;
+                min-height: 0;
                 margin-bottom: 0;
+
+                & > img {
+                    object-position: left;
+                }
             }
 
             .welcome__main-content {
@@ -187,7 +195,6 @@ const { className } = Astro.props;
             }
 
             .welcome__title {
-                font-size: 2.75rem;
                 line-height: 1.27;
                 margin-bottom: 0;
             }
