@@ -1,0 +1,53 @@
+---
+import classNames from "classNames";
+
+export interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<div class={classNames(className, "section")}>
+  <slot />
+</div>
+
+<style lang="scss">
+  @import "../../styles/variables";
+
+  .section {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  @media (max-width: $small-desktop) {
+    .section {
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+    }
+  }
+  @media (max-width: $laptop) {
+    .section {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+  }
+  @media (max-width: $small-laptop) {
+    .section {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+  }
+  @media (max-width: $tablet) {
+    .section {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+  }
+  @media (max-width: $small-tablet) {
+    .section {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+  }
+</style>

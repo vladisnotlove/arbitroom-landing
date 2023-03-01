@@ -55,10 +55,6 @@ const {
             @include typography-h3;
         }
 
-        &.h3-adaptive {
-            @include typography-h3-adaptive;
-        }
-
         &.h4 {
             @include typography-h4;
         }
@@ -88,30 +84,54 @@ const {
 
     @media (max-width: $small-desktop) {
         .text {
+            &.h3 {
+                font-size: 3rem;
+            }
+
             &.h5 {
                 font-size: 1.375rem;
             }
         }
     }
-
-    @media (max-width: $small-laptop) {
+    @media (max-width: $laptop) {
         .text {
+            &.h3 {
+                font-size: 2.75rem;
+            }
             &.h5 {
                 font-size: 1.25rem;
             }
         }
     }
 
-    @media (max-width: $small-tablet) {
+    @media (max-width: $small-laptop) {
         .text {
+            &.h3 {
+                font-size: 2.5rem;
+            }
             &.h5 {
                 font-size: 1.125rem;
             }
         }
     }
 
-    @media (max-width: $mobile) {
+    @media (max-width: $tablet) {
         .text {
+            &.h3 {
+                font-size: 2rem;
+            }
+            &.h5 {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    @media (max-width: $small-tablet) {
+        .text {
+            &.h3 {
+                font-size: 1.75rem;
+                font-weight: 400;
+            }
             &.h5 {
                 font-size: 1rem;
             }

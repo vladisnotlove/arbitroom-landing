@@ -2,6 +2,7 @@
 import classNames from "classNames";
 import { t } from "../utils/i18next";
 import Container from "./uiKit/Container.astro";
+import Section from "./uiKit/Section.astro";
 import Paper from "./uiKit/Paper.astro";
 import Text from "./uiKit/Text.astro";
 
@@ -27,33 +28,31 @@ const profitCards = [
 ];
 ---
 
-<Container className={classNames(className, "profits")}>
-    <Text className="profits__title" variant={"h3"}>
-        {t("@landing.@profits.title")}
-    </Text>
-    <div class="profits__cards">
-        {
-            profitCards.map((data) => (
-                <Paper className="profit-card">
-                    <div class="profit-card__icon-wrapper">
-                        <img src={data.iconSrc} />
-                    </div>
-                    <Text className="profit-card__title" variant={"h5"}>
-                        {data.title}
-                    </Text>
-                </Paper>
-            ))
-        }
-    </div>
+<Container className={className}>
+    <Section className={"profits"}>
+        <Text className="profits__title" variant={"h3"}>
+            {t("@landing.@profits.title")}
+        </Text>
+        <div class="profits__cards">
+            {
+                profitCards.map((data) => (
+                    <Paper className="profit-card">
+                        <div class="profit-card__icon-wrapper">
+                            <img src={data.iconSrc} />
+                        </div>
+                        <Text className="profit-card__title" variant={"h5"}>
+                            {data.title}
+                        </Text>
+                    </Paper>
+                ))
+            }
+        </div>
+    </Section>
 </Container>
 
 <style lang="scss">
     @import "../styles/variables.scss";
 
-    .profits {
-        padding-top: 8rem;
-        padding-bottom: 8rem;
-    }
     .profits__title {
         text-align: center;
         margin-bottom: 4rem;
@@ -61,8 +60,8 @@ const profitCards = [
     .profits__cards {
         display: flex;
         gap: 1rem;
-
         & > * {
+            flex-basis: 0;
             flex-grow: 1;
         }
     }
@@ -87,5 +86,59 @@ const profitCards = [
     .profit-card__title {
         text-align: center;
         width: 70%;
+    }
+
+    @media (max-width: $small-desktop) {
+        .profits__title {
+            margin-bottom: 3.5rem;
+        }
+    }
+    @media (max-width: $laptop) {
+        .profits__title {
+            margin-bottom: 3rem;
+        }
+    }
+    @media (max-width: $small-laptop) {
+        .profits__title {
+            margin-bottom: 2.5rem;
+        }
+    }
+    @media (max-width: $tablet) {
+        .profits__title {
+            margin-bottom: 2rem;
+        }
+    }
+    @media (max-width: $small-tablet) {
+        .profits__title {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .profits__cards {
+            flex-direction: column;
+        }
+
+        .profit-card {
+            flex-direction: row;
+            align-items: center;
+            padding: 2rem;
+        }
+        .profit-card__title {
+            text-align: left;
+            font-size: 1.25rem !important;
+            font-weight: 400 !important;
+            line-height: 140% !important;
+        }
+    }
+
+    @media (max-width: $mobile) {
+        .profit-card {
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+        .profit-card__title {
+            text-align: center;
+        }
     }
 </style>
