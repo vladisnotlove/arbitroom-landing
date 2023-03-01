@@ -1,6 +1,7 @@
 ---
 import classNames from "classNames";
 import Backdrop from "../Backdrop.astro";
+import Container from "../Container.astro";
 
 export interface Props {
     className?: string;
@@ -13,9 +14,9 @@ const { className, side = "right", id } = Astro.props;
 
 <div class={classNames("drawer", side)} id={id}>
     <Backdrop className="drawer__backdrop" />
-    <div class={classNames(className, "drawer__body")}>
+    <Container className={classNames(className, "drawer__body")}>
         <slot />
-    </div>
+    </Container>
 </div>
 
 <style lang="scss">
@@ -38,7 +39,7 @@ const { className, side = "right", id } = Astro.props;
             justify-content: flex-start;
             .drawer__body {
                 min-width: 0;
-                padding-left: $container-padding-desktop;
+                padding-right: 2rem;
                 transform: translateX(-100%);
             }
         }
@@ -47,7 +48,7 @@ const { className, side = "right", id } = Astro.props;
             justify-content: flex-end;
             .drawer__body {
                 min-width: 0;
-                padding-right: $container-padding-desktop;
+                padding-left: 2rem;
                 transform: translateX(100%);
             }
         }
@@ -102,35 +103,21 @@ const { className, side = "right", id } = Astro.props;
         @include custom-scrollbar;
     }
 
-    @media (max-width: $desktop) {
-        .drawer {
-            &.left {
-                .drawer__body {
-                    padding-left: $container-padding-adaptive;
-                }
-            }
-
-            &.right {
-                .drawer__body {
-                    padding-right: $container-padding-adaptive;
-                }
-            }
-        }
-    }
-
     @media (max-width: $mobile) {
         .drawer {
             &.left {
+                justify-content: flex-start;
                 .drawer__body {
                     width: 100%;
-                    padding: $container-padding-mobile;
+                    padding-right: $container-padding-mobile;
                 }
             }
 
             &.right {
+                justify-content: flex-end;
                 .drawer__body {
                     width: 100%;
-                    padding-right: $container-padding-mobile;
+                    padding-left: $container-padding-mobile;
                 }
             }
         }

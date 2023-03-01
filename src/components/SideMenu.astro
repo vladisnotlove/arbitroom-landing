@@ -2,6 +2,7 @@
 import classNames from "classNames";
 import socials from "../store/socials";
 import { t } from "../utils/i18next";
+import Logo from "./Logo.astro";
 import Drawer, { DrawerTrigger } from "./uiKit/Drawer";
 import Icon from "./uiKit/Icon";
 import Text from "./uiKit/Text.astro";
@@ -21,9 +22,7 @@ const { className, menuItems, id } = Astro.props;
 
 <Drawer className={classNames(className, "side-menu")} id={id} side={"right"}>
     <div class="side-menu__header">
-        <a class="side-menu__logo" href="/">
-            <img src="/layout-assets/images/logo.svg" alt="" />
-        </a>
+        <Logo />
         <DrawerTrigger className="side-menu__close" drawerId={id}>
             <Icon iconName="close" />
         </DrawerTrigger>
@@ -110,6 +109,8 @@ const { className, menuItems, id } = Astro.props;
         margin-bottom: -1rem;
     }
     .side-menu__close {
+        padding: 0.5rem;
+        margin: -0.5rem;
         cursor: pointer;
     }
 
@@ -177,6 +178,11 @@ const { className, menuItems, id } = Astro.props;
     }
     .side-menu__copyright {
         color: $color-text-more-secondary;
+    }
+    @media (max-width: $tablet) {
+        .side-menu__header {
+            min-height: $header-height-tablet;
+        }
     }
 
     @media (max-width: $mobile) {

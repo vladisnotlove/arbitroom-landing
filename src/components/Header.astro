@@ -1,5 +1,6 @@
 ---
 import classNames from "classNames";
+import Logo from "./Logo.astro";
 import Container from "./uiKit/Container.astro";
 import { DrawerTrigger } from "./uiKit/Drawer";
 import Icon from "./uiKit/Icon";
@@ -19,9 +20,7 @@ const { className, menuItems, sideMenuId } = Astro.props;
 ---
 
 <Container as="header" className={classNames(className, "header")} id="header">
-    <a class="header__logo" href="/">
-        <img src="/layout-assets/images/logo.svg" />
-    </a>
+    <Logo className={"header__logo"} />
     <div class="header__nav">
         <div class="header__menu">
             {
@@ -156,13 +155,13 @@ const { className, menuItems, sideMenuId } = Astro.props;
 
     @media (max-width: $tablet) {
         .header {
-            height: $header-height-mobile;
+            height: $header-height-tablet;
         }
+    }
 
-        .header__logo {
-            & > img {
-                height: 1.5rem;
-            }
+    @media (max-width: $mobile) {
+        .header {
+            height: $header-height-mobile;
         }
     }
 </style>

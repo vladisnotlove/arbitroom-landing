@@ -1,0 +1,43 @@
+---
+import classNames from "classNames";
+import routes from "../store/routes";
+
+export interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<a class={classNames(className, "logo")} href={routes.index.path}>
+    <img src="/layout-assets/images/logo.svg" alt="" />
+</a>
+
+<style lang="scss">
+    @import "../styles/variables";
+
+    .logo {
+        display: inline-block;
+        text-decoration: none;
+
+        & > img {
+            height: 2.375rem;
+        }
+    }
+
+    @media (max-width: $tablet) {
+        .logo {
+            & > img {
+                height: 2rem;
+            }
+        }
+    }
+
+    @media (max-width: $mobile) {
+        .logo {
+            & > img {
+                height: 1.5rem;
+            }
+        }
+    }
+</style>
