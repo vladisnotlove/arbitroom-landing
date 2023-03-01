@@ -3,12 +3,17 @@ import classNames from "classNames";
 
 export interface Props {
   className?: string;
+  gutterSize?: "medium" | "large";
 }
 
-const { className } = Astro.props;
+const { className, gutterSize } = Astro.props;
 ---
 
-<div class={classNames(className, "section")}>
+<div
+  class={classNames(className, "section", {
+    ["gutter-large"]: gutterSize === "large",
+  })}
+>
   <slot />
 </div>
 
@@ -18,36 +23,62 @@ const { className } = Astro.props;
   .section {
     padding-top: 8rem;
     padding-bottom: 8rem;
+
+    &.large {
+      padding-top: 10rem;
+      padding-bottom: 10rem;
+    }
   }
 
   @media (max-width: $small-desktop) {
     .section {
       padding-top: 7rem;
       padding-bottom: 7rem;
+
+      &.large {
+        padding-top: 8.625rem;
+        padding-bottom: 8.625rem;
+      }
     }
   }
   @media (max-width: $laptop) {
     .section {
       padding-top: 6rem;
       padding-bottom: 6rem;
+      &.large {
+        padding-top: 7.25rem;
+        padding-bottom: 7.25rem;
+      }
     }
   }
   @media (max-width: $small-laptop) {
     .section {
       padding-top: 5rem;
       padding-bottom: 5rem;
+      &.large {
+        padding-top: 5.875rem;
+        padding-bottom: 5.875rem;
+      }
     }
   }
   @media (max-width: $tablet) {
     .section {
       padding-top: 4rem;
       padding-bottom: 4rem;
+      &.large {
+        padding-top: 4.375rem;
+        padding-bottom: 4.375rem;
+      }
     }
   }
   @media (max-width: $small-tablet) {
     .section {
       padding-top: 3rem;
       padding-bottom: 3rem;
+      &.large {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
     }
   }
 </style>

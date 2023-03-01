@@ -4,6 +4,7 @@ import routes from "../store/routes";
 import { t } from "../utils/i18next";
 import Container from "./uiKit/Container.astro";
 import Paper from "./uiKit/Paper.astro";
+import Section from "./uiKit/Section.astro";
 import Text from "./uiKit/Text.astro";
 
 export interface Props {
@@ -100,68 +101,71 @@ const neuralAdvantageCompanies = [
 ---
 
 <Container
-    className={classNames(className, "neural-advantages")}
+    className={classNames(className, "neural-advantages-container")}
     id={routes.index.fragments.advantagesOfNeuralNetwork}
 >
-    <Text className="neural-advantages__title" variant="h2">
-        {t("@landing.@neuralAdvantages.title")}
-    </Text>
-    <div class="neural-advantages__cards">
-        {
-            neuralAdvantageCards.map((data) => (
-                <Paper className="neural-advantage-card">
-                    <div class="neural-advantage-card__icon-wrapper">
-                        <img src={data.iconSrc} alt="" />
-                    </div>
-                    <Text className="neural-advantage-card__title" variant="h4">
-                        {data.label}
-                    </Text>
-                    <Text
-                        className="neural-advantage-card__description"
-                        variant="body1"
-                        color="text-secondary"
-                    >
-                        {data.description}
-                    </Text>
-                </Paper>
-            ))
-        }
-    </div>
-    <div class="neural-advantages__companies">
-        {
-            neuralAdvantageCompanies.map((data) => (
-                <div class="neural-advantages__company">
-                    <Paper
-                        className="neural-advantages__company-logo-wrapper"
-                        backgroundColor="background-upper3"
-                    >
-                        <img src={data.logoSrc} alt={data.name} />
+    <Section className={"neural-advantages"}>
+        <Text className="neural-advantages__title" variant="h2">
+            {t("@landing.@neuralAdvantages.title")}
+        </Text>
+        <div class="neural-advantages__cards">
+            {
+                neuralAdvantageCards.map((data) => (
+                    <Paper className="neural-advantage-card">
+                        <div class="neural-advantage-card__icon-wrapper">
+                            <img src={data.iconSrc} alt="" />
+                        </div>
+                        <Text
+                            className="neural-advantage-card__title"
+                            variant="h4"
+                        >
+                            {data.label}
+                        </Text>
+                        <Text
+                            className="neural-advantage-card__description"
+                            variant="body1"
+                            color="text-secondary"
+                        >
+                            {data.description}
+                        </Text>
                     </Paper>
-                    <Text
-                        className="neural-advantages__company-name"
-                        variant={"h5"}
-                    >
-                        {data.name}
-                    </Text>
-                    <Text
-                        className="neural-advantages__company-subtitle"
-                        variant={"body1"}
-                    >
-                        {data.subtitle}
-                    </Text>
-                </div>
-            ))
-        }
-    </div>
+                ))
+            }
+        </div>
+        <div class="neural-advantages__companies">
+            {
+                neuralAdvantageCompanies.map((data) => (
+                    <div class="neural-advantages__company">
+                        <Paper
+                            className="neural-advantages__company-logo-wrapper"
+                            backgroundColor="background-upper3"
+                        >
+                            <img src={data.logoSrc} alt={data.name} />
+                        </Paper>
+                        <Text
+                            className="neural-advantages__company-name"
+                            variant={"h5"}
+                        >
+                            {data.name}
+                        </Text>
+                        <Text
+                            className="neural-advantages__company-subtitle"
+                            variant={"body1"}
+                        >
+                            {data.subtitle}
+                        </Text>
+                    </div>
+                ))
+            }
+        </div>
+    </Section>
 </Container>
 
 <style lang="scss">
     @import "../styles/variables.scss";
 
-    .neural-advantages {
+    .neural-advantages-container {
         background: $color-background;
-        padding-top: 10rem;
-        padding-bottom: 10rem;
     }
     .neural-advantages__title {
         text-align: center;
@@ -177,6 +181,7 @@ const neuralAdvantageCompanies = [
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        min-width: 0;
     }
 
     .neural-advantage-card__icon-wrapper {
@@ -220,8 +225,8 @@ const neuralAdvantageCompanies = [
         margin-bottom: 1rem;
 
         & > img {
-            width: 3rem;
-            height: 3rem;
+            width: 60%; // 3rem
+            height: 60%; // 3rem
             z-index: 2;
         }
 
@@ -232,12 +237,131 @@ const neuralAdvantageCompanies = [
             left: 50%;
             transform: translate(-50%, -50%);
 
-            width: 3.625rem;
-            height: 3.625rem;
+            width: 72.5%; // 3.625rem
+            height: 72.5%; /// 3.625rem
             background: $color-background;
             filter: blur(8px);
 
             z-index: 1;
+        }
+    }
+
+    .neural-advantages__company-name {
+        text-align: center;
+    }
+
+    .neural-advantages__company-subtitle {
+        text-align: center;
+        color: $color-text-more-secondary;
+    }
+
+    @media (max-width: $small-desktop) {
+        .neural-advantages__title {
+            margin-bottom: 4.25rem;
+        }
+
+        .neural-advantages__companies {
+            margin-top: 4.5rem;
+        }
+
+        .neural-advantages__company-logo-wrapper {
+            width: 4.75rem;
+            height: 4.75rem;
+        }
+    }
+    @media (max-width: $laptop) {
+        .neural-advantages__title {
+            margin-bottom: 3.625rem;
+        }
+
+        .neural-advantages__companies {
+            margin-top: 4rem;
+        }
+
+        .neural-advantages__company-logo-wrapper {
+            width: 4.5rem;
+            height: 4.5rem;
+        }
+    }
+
+    @media (max-width: $small-laptop) {
+        .neural-advantages__title {
+            margin-bottom: 3rem;
+        }
+
+        .neural-advantages__companies {
+            margin-top: 3.375rem;
+        }
+
+        .neural-advantages__company-logo-wrapper {
+            width: 4.25rem;
+            height: 4.25rem;
+        }
+    }
+
+    @media (max-width: $tablet) {
+        .neural-advantages__title {
+            margin-bottom: 2.25rem;
+        }
+
+        .neural-advantages__cards {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .neural-advantages__companies {
+            grid-template-columns: repeat(4, 1fr);
+            margin-top: 2.75rem;
+
+            & > *:nth-child(9) {
+                grid-column: 2;
+            }
+
+            & > *:nth-child(10) {
+                grid-column: 3;
+            }
+        }
+
+        .neural-advantages__company-logo-wrapper {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+    @media (max-width: $small-tablet) {
+        .neural-advantages__title {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .neural-advantages__cards {
+            grid-template-columns: 1fr;
+        }
+
+        .neural-advantages__companies {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2.25rem;
+
+            & > *:nth-child(9) {
+                grid-column: unset;
+            }
+
+            & > *:nth-child(10) {
+                grid-column: unset;
+            }
+        }
+
+        .neural-advantages__company-logo-wrapper {
+            width: 3.75rem;
+            height: 3.75rem;
+        }
+    }
+
+    @media (max-width: $mobile) {
+        .neural-advantages__cards {
+            gap: 0.75rem;
+        }
+        .neural-advantages__companies {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 </style>

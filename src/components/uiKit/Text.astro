@@ -84,8 +84,16 @@ const {
 
     @media (max-width: $small-desktop) {
         .text {
+            &.h2 {
+                font-size: 4.375rem;
+            }
+
             &.h3 {
                 font-size: 3rem;
+            }
+
+            &.h4 {
+                font-size: 2.125rem;
             }
 
             &.h5 {
@@ -95,8 +103,15 @@ const {
     }
     @media (max-width: $laptop) {
         .text {
+            &.h2 {
+                font-size: 3.875rem;
+            }
+
             &.h3 {
                 font-size: 2.75rem;
+            }
+            &.h4 {
+                font-size: 2rem;
             }
             &.h5 {
                 font-size: 1.25rem;
@@ -110,8 +125,15 @@ const {
 
     @media (max-width: $small-laptop) {
         .text {
+            &.h2 {
+                font-size: 3.25rem;
+            }
+
             &.h3 {
                 font-size: 2.5rem;
+            }
+            &.h4 {
+                font-size: 1.875rem;
             }
             &.h5 {
                 font-size: 1.125rem;
@@ -126,23 +148,34 @@ const {
 
     @media (max-width: $tablet) {
         .text {
+            &.h2 {
+                font-size: 2.625rem;
+            }
+
             &.h3 {
                 font-size: 2rem;
             }
+            &.h4 {
+                font-size: 1.625rem;
+            }
             &.h5 {
                 font-size: 1rem;
+                font-weight: 400;
             }
         }
     }
 
     @media (max-width: $small-tablet) {
         .text {
+            &.h2 {
+                font-size: 2rem;
+            }
             &.h3 {
                 font-size: 1.75rem;
                 font-weight: 400;
             }
-            &.h5 {
-                font-size: 1rem;
+            &.h4 {
+                font-size: 1.5rem;
             }
         }
     }
