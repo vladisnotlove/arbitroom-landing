@@ -19,8 +19,7 @@ dom.childNodes.forEach((node) => {
     import { throttle } from "throttle-debounce";
 
     window.addEventListener("load", () => {
-        const stopCoef = 0.99;
-        const initialCoef = 5;
+        const stopCoef = 0.95;
 
         document
             .querySelectorAll("[data-js][data-drag-to-scroll]")
@@ -40,6 +39,7 @@ dom.childNodes.forEach((node) => {
                     x: 0,
                     y: 0,
                 };
+                let prevPos = { ...pos };
                 let isGrabbed = false;
 
                 // for intertia
@@ -55,6 +55,10 @@ dom.childNodes.forEach((node) => {
                     pos = {
                         ...startPos,
                     };
+                    prevPos = {
+                        ...pos,
+                    };
+                    prevPos;
                     isGrabbed = true;
 
                     transform = {
@@ -81,11 +85,6 @@ dom.childNodes.forEach((node) => {
                     pos.left = startPos.left - dx;
                     pos.top = startPos.top - dy;
 
-                    transform = {
-                        x: (e.clientX - pos.x) * initialCoef,
-                        y: (e.clientY - pos.y) * initialCoef,
-                    };
-
                     pos.x = e.clientX;
                     pos.y = e.clientY;
                 };
@@ -103,14 +102,28 @@ dom.childNodes.forEach((node) => {
 
                 const move = () => {
                     if (!isGrabbed) return;
+
+                    transform = {
+                        x: prevPos.left - pos.left,
+                        y: prevPos.top - pos.top,
+                    };
+
                     element.scrollTop = pos.top;
                     element.scrollLeft = pos.left;
+
+                    prevPos = {
+                        ...pos,
+                    };
+
                     requestAnimationFrame(move);
                 };
 
                 const moveByInertia = () => {
                     if (isGrabbed) return;
-                    if (Math.pow(transform.x, 2) + Math.pow(transform.y, 2) < 4)
+                    if (
+                        Math.pow(transform.x, 2) + Math.pow(transform.y, 2) <
+                        0.3
+                    )
                         return;
 
                     transform.x *= stopCoef;
