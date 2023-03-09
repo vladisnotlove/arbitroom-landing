@@ -61,6 +61,7 @@ const { className, title, PaperProps } = Astro.props;
     .collapse-card__header {
         display: flex;
         justify-content: space-between;
+        gap: 0.5rem;
     }
 
     .collapse-card__expand-btn {
@@ -80,8 +81,8 @@ const { className, title, PaperProps } = Astro.props;
             left: 50%;
             translate: -50% -50%;
 
-            width: 1.5rem;
-            height: 2.5px;
+            width: 75%;
+            height: 4.6875%;
             border-radius: 2px;
             background: $color-prime-main;
 
@@ -90,6 +91,38 @@ const { className, title, PaperProps } = Astro.props;
             &:nth-child(2) {
                 rotate: -90deg;
             }
+        }
+    }
+
+    @media (max-width: $small-desktop) {
+    }
+    @media (max-width: $laptop) {
+        .collapse-card__plus-minus-icon {
+            width: 1.875rem;
+            height: 1.875rem;
+        }
+    }
+    @media (max-width: $small-laptop) {
+        .collapse-card__plus-minus-icon {
+            width: 1.75rem;
+            height: 1.75rem;
+        }
+    }
+    @media (max-width: $tablet) {
+        .collapse-card__plus-minus-icon {
+            width: 1.625rem;
+            height: 1.625rem;
+        }
+
+        .collapse-card__content {
+            font-size: 0.875rem !important;
+            line-height: 143% !important;
+        }
+    }
+    @media (max-width: $small-tablet) {
+        .collapse-card__plus-minus-icon {
+            width: 1.5rem;
+            height: 1.5rem;
         }
     }
 </style>

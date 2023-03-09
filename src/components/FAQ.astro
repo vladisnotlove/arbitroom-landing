@@ -3,6 +3,7 @@ import classNames from "classNames";
 import { t } from "../utils/i18next";
 import CollapseCard from "./CollapseCard.astro";
 import Container from "./uiKit/Container.astro";
+import Section from "./uiKit/Section.astro";
 import Text from "./uiKit/Text.astro";
 
 export interface Props {
@@ -42,23 +43,25 @@ const questions = [
 ];
 ---
 
-<Container className={classNames(className, "faq")}>
-    <Text className={"faq__title"} variant={"h2"}>
-        {t("@landing.@faq.title")}
-    </Text>
-    <div class="faq__cards">
-        {
-            questions.map(({ question, answer }) => (
-                <CollapseCard title={question}>{answer}</CollapseCard>
-            ))
-        }
-    </div>
+<Container className={classNames(className)}>
+    <Section className={"faq"}>
+        <Text className={"faq__title"} variant={"h2"}>
+            {t("@landing.@faq.title")}
+        </Text>
+        <div class="faq__cards">
+            {
+                questions.map(({ question, answer }) => (
+                    <CollapseCard title={question}>{answer}</CollapseCard>
+                ))
+            }
+        </div>
+    </Section>
 </Container>
 
 <style lang="scss">
+    @import "../styles/variables";
+
     .faq {
-        padding-top: 8rem;
-        padding-bottom: 8rem;
         display: flex;
         gap: 3rem;
     }
@@ -75,5 +78,27 @@ const questions = [
         display: flex;
         flex-direction: column;
         gap: 1rem;
+    }
+
+    @media (max-width: $tablet) {
+        .faq {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .faq__title {
+            text-align: center;
+        }
+    }
+    @media (max-width: $small-tablet) {
+        .faq {
+            gap: 1.5rem;
+        }
+    }
+    @media (max-width: $mobile) {
+        .faq__cards {
+            gap: 0.75rem;
+        }
     }
 </style>
