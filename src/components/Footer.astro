@@ -7,6 +7,9 @@ import Container from "./uiKit/Container.astro";
 import Icon, { Props as IconProps } from "./uiKit/Icon/Icon.astro";
 import Text from "./uiKit/Text.astro";
 import socials from "../store/socials";
+import Logo from "./Logo.astro";
+import Section from "./uiKit/Section.astro";
+import AppBar from "./uiKit/AppBar.astro";
 
 export interface Props {
     className?: string;
@@ -40,8 +43,8 @@ const { className, menuItems } = Astro.props;
             alt=""
         />
     </div>
-    <div class="footer__nav">
-        <img class="footer__logo" src="/layout-assets/images/logo.svg" alt="" />
+    <AppBar className="footer__nav">
+        <Logo />
         <div class="footer__menu">
             {
                 menuItems.map((menuItem) => (
@@ -59,7 +62,7 @@ const { className, menuItems } = Astro.props;
                 ))
             }
         </div>
-    </div>
+    </AppBar>
     <div class="footer__links">
         <div class="footer__socials">
             {
@@ -77,9 +80,6 @@ const { className, menuItems } = Astro.props;
             }
         </div>
         <div class="footer__meta">
-            <Text variant={"body2"} className={"footer__copyright"}>
-                © {new Date().getFullYear()} Arbitroom. All rights reserved.
-            </Text>
             <Text
                 as="a"
                 attrs={{ href: "#" }}
@@ -87,6 +87,9 @@ const { className, menuItems } = Astro.props;
                 className={"footer__private-policy"}
             >
                 {t("@common.privacyPolicy")}
+            </Text>
+            <Text variant={"body2"} className={"footer__copyright"}>
+                © {new Date().getFullYear()} Arbitroom. All rights reserved.
             </Text>
         </div>
     </div>
@@ -99,13 +102,14 @@ const { className, menuItems } = Astro.props;
     .footer {
         position: relative;
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: 1fr auto;
         grid-template-areas:
             "m i"
             "n n"
             "l l";
         padding-top: 11.25rem;
         padding-bottom: 4rem;
+        column-gap: 1rem;
     }
     .footer__main {
         grid-area: m;
@@ -122,7 +126,6 @@ const { className, menuItems } = Astro.props;
         grid-area: i;
         position: relative;
         width: clamp(180px, 18.75vw, 360px);
-        height: 290px;
     }
     .footer__img {
         position: absolute;
@@ -137,6 +140,7 @@ const { className, menuItems } = Astro.props;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        box-sizing: content-box;
         gap: 1.5rem;
         margin-top: 8rem;
         padding-bottom: 1.5rem;
@@ -180,8 +184,9 @@ const { className, menuItems } = Astro.props;
     .footer__meta {
         flex-grow: 1;
         display: flex;
+        flex-flow: row-reverse wrap;
+        justify-content: flex-end;
         align-items: center;
-        flex-wrap: wrap;
         gap: 1rem;
     }
     .footer__copyright {
@@ -194,13 +199,16 @@ const { className, menuItems } = Astro.props;
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        gap: 2rem;
+        column-gap: 2rem;
+        row-gap: 1rem;
     }
     .footer__social {
         display: flex;
         align-items: center;
         gap: 0.5rem;
         padding: 0.625rem;
+        cursor: pointer;
+        transition: color $animation-normal;
     }
 
     .footer__glow {
@@ -229,6 +237,140 @@ const { className, menuItems } = Astro.props;
                 )
                 /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
             filter: blur(128px);
+        }
+    }
+
+    @media (max-width: $small-desktop) {
+        .footer {
+            padding-top: 9.625rem;
+            padding-bottom: 3.875rem;
+        }
+
+        .footer__main {
+            gap: 2.75rem;
+        }
+
+        .footer__nav {
+            margin-top: 7rem;
+        }
+
+        .footer__socials {
+            column-gap: 1.75rem;
+        }
+    }
+
+    @media (max-width: $laptop) {
+        .footer {
+            padding-top: 8rem;
+            padding-bottom: 3.625rem;
+        }
+
+        .footer__main {
+            gap: 2.5rem;
+        }
+
+        .footer__nav {
+            margin-top: 6rem;
+        }
+
+        .footer__socials {
+            column-gap: 1.5rem;
+        }
+    }
+
+    @media (max-width: $small-laptop) {
+        .footer {
+            padding-top: 6.25rem;
+            padding-bottom: 3.375rem;
+        }
+
+        .footer__main {
+            gap: 2.125rem;
+        }
+
+        .footer__nav {
+            margin-top: 5rem;
+        }
+
+        .footer__socials {
+            column-gap: 1.25rem;
+        }
+    }
+
+    @media (max-width: $tablet) {
+        .footer {
+            padding-top: 4.625rem;
+            padding-bottom: 3.25rem;
+        }
+
+        .footer__main {
+            gap: 1.875rem;
+        }
+
+        .footer__nav {
+            margin-top: 4rem;
+        }
+
+        .footer__socials {
+            column-gap: 1rem;
+        }
+    }
+
+    @media (max-width: $small-tablet) {
+        .footer {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            gap: 0;
+        }
+
+        .footer__main {
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer__title {
+            max-width: 500px;
+        }
+
+        .footer__img-wrapper {
+            display: none;
+        }
+
+        .footer__nav {
+            display: none;
+        }
+
+        .footer__links {
+            row-gap: 2rem;
+        }
+
+        .footer__meta {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer__glow {
+            display: none;
+        }
+    }
+
+    @media (max-width: $mobile) {
+        .footer__socials {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer__social {
+            gap: 1rem;
+            padding: 0.5rem;
+            border: 1px solid $color-text-prime;
+            border-radius: 2.5rem;
+            transition: background $animation-normal;
+
+            &:hover {
+                background: $color-action-hover;
+                transition: background $animation-fast;
+            }
         }
     }
 </style>

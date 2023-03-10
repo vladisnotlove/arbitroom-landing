@@ -1,0 +1,31 @@
+---
+import classNames from "classNames";
+
+export interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<div class={classNames(className, "app-bar")}><slot /></div>
+
+<style lang="scss">
+    @import "../../styles/variables";
+
+    .app-bar {
+        height: $header-height-desktop;
+    }
+
+    @media (max-width: $tablet) {
+        .app-bar {
+            height: $header-height-tablet;
+        }
+    }
+
+    @media (max-width: $mobile) {
+        .app-bar {
+            height: $header-height-mobile;
+        }
+    }
+</style>

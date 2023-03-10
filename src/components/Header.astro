@@ -1,6 +1,7 @@
 ---
 import classNames from "classNames";
 import Logo from "./Logo.astro";
+import AppBar from "./uiKit/AppBar.astro";
 import Container from "./uiKit/Container.astro";
 import { DrawerTrigger } from "./uiKit/Drawer";
 import Icon from "./uiKit/Icon";
@@ -20,32 +21,34 @@ const { className, menuItems, sideMenuId } = Astro.props;
 ---
 
 <Container as="header" className={classNames(className, "header")} id="header">
-    <Logo className={"header__logo"} />
-    <div class="header__nav">
-        <div class="header__menu">
-            {
-                menuItems.map((menuItem) => (
-                    <Text
-                        variant={"body2"}
-                        className="header__menu-item"
-                        as="a"
-                        attrs={{
-                            ["href"]: menuItem.href,
-                            ["data-key"]: menuItem.id,
-                        }}
-                    >
-                        {menuItem.label}
-                    </Text>
-                ))
-            }
+    <AppBar className="header__content">
+        <Logo className={"header__logo"} />
+        <div class="header__nav">
+            <div class="header__menu">
+                {
+                    menuItems.map((menuItem) => (
+                        <Text
+                            variant={"body2"}
+                            className="header__menu-item"
+                            as="a"
+                            attrs={{
+                                ["href"]: menuItem.href,
+                                ["data-key"]: menuItem.id,
+                            }}
+                        >
+                            {menuItem.label}
+                        </Text>
+                    ))
+                }
+            </div>
+            <div class="header__actions">
+                <slot name="actions" />
+            </div>
+            <DrawerTrigger className="header__burger" drawerId={sideMenuId}>
+                <Icon iconName={"burger"} />
+            </DrawerTrigger>
         </div>
-        <div class="header__actions">
-            <slot name="actions" />
-        </div>
-        <DrawerTrigger className="header__burger" drawerId={sideMenuId}>
-            <Icon iconName={"burger"} />
-        </DrawerTrigger>
-    </div>
+    </AppBar>
 </Container>
 
 <style lang="scss">
@@ -61,11 +64,6 @@ const { className, menuItems, sideMenuId } = Astro.props;
 
         background: rgba(23, 26, 48, 0.12);
         backdrop-filter: blur(32px);
-        height: $header-height-desktop;
-
-        display: flex;
-        align-items: center;
-        gap: $header-gap;
         z-index: $z-index-header;
 
         &.overflowed {
@@ -86,6 +84,12 @@ const { className, menuItems, sideMenuId } = Astro.props;
                 pointer-events: auto;
             }
         }
+    }
+
+    .header__content {
+        display: flex;
+        align-items: center;
+        gap: $header-gap;
     }
 
     .header__logo {
@@ -151,18 +155,6 @@ const { className, menuItems, sideMenuId } = Astro.props;
         opacity: 0;
         pointer-events: none;
         transition: opacity $animation-normal;
-    }
-
-    @media (max-width: $tablet) {
-        .header {
-            height: $header-height-tablet;
-        }
-    }
-
-    @media (max-width: $mobile) {
-        .header {
-            height: $header-height-mobile;
-        }
     }
 </style>
 

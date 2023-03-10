@@ -3,6 +3,7 @@ import classNames from "classNames";
 import socials from "../store/socials";
 import { t } from "../utils/i18next";
 import Logo from "./Logo.astro";
+import AppBar from "./uiKit/AppBar.astro";
 import Drawer, { DrawerTrigger } from "./uiKit/Drawer";
 import Icon from "./uiKit/Icon";
 import Text from "./uiKit/Text.astro";
@@ -21,12 +22,12 @@ const { className, menuItems, id } = Astro.props;
 ---
 
 <Drawer className={classNames(className, "side-menu")} id={id} side={"right"}>
-    <div class="side-menu__header">
+    <AppBar className="side-menu__header">
         <Logo />
         <DrawerTrigger className="side-menu__close" drawerId={id}>
             <Icon iconName="close" />
         </DrawerTrigger>
-    </div>
+    </AppBar>
     <div class="side-menu__body">
         <div class="side-menu__actions">
             <slot name="actions" />
@@ -101,7 +102,6 @@ const { className, menuItems, id } = Astro.props;
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
-        min-height: $header-height-desktop;
 
         // desktop width
         width: $side-menu-width;
@@ -179,11 +179,6 @@ const { className, menuItems, id } = Astro.props;
     .side-menu__copyright {
         color: $color-text-more-secondary;
     }
-    @media (max-width: $tablet) {
-        .side-menu__header {
-            min-height: $header-height-tablet;
-        }
-    }
 
     @media (max-width: $mobile) {
         .side-menu__header,
@@ -191,10 +186,6 @@ const { className, menuItems, id } = Astro.props;
         .side-menu__footer {
             // mobile width
             width: 100%;
-        }
-
-        .side-menu__header {
-            min-height: $header-height-mobile;
         }
     }
 </style>
