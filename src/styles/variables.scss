@@ -22,6 +22,7 @@
 // colors
 
 $color-prime-main: #6320F0;
+$color-prime-light: #9868ff;
 $color-prime-dim: rgba(157, 111, 255, 0.16);
 $color-prime-contrast: #fff;
 
@@ -39,7 +40,7 @@ $color-text-prime: rgba(255, 255, 255, 0.92);
 $color-text-secondary: rgba(255, 255, 255, 0.64);
 $color-text-more-secondary: rgba(255, 255, 255, 0.32);
 
-$color-action-hover-opacity: 0.08;
+$color-action-hover-opacity: 0.10;
 $color-action-hover: rgba(255, 255, 255, $color-action-hover-opacity);
 $color-action-selected-opacity: 0.2;
 $color-action-selected: rgba(255, 127, 81, $color-action-selected-opacity);
@@ -242,9 +243,9 @@ $mobile: 420px;
 
 // animations
 
-$animation-fast: .125s;
-$animation-normal: .25s;
-$animation-slow: .5s;
+$animation-fast: .15s;
+$animation-normal: .3s;
+$animation-slow: .45s;
 
 // z-index
 

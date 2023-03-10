@@ -14,7 +14,11 @@ export interface Props {
         | "body1"
         | "body2"
         | "caption";
-    color?: "text-primary" | "text-secondary" | "secondary-gradient";
+    color?:
+        | "text-primary"
+        | "text-secondary"
+        | "secondary-gradient"
+        | "inherit";
     disableMobileAdaptive?: boolean;
     disableAdaptive?: boolean;
 }
@@ -34,6 +38,7 @@ const {
     class={classNames(className, "text", variant, {
         ["color-text-secondary"]: color === "text-secondary",
         ["color-secondary-gradient"]: color === "secondary-gradient",
+        ["color-inherit"]: color === "inherit",
         ["disable-mobile-adaptive"]: disableMobileAdaptive,
         ["disable-adaptive"]: disableAdaptive,
     })}
@@ -79,6 +84,10 @@ const {
 
         &.color-secondary-gradient {
             @include gradient-primary-for-text;
+        }
+
+        &.color-inherit {
+            color: inherit;
         }
     }
 

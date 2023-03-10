@@ -2,16 +2,23 @@
 import classNames from "classNames";
 
 export interface Props {
+    as?: keyof HTMLElementTagNameMap;
     className?: string;
     drawerId: string;
+    attrs?: Record<string, string | undefined>;
 }
 
-const { className, drawerId } = Astro.props;
+const { as: As = "div", className, drawerId, attrs } = Astro.props;
 ---
 
-<div class={classNames(className, "drawer-trigger")} data-drawer-id={drawerId}>
+<As
+    class={classNames(className, "drawer-trigger")}
+    data-js
+    data-drawer-id={drawerId}
+    {...attrs}
+>
     <slot />
-</div>
+</As>
 
 <style lang="scss">
     html.drawer-open {

@@ -35,15 +35,16 @@ const { className, menuItems, id } = Astro.props;
         <div class="side-menu__items">
             {
                 menuItems.map((menuItem) => (
-                    <DrawerTrigger drawerId={id} className="side-menu__item">
-                        <Text
-                            as="a"
-                            variant={"body2"}
-                            attrs={{
-                                ["href"]: menuItem.href,
-                                ["data-key"]: menuItem.id,
-                            }}
-                        >
+                    <DrawerTrigger
+                        as="a"
+                        drawerId={id}
+                        className="side-menu__item"
+                        attrs={{
+                            ["href"]: menuItem.href,
+                            ["data-key"]: menuItem.id,
+                        }}
+                    >
+                        <Text variant={"body2"} color={"inherit"}>
                             {menuItem.label}
                         </Text>
                     </DrawerTrigger>
@@ -128,12 +129,19 @@ const { className, menuItems, id } = Astro.props;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
+        margin: -0.5rem 0;
     }
     .side-menu__item {
-        padding: 0.5rem;
+        padding: 1rem 0.5rem;
+        cursor: pointer;
+        transition: all $animation-normal;
 
-        @include animated-underaline(0.5rem, 0.5rem, $position: left 0.5rem);
+        &:hover {
+            //color: $color-prime-light;
+            transform: translateX(0.75rem);
+        }
+
+        // @include animated-underaline(0.5rem, 0.5rem, $position: left 0.5rem);
     }
 
     .side-menu__footer {
@@ -169,7 +177,6 @@ const { className, menuItems, id } = Astro.props;
 
         &:hover {
             background: $color-action-hover;
-            transition: background $animation-fast;
         }
     }
     .side-menu__meta {

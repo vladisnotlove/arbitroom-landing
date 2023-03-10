@@ -126,11 +126,16 @@ const { className, menuItems, sideMenuId } = Astro.props;
         overflow: visible;
         padding: $header-menu-item-padding;
         white-space: nowrap;
+        transition: color $animation-normal;
 
-        @include animated-underaline(
-            $header-menu-item-padding,
-            $header-menu-item-padding
-        );
+        &:hover {
+            color: $color-prime-light;
+        }
+
+        // @include animated-underaline(
+        //     $header-menu-item-padding,
+        //     $header-menu-item-padding
+        // );
     }
 
     .header__actions {
