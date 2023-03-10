@@ -135,8 +135,6 @@ const { className, side = "right", id } = Astro.props;
                 if (!(e.target instanceof Element)) return;
                 if (e.target.closest(".drawer__body")) return;
 
-                drawer.classList.toggle("open");
-
                 toggleDrawer(drawer);
             });
         });
