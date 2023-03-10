@@ -1,5 +1,6 @@
 ---
 import classNames from "classNames";
+import routes from "../store/routes";
 import { t, Trans } from "../utils/i18next";
 import Container from "./uiKit/Container.astro";
 import Paper from "./uiKit/Paper.astro";
@@ -45,7 +46,10 @@ const reviews = [
 ];
 ---
 
-<Section className={classNames(className, "reviews")}>
+<Section
+    className={classNames(className, "reviews")}
+    id={routes.index.fragments.clientsAboutUs}
+>
     <Container className={"reviews__header"}>
         <Text className={"reviews__title"} variant={"h2"}>
             {t("@landing.@reviews.title")}

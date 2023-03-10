@@ -35,17 +35,18 @@ const { className, menuItems, id } = Astro.props;
         <div class="side-menu__items">
             {
                 menuItems.map((menuItem) => (
-                    <Text
-                        as="a"
-                        variant={"body2"}
-                        className="side-menu__item"
-                        attrs={{
-                            ["href"]: menuItem.href,
-                            ["data-key"]: menuItem.id,
-                        }}
-                    >
-                        {menuItem.label}
-                    </Text>
+                    <DrawerTrigger drawerId={id} className="side-menu__item">
+                        <Text
+                            as="a"
+                            variant={"body2"}
+                            attrs={{
+                                ["href"]: menuItem.href,
+                                ["data-key"]: menuItem.id,
+                            }}
+                        >
+                            {menuItem.label}
+                        </Text>
+                    </DrawerTrigger>
                 ))
             }
         </div>

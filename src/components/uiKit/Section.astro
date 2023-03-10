@@ -4,15 +4,17 @@ import classNames from "classNames";
 export interface Props {
   className?: string;
   gutterSize?: "medium" | "large";
+  id?: string;
 }
 
-const { className, gutterSize } = Astro.props;
+const { className, gutterSize, id } = Astro.props;
 ---
 
 <div
   class={classNames(className, "section", {
     ["gutter-large"]: gutterSize === "large",
   })}
+  id={id}
 >
   <slot />
 </div>
