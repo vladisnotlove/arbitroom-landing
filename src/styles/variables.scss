@@ -243,9 +243,9 @@ $mobile: 420px;
 
 // animations
 
-$animation-fast: .15s;
-$animation-normal: .3s;
-$animation-slow: .45s;
+$animation-fast: .125s;
+$animation-normal: .25s;
+$animation-slow: .5s;
 
 // z-index
 
@@ -257,6 +257,7 @@ $z-index-dropdown-overlay: 1200;
 $z-index-dropdown-menu: 1250;
 $z-index-popper: 1400;
 $z-index-tooltip: 1600;
+$z-index-page-loader: 2000;
 
 // sizes
 

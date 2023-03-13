@@ -59,20 +59,22 @@ const { className, side = "right", id } = Astro.props;
 
             .drawer__backdrop {
                 opacity: 1;
-                transition: opacity 0.2s ease-out;
+                transition: opacity 0.225s cubic-bezier(0.24, 0.45, 0.45, 0.99);
             }
 
             &.left {
                 .drawer__body {
                     transform: translateX(0);
-                    transition: transform 0.2s ease-out;
+                    transition: transform 0.225s
+                        cubic-bezier(0.24, 0.45, 0.45, 0.99);
                 }
             }
 
             &.right {
                 .drawer__body {
                     transform: translateX(0);
-                    transition: transform 0.2s ease-out;
+                    transition: transform 0.225s
+                        cubic-bezier(0.24, 0.45, 0.45, 0.99);
                 }
             }
         }
@@ -87,7 +89,7 @@ const { className, side = "right", id } = Astro.props;
         background: $color-overlay;
         opacity: 0;
         z-index: 1;
-        transition: opacity 0.1s ease-in;
+        transition: opacity 0.105s cubic-bezier(0.75, 0, 0.81, 0.48);
     }
 
     .drawer__body {
@@ -98,7 +100,7 @@ const { className, side = "right", id } = Astro.props;
         background: $color-background-upper1;
         overflow-y: scroll;
         z-index: 2;
-        transition: transform 0.1s ease-in;
+        transition: transform 0.105s cubic-bezier(0.75, 0, 0.81, 0.48);
 
         @include custom-scrollbar;
     }
