@@ -33,7 +33,7 @@ const { className, side = "right", id } = Astro.props;
         z-index: $z-index-drawer;
         color: $color-text-prime;
 
-        transition: top 0s 0.19s;
+        transition: top 0s 0.1s;
 
         &.left {
             justify-content: flex-start;
@@ -59,20 +59,20 @@ const { className, side = "right", id } = Astro.props;
 
             .drawer__backdrop {
                 opacity: 1;
-                transition: opacity 0.21s ease-out;
+                transition: opacity 0.2s ease-out;
             }
 
             &.left {
                 .drawer__body {
                     transform: translateX(0);
-                    transition: transform 0.21s ease-out;
+                    transition: transform 0.2s ease-out;
                 }
             }
 
             &.right {
                 .drawer__body {
                     transform: translateX(0);
-                    transition: transform 0.21s ease-out;
+                    transition: transform 0.2s ease-out;
                 }
             }
         }
@@ -87,7 +87,7 @@ const { className, side = "right", id } = Astro.props;
         background: $color-overlay;
         opacity: 0;
         z-index: 1;
-        transition: opacity 0.19s ease-in;
+        transition: opacity 0.1s ease-in;
     }
 
     .drawer__body {
@@ -98,7 +98,7 @@ const { className, side = "right", id } = Astro.props;
         background: $color-background-upper1;
         overflow-y: scroll;
         z-index: 2;
-        transition: transform 0.19s ease-in;
+        transition: transform 0.1s ease-in;
 
         @include custom-scrollbar;
     }
