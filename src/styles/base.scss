@@ -52,6 +52,11 @@ html {
     @include custom-scrollbar;
     overflow-y: scroll;
     overflow-x: hidden;
+
+    //  theme variables
+    --color-prime-main: #{$color-prime-main};
+    --color-background: #{$color-background};
+    --z-index-page-loader: #{$z-index-page-loader};
 }
 
 body {

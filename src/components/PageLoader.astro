@@ -1,0 +1,165 @@
+---
+import classNames from "classNames";
+import LogoIcon from "./LogoIcon.astro";
+import Icon from "./uiKit/Icon/Icon.astro";
+
+export interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<div class={classNames(className, "page-loader")} id="pageLoader">
+    <LogoIcon className="page-loader__logo" />
+    <div class="page-loader__spinner">
+        <div class="page-loader__spinner-circle1"></div>
+        <div class="page-loader__spinner-circle2"></div>
+        <div class="page-loader__spinner-circle3"></div>
+    </div>
+</div>
+
+<style is:inline>
+    .page-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-background);
+
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+        z-index: var(--z-index-page-loader);
+        transition: opacity 0.5s 0.4s ease-in, transform 0s 0.8s;
+    }
+    .page-loader.hidden {
+        transform: translateY(-200%);
+        opacity: 0;
+    }
+    .page-loader.hidden > .page-loader__spinner {
+        opacity: 0;
+        transform: scale(2);
+    }
+    .page-loader.hidden > .page-loader__logo {
+        opacity: 0;
+        transform: translateY(-500px);
+        //transform:
+    }
+
+    .page-loader__logo {
+        width: 4rem;
+        height: 4rem;
+        transform-origin: center center;
+        transition: opacity 0.25s 0.2s ease-in, transform 0.5s 0.1s ease-in;
+    }
+
+    .page-loader__spinner {
+        position: absolute;
+        top: calc(50% - 3rem);
+        left: calc(50% - 3rem);
+        width: 6rem;
+        height: 6rem;
+        //animation: rotation 10s linear infinite;
+        transition: all 0.4s ease-in;
+    }
+
+    .page-loader__spinner-circle1 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #fff3;
+        border-top-color: transparent;
+        border-radius: 50%;
+        transform-origin: center center;
+        animation: rotation 1.25s linear infinite;
+    }
+
+    .page-loader__spinner-circle2 {
+        position: absolute;
+        top: -0.5rem;
+        left: -0.5rem;
+        content: "";
+        display: block;
+        width: calc(100% + 1rem);
+        height: calc(100% + 1rem);
+        border: 2px solid #fff3;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        transform-origin: center center;
+        animation: rotation2 1.75s linear infinite reverse;
+    }
+
+    .page-loader__spinner-circle3 {
+        position: absolute;
+        top: -1rem;
+        left: -1rem;
+        content: "";
+        display: block;
+        width: calc(100% + 2rem);
+        height: calc(100% + 2rem);
+        border: 2px solid #fff3;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        transform-origin: center center;
+        animation: rotation3 2s linear infinite;
+    }
+
+    @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes rotation2 {
+        0% {
+            transform: rotate(90deg);
+        }
+        100% {
+            transform: rotate(450deg);
+        }
+    }
+
+    @keyframes rotation3 {
+        0% {
+            transform: rotate(180deg);
+        }
+        100% {
+            transform: rotate(540deg);
+        }
+    }
+</style>
+
+<script is:inline>
+    (() => {
+        const MIN_LOADER_TIME = 500;
+
+        const pageLoader = document.getElementById("pageLoader");
+        const timeBefore = performance.now();
+
+        window.addEventListener("load", () => {
+            const timeAfter = performance.now();
+
+            const loadTime = timeAfter - timeBefore;
+            if (loadTime > MIN_LOADER_TIME) {
+                pageLoader.classList.add("hidden");
+            } else {
+                setTimeout(() => {
+                    pageLoader.classList.add("hidden");
+                }, MIN_LOADER_TIME - loadTime);
+            }
+        });
+    })();
+</script>
