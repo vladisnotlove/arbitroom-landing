@@ -137,8 +137,8 @@ dom.childNodes.forEach((node) => {
 
                 const preventClickIfMove = (e: MouseEvent) => {
                     const diff = {
-                        x: pos.x - e.clientX,
-                        y: pos.y - e.clientY,
+                        x: startPos.x - e.clientX,
+                        y: startPos.y - e.clientY,
                     };
                     const diffLength = Math.sqrt(
                         diff.x * diff.x + diff.y * diff.y
