@@ -13,14 +13,13 @@ const { as: As = "div", className, drawerId, attrs } = Astro.props;
 
 <As
     class={classNames(className, "drawer-trigger")}
-    data-js
     data-drawer-id={drawerId}
     {...attrs}
 >
     <slot />
 </As>
 
-<style lang="scss">
+<style lang="scss" is:global>
     html.drawer-open {
         overflow: hidden;
     }

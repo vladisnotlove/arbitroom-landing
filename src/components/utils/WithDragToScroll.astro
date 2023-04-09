@@ -7,7 +7,6 @@ const dom = parse(html);
 dom.childNodes.forEach((node) => {
     // ELEMENT
     if (node instanceof HTMLElement) {
-        node.setAttribute("data-js", "");
         node.setAttribute("data-drag-to-scroll", "");
     }
 });
@@ -16,13 +15,11 @@ dom.childNodes.forEach((node) => {
 <Fragment set:html={dom.toString()} />
 
 <script>
-    import { throttle } from "throttle-debounce";
-
     window.addEventListener("load", () => {
         const stopCoef = 0.95;
 
         document
-            .querySelectorAll("[data-js][data-drag-to-scroll]")
+            .querySelectorAll("[data-drag-to-scroll]")
             .forEach((element) => {
                 if (!(element instanceof HTMLElement)) return;
 

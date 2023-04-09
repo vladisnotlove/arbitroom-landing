@@ -10,7 +10,7 @@ const { className } = Astro.props;
 
 <div class={classNames(className, "app-bar")}><slot /></div>
 
-<style lang="scss">
+<style lang="scss" is:global>
     @import "../../styles/variables";
 
     .app-bar {

@@ -14,7 +14,7 @@ const { as: As = "div", className, id, attrs } = Astro.props;
     <slot />
 </As>
 
-<style lang="scss">
+<style lang="scss" is:global>
     @import "../../styles/variables.scss";
 
     .container {

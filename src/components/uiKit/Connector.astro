@@ -17,7 +17,6 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
 
 <div
     class={classNames(className, "connector")}
-    data-js
     data-radius={lineOptions.radius}
     data-line-class={classes.line}
 >
@@ -29,7 +28,7 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
     import drawLine from "../../utils/drawLine";
 
     window.addEventListener("load", () => {
-        const connectors = document.querySelectorAll(".connector[data-js]");
+        const connectors = document.querySelectorAll(".connector");
 
         connectors.forEach((connector) => {
             let lines: Element[] = [];

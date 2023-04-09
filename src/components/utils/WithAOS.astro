@@ -86,7 +86,6 @@ const dom = parse(html);
 dom.childNodes.forEach((node) => {
     // ELEMENT
     if (node instanceof HTMLElement) {
-        node.setAttribute("data-js", "");
         node.setAttribute("data-aos", animation);
         if (offset) node.setAttribute("data-aos-offset", "" + offset);
         if (duration) node.setAttribute("data-aos-duration", "" + duration);
