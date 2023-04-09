@@ -5,6 +5,8 @@ import { t, Trans } from "../utils/i18next";
 import Container from "./uiKit/Container.astro";
 import Section from "./uiKit/Section.astro";
 import Text from "./uiKit/Text.astro";
+import WithAOS from "./utils/WithAOS.astro";
+import variables from "../styles/variables";
 
 export interface Props {
     className?: string;
@@ -18,33 +20,74 @@ const { className } = Astro.props;
     id={routes.index.fragments.howCashGenerated}
 >
     <Section className="about-neural">
-        <div class="about-neural__poster"></div>
-        <div class="about-neural__header">
-            <Text className="about-neural__subtitle" variant={"h5"}>
-                {t("@landing.@menu.howCashGenerated")}
-            </Text>
-            <Text className="about-neural__title" variant={"h3"}>
-                <Trans i18nKey="@landing.@aboutNeural.title">
-                    Собственная разработка компании Arbitroom —
-                    <Text color="secondary-gradient">
-                        нейросеть для крипто арбитража
-                    </Text>
-                </Trans>
-            </Text>
-        </div>
+        <WithAOS animation={"zoom-in"} delay={100}>
+            <div class="about-neural__poster"></div>
+        </WithAOS>
+        <WithAOS
+            animation={"fade-left"}
+            adaptive={[
+                {
+                    maxWidth: variables.smallTablet,
+                    attrs: { animation: "fade-right" },
+                },
+            ]}
+        >
+            <div class="about-neural__header">
+                <Text className="about-neural__subtitle" variant={"h5"}>
+                    {t("@landing.@menu.howCashGenerated")}
+                </Text>
+                <Text className="about-neural__title" variant={"h3"}>
+                    <Trans i18nKey="@landing.@aboutNeural.title">
+                        Собственная разработка компании Arbitroom —
+                        <Text color="secondary-gradient">
+                            нейросеть для крипто арбитража
+                        </Text>
+                    </Trans>
+                </Text>
+            </div>
+        </WithAOS>
         <div class="about-neural__body">
             <Text
                 className={"about-neural__description"}
                 variant={"body1"}
                 color="text-secondary"
             >
-                <Trans i18nKey="@landing.@aboutNeural.description">
-                    Параграф 1
-                    <div class="divider"></div>
-                    Параграф 2
-                    <div class="divider"></div>
-                    Параграф 3
-                </Trans>
+                <WithAOS
+                    animation={"fade-left"}
+                    delay={200}
+                    adaptive={[
+                        {
+                            maxWidth: variables.tablet,
+                            attrs: { animation: "fade-right" },
+                        },
+                    ]}
+                >
+                    <div>{t("@landing.@aboutNeural.description1")}</div>
+                </WithAOS>
+                <WithAOS
+                    animation={"fade-left"}
+                    delay={250}
+                    adaptive={[
+                        {
+                            maxWidth: variables.tablet,
+                            attrs: { animation: "fade-right" },
+                        },
+                    ]}
+                >
+                    <div>{t("@landing.@aboutNeural.description2")}</div>
+                </WithAOS>
+                <WithAOS
+                    animation={"fade-left"}
+                    delay={300}
+                    adaptive={[
+                        {
+                            maxWidth: variables.tablet,
+                            attrs: { animation: "fade-right" },
+                        },
+                    ]}
+                >
+                    <div>{t("@landing.@aboutNeural.description3")}</div>
+                </WithAOS>
             </Text>
         </div>
     </Section>
@@ -81,8 +124,10 @@ const { className } = Astro.props;
         margin-bottom: 1rem;
     }
 
-    .divider {
-        height: 1rem;
+    .about-neural__description {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 
     @media (max-width: $small-desktop) {

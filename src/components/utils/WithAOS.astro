@@ -144,7 +144,7 @@ dom.childNodes.forEach((node) => {
                     if (adaptive && Array.isArray(adaptive)) {
                         adaptive.forEach(({ maxWidth, attrs }) => {
                             if (maxWidth !== undefined) {
-                                if (window.innerWidth < maxWidth) {
+                                if (window.innerWidth <= maxWidth) {
                                     finalAttrs = attrs;
                                 }
                             } else {

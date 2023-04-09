@@ -8,6 +8,7 @@ import Rating from "./uiKit/Rating.astro";
 import Section from "./uiKit/Section.astro";
 import Text from "./uiKit/Text.astro";
 import WithDragToScroll from "./utils/WithDragToScroll.astro";
+import WithAOS from "./utils/WithAOS.astro";
 
 export interface Props {
     className?: string;
@@ -51,62 +52,82 @@ const reviews = [
     id={routes.index.fragments.clientsAboutUs}
 >
     <Container className={"reviews__header"}>
-        <Text className={"reviews__title"} variant={"h2"}>
-            {t("@landing.@reviews.title")}
-        </Text>
-        <div class={"reviews__amount"}>
-            <Text
-                className="reviews__amount-value"
-                as="span"
-                variant={"h3"}
-                color={"secondary-gradient"}
-            >
-                1280+
+        <WithAOS animation={"fade-right"}>
+            <Text className={"reviews__title"} variant={"h2"}>
+                {t("@landing.@reviews.title")}
             </Text>
-            <Text className="reviews__amount-label" variant={"body1"}>
-                <Trans i18nKey="@landing.@reviews.satisfiedClients">
-                    Довольных<br /> клиентов
-                </Trans>
-            </Text>
-        </div>
+        </WithAOS>
+        <WithAOS
+            animation={"fade-down"}
+            delay={200}
+            adaptive={[
+                {
+                    maxWidth: 650,
+                    attrs: {
+                        animation: "fade-right",
+                    },
+                },
+            ]}
+        >
+            <div class={"reviews__amount"}>
+                <Text
+                    className="reviews__amount-value"
+                    as="span"
+                    variant={"h3"}
+                    color={"secondary-gradient"}
+                >
+                    1280+
+                </Text>
+                <Text className="reviews__amount-label" variant={"body1"}>
+                    <Trans i18nKey="@landing.@reviews.satisfiedClients">
+                        Довольных<br /> клиентов
+                    </Trans>
+                </Text>
+            </div>
+        </WithAOS>
     </Container>
 
-    <WithDragToScroll>
-        <Container className="reviews__cards">
-            {
-                reviews.map((data) => (
-                    <Paper className="reviews__card" variant={"flat"}>
-                        <div class="reviews__card-author">
-                            <div class="reviews__card-avatar-wrapper">
-                                <img src={data.author.avatar} alt="" />
+    <WithAOS animation={"fade-right"} delay={250}>
+        <WithDragToScroll>
+            <Container className="reviews__cards">
+                {
+                    reviews.map((data) => (
+                        <Paper className="reviews__card" variant={"flat"}>
+                            <div class="reviews__card-author">
+                                <div class="reviews__card-avatar-wrapper">
+                                    <img src={data.author.avatar} alt="" />
+                                </div>
+                                <div class="reviews__card-name-role">
+                                    <Text
+                                        className="reviews__card-name"
+                                        variant={"h5"}
+                                    >
+                                        {data.author.name}
+                                    </Text>
+                                    <Text
+                                        className="reviews__card-role"
+                                        variant={"body1"}
+                                    >
+                                        {data.author.role}
+                                    </Text>
+                                </div>
                             </div>
-                            <div class="reviews__card-name-role">
-                                <Text
-                                    className="reviews__card-name"
-                                    variant={"h5"}
-                                >
-                                    {data.author.name}
-                                </Text>
-                                <Text
-                                    className="reviews__card-role"
-                                    variant={"body1"}
-                                >
-                                    {data.author.role}
-                                </Text>
-                            </div>
-                        </div>
-                        <Rating
-                            className={"reviews__card-rating"}
-                            value={data.rating}
-                        />
-                        <Text className="reviews__card-text" variant={"body1"}>
-                            {data.text}
-                        </Text>
-                    </Paper>
-                ))
-            }
-        </Container>
-    </WithDragToScroll>
+                            <Rating
+                                className={"reviews__card-rating"}
+                                value={data.rating}
+                            />
+                            <Text
+                                className="reviews__card-text"
+                                variant={"body1"}
+                            >
+                                {data.text}
+                            </Text>
+                        </Paper>
+                    ))
+                }
+            </Container>
+        </WithDragToScroll>
+    </WithAOS>
 </Section>
 
 <script>
@@ -268,7 +289,7 @@ const reviews = [
             align-items: flex-start;
             gap: 0.375rem;
 
-            :global(br) {
+            br {
                 display: none;
             }
         }

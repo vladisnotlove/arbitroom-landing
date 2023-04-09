@@ -168,7 +168,6 @@ const drawLine = (
     end: Element,
     options: DrawLineOptions = {}
 ): Element | null => {
-
     const _options: Required<DrawLineOptions> = {
         radius: options.radius ?? defaultOptions.radius
     }

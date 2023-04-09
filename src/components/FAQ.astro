@@ -5,6 +5,8 @@ import CollapseCard from "./CollapseCard.astro";
 import Container from "./uiKit/Container.astro";
 import Section from "./uiKit/Section.astro";
 import Text from "./uiKit/Text.astro";
+import WithAOS from "./utils/WithAOS.astro";
+import variables from "../styles/variables";
 
 export interface Props {
     className?: string;
@@ -45,13 +47,29 @@ const questions = [
 
 <Container className={classNames(className)}>
     <Section className={"faq"}>
-        <Text className={"faq__title"} variant={"h2"}>
-            {t("@landing.@faq.title")}
-        </Text>
+        <WithAOS animation={"fade-right"}>
+            <Text className={"faq__title"} variant={"h2"}>
+                {t("@landing.@faq.title")}
+            </Text>
+        </WithAOS>
         <div class="faq__cards">
             {
-                questions.map(({ question, answer }) => (
-                    <CollapseCard title={question}>{answer}</CollapseCard>
+                questions.map(({ question, answer }, index) => (
+                    <WithAOS
+                        animation={"fade-right"}
+                        delay={index * 50 + 200}
+                        adaptive={[
+                            {
+                                maxWidth: variables.tablet,
+                                attrs: {
+                                    animation: "fade-right",
+                                    delay: 200,
+                                },
+                            },
+                        ]}
+                    >
+                        <CollapseCard title={question}>{answer}</CollapseCard>
+                    </WithAOS>
                 ))
             }
         </div>
@@ -88,7 +106,7 @@ const questions = [
         }
 
         .faq__title {
-            text-align: center;
+            text-align: left;
         }
     }
     @media (max-width: $small-tablet) {

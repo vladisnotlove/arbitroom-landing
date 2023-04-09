@@ -23,6 +23,17 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
     <slot />
 </div>
 
+<style lang="scss" is:global>
+    .line {
+        opacity: 0;
+        transition: opacity 0.6s;
+
+        &.show {
+            opacity: 1;
+        }
+    }
+</style>
+
 <script>
     import addOnResize from "../../utils/addOnResize";
     import drawLine from "../../utils/drawLine";
@@ -31,36 +42,78 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
         const connectors = document.querySelectorAll(".connector");
 
         connectors.forEach((connector) => {
-            let lines: Element[] = [];
+            const radius = parseFloat(
+                connector.getAttribute("data-radius") || ""
+            );
+            const className = connector.getAttribute("data-line-class");
+            const children = connector.children;
 
-            const drawLines = () => {
+            let lines: (Element | null)[] = new Array(children.length - 1).fill(
+                null
+            );
+            let observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("show");
+                        }
+                    });
+                },
+                {
+                    root: null,
+                    rootMargin: "0px 100px 0px 100px",
+                    threshold: [1],
+                }
+            );
+
+            const clearLines = () => {
                 // clear lines
                 if (lines.length > 0) {
-                    lines.forEach((line) => line.remove());
-                    lines = [];
+                    for (let i = 0; i < lines.length; i++) {
+                        lines[i]?.remove();
+                        lines[i] = null;
+                    }
+                    observer.disconnect();
                 }
-                // draw lines
-                const children = connector.children;
-                const rawRadius = parseFloat(
-                    connector.getAttribute("data-radius") || "a"
-                );
-                const radius = isNaN(rawRadius) ? undefined : rawRadius;
-                const className = connector.getAttribute("data-line-class");
+            };
 
+            const drawLines = () => {
                 for (let i = 1; i < children.length; i++) {
                     const prev = children[i - 1];
                     const cur = children[i];
-                    const line = drawLine(prev, cur, {
-                        radius: radius ?? undefined,
-                    });
-                    if (line) {
-                        if (className) line.classList.add(className);
-                        lines.push(line);
+
+                    if (
+                        getComputedStyle(cur).opacity === "1" &&
+                        getComputedStyle(prev).opacity === "1" &&
+                        lines[i - 1] === null
+                    ) {
+                        const line = drawLine(prev, cur, { radius: radius });
+
+                        if (line) {
+                            line.classList.add("line");
+                            if (className) line.classList.add(className);
+                            lines[i - 1] = line;
+                            observer.observe(line);
+                        }
                     }
                 }
             };
 
-            addOnResize(connector, drawLines, { throttle: 150 });
+            const redrawLines = () => {
+                clearLines();
+                drawLines();
+            };
+
+            // wait for page loader
+            setTimeout(() => {
+                addOnResize(connector, redrawLines, { throttle: 150 });
+
+                setInterval(() => {
+                    if (lines.findIndex((line) => line === null) !== -1) {
+                        drawLines();
+                    }
+                }, 200);
+            }, 400);
         });
     });
 </script>

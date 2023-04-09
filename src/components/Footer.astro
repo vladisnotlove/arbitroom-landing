@@ -10,6 +10,7 @@ import socials from "../store/socials";
 import Logo from "./Logo.astro";
 import Section from "./uiKit/Section.astro";
 import AppBar from "./uiKit/AppBar.astro";
+import WithAOS from "./utils/WithAOS.astro";
 
 export interface Props {
     className?: string;
@@ -25,74 +26,84 @@ const { className, menuItems } = Astro.props;
 
 <Container as="footer" className={classNames(className, "footer")} id="footer">
     <div class="footer__main">
-        <Text className={"footer__title"} variant={"h3"}>
-            <Trans i18nKey="@landing.@footer.title">
-                <Text as="span" color="secondary-gradient">
-                    Получай прибыль
-                </Text> уже сейчас независимо от тренда
-            </Trans>
-        </Text>
-        <Button size={"large"}>
-            {t("@common.join")}
-        </Button>
-    </div>
-    <div class="footer__img-wrapper">
-        <img
-            class="footer__img"
-            src="/layout-assets/images/image-for-footer.png"
-            alt=""
-        />
-    </div>
-    <AppBar className="footer__nav">
-        <Logo />
-        <div class="footer__menu">
-            {
-                menuItems.map((menuItem) => (
-                    <Text
-                        variant={"body2"}
-                        className="footer__menu-item"
-                        as="a"
-                        attrs={{
-                            ["href"]: menuItem.href,
-                            ["data-key"]: menuItem.id,
-                        }}
-                    >
-                        {menuItem.label}
-                    </Text>
-                ))
-            }
-        </div>
-    </AppBar>
-    <div class="footer__links">
-        <div class="footer__socials">
-            {
-                socials.map((social) => (
-                    <Text
-                        as="a"
-                        attrs={{ href: social.href, target: "_blank" }}
-                        variant={"body1"}
-                        className={"footer__social"}
-                    >
-                        <Icon iconName={social.iconName} />
-                        {t(social.tkey)}
-                    </Text>
-                ))
-            }
-        </div>
-        <div class="footer__meta">
-            <Text
-                as="a"
-                attrs={{ href: "#" }}
-                variant={"body2"}
-                className={"footer__private-policy"}
-            >
-                {t("@common.privacyPolicy")}
+        <WithAOS animation={"fade-right"}>
+            <Text className={"footer__title"} variant={"h3"}>
+                <Trans i18nKey="@landing.@footer.title">
+                    <Text as="span" color="secondary-gradient">
+                        Получай прибыль
+                    </Text> уже сейчас независимо от тренда
+                </Trans>
             </Text>
-            <Text variant={"body2"} className={"footer__copyright"}>
-                © {new Date().getFullYear()} Arbitroom. All rights reserved.
-            </Text>
-        </div>
+        </WithAOS>
+        <WithAOS animation={"fade-right"} delay={100}>
+            <Button size={"large"}>
+                {t("@common.join")}
+            </Button>
+        </WithAOS>
     </div>
+    <WithAOS animation={"zoom-in"} delay={150}>
+        <div class="footer__img-wrapper">
+            <img
+                class="footer__img"
+                src="/layout-assets/images/image-for-footer.png"
+                alt=""
+            />
+        </div>
+    </WithAOS>
+    <WithAOS animation={"fade-right"} delay={200} offset={0}>
+        <AppBar className="footer__nav">
+            <Logo />
+            <div class="footer__menu">
+                {
+                    menuItems.map((menuItem) => (
+                        <Text
+                            variant={"body2"}
+                            className="footer__menu-item"
+                            as="a"
+                            attrs={{
+                                ["href"]: menuItem.href,
+                                ["data-key"]: menuItem.id,
+                            }}
+                        >
+                            {menuItem.label}
+                        </Text>
+                    ))
+                }
+            </div>
+        </AppBar>
+    </WithAOS>
+    <WithAOS animation={"fade-right"} delay={200} offset={-50}>
+        <div class="footer__links">
+            <div class="footer__socials">
+                {
+                    socials.map((social) => (
+                        <Text
+                            as="a"
+                            attrs={{ href: social.href, target: "_blank" }}
+                            variant={"body1"}
+                            className={"footer__social"}
+                        >
+                            <Icon iconName={social.iconName} />
+                            {t(social.tkey)}
+                        </Text>
+                    ))
+                }
+            </div>
+            <div class="footer__meta">
+                <Text
+                    as="a"
+                    attrs={{ href: "#" }}
+                    variant={"body2"}
+                    className={"footer__private-policy"}
+                >
+                    {t("@common.privacyPolicy")}
+                </Text>
+                <Text variant={"body2"} className={"footer__copyright"}>
+                    © {new Date().getFullYear()} Arbitroom. All rights reserved.
+                </Text>
+            </div>
+        </div>
+    </WithAOS>
     <div class="footer__glow"></div>
 </Container>
 

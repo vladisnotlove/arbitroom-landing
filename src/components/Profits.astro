@@ -6,7 +6,7 @@ import Section from "./uiKit/Section.astro";
 import Paper from "./uiKit/Paper.astro";
 import Text from "./uiKit/Text.astro";
 import WithAOS from "./utils/WithAOS.astro";
-import cssVars from "../styles/variables";
+import variables from "../styles/variables";
 
 export interface Props {
     className?: string;
@@ -42,11 +42,14 @@ const profitCards = [
                 profitCards.map((data, index) => (
                     <WithAOS
                         animation={"fade-up"}
-                        delay={index * 150 + 50}
+                        delay={index * 100 + 200}
                         adaptive={[
                             {
-                                maxWidth: cssVars.smallTablet,
-                                attrs: { animation: "fade-right" },
+                                maxWidth: variables.smallTablet,
+                                attrs: {
+                                    animation: "fade-right",
+                                    delay: index * 50 + 200,
+                                },
                             },
                         ]}
                     >

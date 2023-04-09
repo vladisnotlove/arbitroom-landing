@@ -8,6 +8,9 @@ import Container from "./uiKit/Container.astro";
 import Paper from "./uiKit/Paper.astro";
 import Section from "./uiKit/Section.astro";
 import Text from "./uiKit/Text.astro";
+import WithAOS from "./utils/WithAOS.astro";
+import calculateCellDelay from "../utils/aos/calculateCellDelay";
+import variables from "../styles/variables";
 
 export interface Props {
     className?: string;
@@ -44,9 +47,11 @@ const steps = [
     id={routes.index.fragments.whatFirst}
 >
     <Section className={"guide"}>
-        <Text className="guide__title" variant="h2">
-            {t("@landing.@guide.title")}
-        </Text>
+        <WithAOS animation={"fade-right"}>
+            <Text className="guide__title" variant="h2">
+                {t("@landing.@guide.title")}
+            </Text>
+        </WithAOS>
         <Connector
             className={"guide__steps"}
             classes={{ line: "guide__line" }}
@@ -54,31 +59,79 @@ const steps = [
         >
             {
                 steps.map((data, index) => (
-                    <Paper className={"guide__step"}>
-                        <div class="guide__step-image-wrapper">
-                            <img src={data.imgSrc} />
-                        </div>
-                        <Text
-                            className="guide__step-number"
-                            variant={"body1"}
-                            color="text-secondary"
-                        >
-                            {t("@common.step") + " " + (index + 1)}
-                        </Text>
-                        <Text
-                            className="guide__step-description"
-                            variant={"h5"}
-                        >
-                            {data.description}
-                        </Text>
-                    </Paper>
+                    <WithAOS
+                        animation={"fade-up"}
+                        delay={calculateCellDelay(index, 3)}
+                        adaptive={[
+                            {
+                                maxWidth: variables.tablet,
+                                attrs: {
+                                    animation: "fade-up",
+                                    delay: calculateCellDelay(index, 2, {
+                                        columnsDeltaTime: 100,
+                                        rowsDeltaTime: 50,
+                                    }),
+                                },
+                            },
+                            {
+                                maxWidth: variables.smallTablet,
+                                attrs: {
+                                    animation: "fade-right",
+                                    delay: 200,
+                                },
+                            },
+                        ]}
+                    >
+                        <Paper className={"guide__step"}>
+                            <div class="guide__step-image-wrapper">
+                                <img src={data.imgSrc} />
+                            </div>
+                            <Text
+                                className="guide__step-number"
+                                variant={"body1"}
+                                color="text-secondary"
+                            >
+                                {t("@common.step") + " " + (index + 1)}
+                            </Text>
+                            <Text
+                                className="guide__step-description"
+                                variant={"h5"}
+                            >
+                                {data.description}
+                            </Text>
+                        </Paper>
+                    </WithAOS>
                 ))
             }
-            <Paper className={"guide__step with-action"}>
-                <Button>
-                    {t("@common.proceed")}
-                </Button>
-            </Paper>
+            <WithAOS
+                animation={"fade-up"}
+                delay={calculateCellDelay(steps.length, 3)}
+                adaptive={[
+                    {
+                        maxWidth: variables.tablet,
+                        attrs: {
+                            animation: "fade-up",
+                            delay: calculateCellDelay(steps.length, 2, {
+                                columnsDeltaTime: 50,
+                                rowsDeltaTime: 100,
+                            }),
+                        },
+                    },
+                    {
+                        maxWidth: variables.smallTablet,
+                        attrs: {
+                            animation: "fade-right",
+                            delay: 200,
+                        },
+                    },
+                ]}
+            >
+                <Paper className={"guide__step with-action"}>
+                    <Button>
+                        {t("@common.proceed")}
+                    </Button>
+                </Paper>
+            </WithAOS>
         </Connector>
     </Section>
 </Container>
@@ -125,7 +178,7 @@ const steps = [
         text-align: center;
     }
 
-    :global(svg.guide__line) {
+    svg.guide__line {
         stroke: white;
         stroke-opacity: 0.24;
         stroke-width: 1;
@@ -176,7 +229,7 @@ const steps = [
             display: flex;
             flex-direction: row;
 
-            & > :global(*) {
+            & > * {
                 flex-grow: 1;
             }
         }

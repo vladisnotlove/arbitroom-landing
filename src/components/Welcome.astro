@@ -19,12 +19,12 @@ const { className } = Astro.props;
         <WithAOS animation={"fade-right"}>
             <div class="welcome__title">{t("@landing.@welcome.title")}</div>
         </WithAOS>
-        <WithAOS animation={"fade-right"} delay={50}>
+        <WithAOS animation={"fade-right"} delay={100}>
             <Text className="welcome__description" variant={"h5"}>
                 {t("@landing.@welcome.description")}
             </Text>
         </WithAOS>
-        <WithAOS animation={"fade-right"} delay={100}>
+        <WithAOS animation={"fade-right"} delay={200}>
             <div class="welcome__actions">
                 <Button size={"large"}>
                     {t("@common.startNow")}
@@ -218,7 +218,7 @@ const { className } = Astro.props;
                 gap: 0.5rem;
                 margin-bottom: 0;
 
-                :global(svg) {
+                svg {
                     display: none;
                 }
             }

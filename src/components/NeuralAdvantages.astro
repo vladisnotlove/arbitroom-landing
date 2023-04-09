@@ -6,6 +6,9 @@ import Container from "./uiKit/Container.astro";
 import Paper from "./uiKit/Paper.astro";
 import Section from "./uiKit/Section.astro";
 import Text from "./uiKit/Text.astro";
+import WithAOS from "./utils/WithAOS.astro";
+import calculateCellDelay from "../utils/aos/calculateCellDelay";
+import variables from "../styles/variables";
 
 export interface Props {
     className?: string;
@@ -105,56 +108,110 @@ const neuralAdvantageCompanies = [
     id={routes.index.fragments.advantagesOfNeuralNetwork}
 >
     <Section className={"neural-advantages"}>
-        <Text className="neural-advantages__title" variant="h2">
-            {t("@landing.@neuralAdvantages.title")}
-        </Text>
+        <WithAOS animation={"fade-right"}>
+            <Text className="neural-advantages__title" variant="h2">
+                {t("@landing.@neuralAdvantages.title")}
+            </Text>
+        </WithAOS>
         <div class="neural-advantages__cards">
             {
-                neuralAdvantageCards.map((data) => (
-                    <Paper className="neural-advantage-card">
-                        <div class="neural-advantage-card__icon-wrapper">
-                            <img src={data.iconSrc} alt="" />
-                        </div>
-                        <Text
-                            className="neural-advantage-card__title"
-                            variant="h4"
-                        >
-                            {data.label}
-                        </Text>
-                        <Text
-                            className="neural-advantage-card__description"
-                            variant="body1"
-                            color="text-secondary"
-                        >
-                            {data.description}
-                        </Text>
-                    </Paper>
+                neuralAdvantageCards.map((data, index) => (
+                    <WithAOS
+                        animation={"fade-up"}
+                        delay={calculateCellDelay(index, 3)}
+                        adaptive={[
+                            {
+                                maxWidth: variables.tablet,
+                                attrs: {
+                                    animation: "fade-up",
+                                    delay: calculateCellDelay(index, 2),
+                                },
+                            },
+                            {
+                                maxWidth: variables.smallTablet,
+                                attrs: {
+                                    animation: "fade-right",
+                                    delay: 200,
+                                },
+                            },
+                        ]}
+                    >
+                        <Paper className="neural-advantage-card">
+                            <div class="neural-advantage-card__icon-wrapper">
+                                <img src={data.iconSrc} alt="" />
+                            </div>
+                            <Text
+                                className="neural-advantage-card__title"
+                                variant="h4"
+                            >
+                                {data.label}
+                            </Text>
+                            <Text
+                                className="neural-advantage-card__description"
+                                variant="body1"
+                                color="text-secondary"
+                            >
+                                {data.description}
+                            </Text>
+                        </Paper>
+                    </WithAOS>
                 ))
             }
         </div>
         <div class="neural-advantages__companies">
             {
-                neuralAdvantageCompanies.map((data) => (
-                    <div class="neural-advantages__company">
-                        <Paper
-                            className="neural-advantages__company-logo-wrapper"
-                            backgroundColor="background-upper3"
-                        >
-                            <img src={data.logoSrc} alt={data.name} />
-                        </Paper>
-                        <Text
-                            className="neural-advantages__company-name"
-                            variant={"h5"}
-                        >
-                            {data.name}
-                        </Text>
-                        <Text
-                            className="neural-advantages__company-subtitle"
-                            variant={"body1"}
-                        >
-                            {data.subtitle}
-                        </Text>
-                    </div>
+                neuralAdvantageCompanies.map((data, index) => (
+                    <WithAOS
+                        animation={"fade-up"}
+                        delay={calculateCellDelay(index, 5)}
+                        adaptive={[
+                            {
+                                maxWidth: variables.tablet,
+                                attrs: {
+                                    animation: "fade-up",
+                                    delay: calculateCellDelay(index, 4),
+                                },
+                            },
+                            {
+                                maxWidth: variables.smallTablet,
+                                attrs: {
+                                    animation: "fade-up",
+                                    delay: calculateCellDelay(index, 3),
+                                },
+                            },
+                            {
+                                maxWidth: variables.mobile,
+                                attrs: {
+                                    animation: "fade-right",
+                                    delay: calculateCellDelay(index, 2, {
+                                        rowsDeltaTime: 100,
+                                        columnsDeltaTime: 50,
+                                    }),
+                                },
+                            },
+                        ]}
+                    >
+                        <div class="neural-advantages__company">
+                            <Paper
+                                className="neural-advantages__company-logo-wrapper"
+                                backgroundColor="background-upper3"
+                            >
+                                <img src={data.logoSrc} alt={data.name} />
+                            </Paper>
+                            <Text
+                                className="neural-advantages__company-name"
+                                variant={"h5"}
+                            >
+                                {data.name}
+                            </Text>
+                            <Text
+                                className="neural-advantages__company-subtitle"
+                                variant={"body1"}
+                            >
+                                {data.subtitle}
+                            </Text>
+                        </div>
+                    </WithAOS>
                 ))
             }
         </div>
