@@ -6,6 +6,7 @@ import Section from "./uiKit/Section.astro";
 import Paper from "./uiKit/Paper.astro";
 import Text from "./uiKit/Text.astro";
 import WithAOS from "./utils/WithAOS.astro";
+import cssVars from "../styles/variables";
 
 export interface Props {
     className?: string;
@@ -39,7 +40,16 @@ const profitCards = [
         <div class="profits__cards">
             {
                 profitCards.map((data, index) => (
-                    <WithAOS animation={"fade-up"} delay={index * 150}>
+                    <WithAOS
+                        animation={"fade-up"}
+                        delay={index * 150 + 50}
+                        adaptive={[
+                            {
+                                maxWidth: cssVars.smallTablet,
+                                attrs: { animation: "fade-right" },
+                            },
+                        ]}
+                    >
                         <div>
                             <Paper className="profit-card">
                                 <div class="profit-card__icon-wrapper">

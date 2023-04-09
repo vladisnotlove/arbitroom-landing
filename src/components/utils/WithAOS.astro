@@ -2,7 +2,7 @@
 import { parse, HTMLElement } from "node-html-parser";
 import "aos/dist/aos.css";
 
-interface Props {
+type AOSProps = {
     animation:
         | "fade"
         | "fade-up"
@@ -67,6 +67,13 @@ interface Props {
         | "bottom-center"
         | "bottom-top";
     once?: boolean;
+};
+
+interface Props extends AOSProps {
+    adaptive?: {
+        maxWidth?: number;
+        attrs: AOSProps;
+    }[];
 }
 
 const {
@@ -78,6 +85,7 @@ const {
     anchor,
     anchorPlacement,
     once = true,
+    adaptive,
 } = Astro.props;
 
 const html = await Astro.slots.render("default");
@@ -87,6 +95,24 @@ dom.childNodes.forEach((node) => {
     // ELEMENT
     if (node instanceof HTMLElement) {
         node.setAttribute("data-aos", animation);
+        if (adaptive) {
+            const defaultAttrs = {
+                animation,
+                offset,
+                duration,
+                easing,
+                delay,
+                anchor,
+                anchorPlacement,
+                once,
+            };
+            const _adaptive: typeof adaptive = [
+                ...adaptive,
+                { attrs: defaultAttrs },
+            ];
+
+            node.setAttribute("data-aos-adaptive", JSON.stringify(_adaptive));
+        }
         if (offset) node.setAttribute("data-aos-offset", "" + offset);
         if (duration) node.setAttribute("data-aos-duration", "" + duration);
         if (easing) node.setAttribute("data-aos-easing", easing);
@@ -102,12 +128,66 @@ dom.childNodes.forEach((node) => {
 <Fragment set:html={dom.toString()} />
 
 <script>
+    import { debounce } from "throttle-debounce";
     import AOS from "aos";
 
+    const updateAttrs = () => {
+        try {
+            let attrsChanged = false;
+            document
+                .querySelectorAll("[data-aos-adaptive]")
+                .forEach((element) => {
+                    const str = element.getAttribute("data-aos-adaptive");
+                    const adaptive = str ? JSON.parse(str) : null;
+                    let finalAttrs: any;
+
+                    if (adaptive && Array.isArray(adaptive)) {
+                        adaptive.forEach(({ maxWidth, attrs }) => {
+                            if (maxWidth !== undefined) {
+                                if (window.innerWidth < maxWidth) {
+                                    finalAttrs = attrs;
+                                }
+                            } else {
+                                if (finalAttrs === undefined) {
+                                    finalAttrs = attrs;
+                                }
+                            }
+                        });
+                    }
+
+                    if (finalAttrs !== undefined) {
+                        Object.entries(finalAttrs).forEach(([key, value]) => {
+                            if (key === "animation") {
+                                element.setAttribute("data-aos", String(value));
+                            } else {
+                                element.setAttribute(
+                                    `data-aos-${key}`,
+                                    String(value)
+                                );
+                            }
+                        });
+                        attrsChanged = true;
+                    }
+                });
+
+            if (attrsChanged) {
+                AOS.refresh();
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
     window.addEventListener("load", () => {
+        updateAttrs();
+
         // wait for loader appear
         setTimeout(() => {
-            AOS.init();
+            AOS.init({
+                duration: 800,
+            });
         }, 300);
     });
+
+    window.addEventListener("resize", debounce(200, updateAttrs));
 </script>
