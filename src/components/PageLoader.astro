@@ -26,7 +26,7 @@ const { className } = Astro.props;
         left: 0;
         width: 100%;
         height: 100%;
-        background: var(--color-background);
+        background: var(--color-background-upper1);
 
         display: flex;
         flex-direction: column;
@@ -34,7 +34,7 @@ const { className } = Astro.props;
         align-items: center;
         justify-content: center;
         z-index: var(--z-index-page-loader);
-        transition: opacity 0.5s 0.4s ease-in, transform 0s 0.8s;
+        transition: opacity 0.25s 0.15s ease-in, transform 0s 0.4s;
     }
     .page-loader.hidden {
         transform: translateY(-200%);
@@ -42,19 +42,17 @@ const { className } = Astro.props;
     }
     .page-loader.hidden > .page-loader__spinner {
         opacity: 0;
-        transform: scale(2);
     }
     .page-loader.hidden > .page-loader__logo {
         opacity: 0;
-        transform: translateY(-500px);
-        //transform:
+        transform: scale(0.85);
     }
 
     .page-loader__logo {
         width: 4rem;
         height: 4rem;
         transform-origin: center center;
-        transition: opacity 0.25s 0.2s ease-in, transform 0.5s 0.1s ease-in;
+        transition: all 0.1s 0.15s ease-in;
     }
 
     .page-loader__spinner {
@@ -63,8 +61,7 @@ const { className } = Astro.props;
         left: calc(50% - 3rem);
         width: 6rem;
         height: 6rem;
-        //animation: rotation 10s linear infinite;
-        transition: all 0.4s ease-in;
+        transition: all 0.15s ease-in;
     }
 
     .page-loader__spinner-circle1 {
@@ -79,7 +76,7 @@ const { className } = Astro.props;
         border-top-color: transparent;
         border-radius: 50%;
         transform-origin: center center;
-        animation: rotation 1.25s linear infinite;
+        animation: rotation 1s linear infinite;
     }
 
     .page-loader__spinner-circle2 {
@@ -95,7 +92,7 @@ const { className } = Astro.props;
         border-bottom-color: transparent;
         border-radius: 50%;
         transform-origin: center center;
-        animation: rotation2 1.75s linear infinite reverse;
+        animation: rotation2 1.5s linear infinite reverse;
     }
 
     .page-loader__spinner-circle3 {
@@ -111,7 +108,7 @@ const { className } = Astro.props;
         border-bottom-color: transparent;
         border-radius: 50%;
         transform-origin: center center;
-        animation: rotation3 2s linear infinite;
+        animation: rotation3 1.75s linear infinite;
     }
 
     @keyframes rotation {
@@ -144,7 +141,7 @@ const { className } = Astro.props;
 
 <script is:inline>
     (() => {
-        const MIN_LOADER_TIME = 500;
+        const MIN_LOADER_TIME = 0;
 
         const pageLoader = document.getElementById("pageLoader");
         const timeBefore = performance.now();
