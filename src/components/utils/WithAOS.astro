@@ -77,7 +77,7 @@ const {
     delay,
     anchor,
     anchorPlacement,
-    once,
+    once = true,
 } = Astro.props;
 
 const html = await Astro.slots.render("default");
@@ -105,5 +105,10 @@ dom.childNodes.forEach((node) => {
 <script>
     import AOS from "aos";
 
-    AOS.init();
+    window.addEventListener("load", () => {
+        // wait for loader appear
+        setTimeout(() => {
+            AOS.init();
+        }, 300);
+    });
 </script>

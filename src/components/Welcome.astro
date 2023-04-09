@@ -5,6 +5,7 @@ import Button from "./uiKit/Button.astro";
 import Container from "./uiKit/Container.astro";
 import Icon from "./uiKit/Icon";
 import Text from "./uiKit/Text.astro";
+import WithAOS from "./utils/WithAOS.astro";
 
 export interface Props {
     className?: string;
@@ -15,23 +16,31 @@ const { className } = Astro.props;
 
 <Container className={classNames(className, "welcome")}>
     <div class="welcome__main-content">
-        <div class="welcome__title">{t("@landing.@welcome.title")}</div>
-        <Text className="welcome__description" variant={"h5"}>
-            {t("@landing.@welcome.description")}
-        </Text>
-        <div class="welcome__actions">
-            <Button size={"large"}>
-                {t("@common.startNow")}
-            </Button>
-            <Button size={"large"} color={"primary-dim"}>
-                <Icon iconName={"play"} />
-                {t("@common.watchVideo")}
-            </Button>
+        <WithAOS animation={"fade-right"}>
+            <div class="welcome__title">{t("@landing.@welcome.title")}</div>
+        </WithAOS>
+        <WithAOS animation={"fade-right"} delay={50}>
+            <Text className="welcome__description" variant={"h5"}>
+                {t("@landing.@welcome.description")}
+            </Text>
+        </WithAOS>
+        <WithAOS animation={"fade-right"} delay={100}>
+            <div class="welcome__actions">
+                <Button size={"large"}>
+                    {t("@common.startNow")}
+                </Button>
+                <Button size={"large"} color={"primary-dim"}>
+                    <Icon iconName={"play"} />
+                    {t("@common.watchVideo")}
+                </Button>
+            </div>
+        </WithAOS>
+    </div>
+    <WithAOS animation={"zoom-in"} delay={100}>
+        <div class="welcome__image-wrapper">
+            <img src="/layout-assets/images/image-for-welcome.png" alt="" />
         </div>
-    </div>
-    <div class="welcome__image-wrapper">
-        <img src="/layout-assets/images/image-for-welcome.png" alt="" />
-    </div>
+    </WithAOS>
 </Container>
 
 <style lang="scss">
