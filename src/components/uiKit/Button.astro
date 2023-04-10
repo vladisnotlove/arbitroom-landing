@@ -43,7 +43,7 @@ const { size = "medium", color } = Astro.props;
 
         cursor: pointer;
         box-shadow: 0 0 1.5em change-color($color-prime-dim, $alpha: 0.4);
-        transition: all $animation-normal;
+        transition: all $animation-slow;
 
         .icon {
             margin-top: -50%;
@@ -52,7 +52,9 @@ const { size = "medium", color } = Astro.props;
 
         &:hover {
             text-decoration: none;
-            box-shadow: 0 0 2.25em change-color($color-prime-dim, $alpha: 0.6);
+            background: change-color($color-prime-main, $lightness: 60%);
+            box-shadow: 0 0 2em 0.25em
+                change-color($color-prime-main, $alpha: 0.8, $lightness: 50%);
         }
 
         &.large {
@@ -66,7 +68,12 @@ const { size = "medium", color } = Astro.props;
 
             &:hover {
                 box-shadow: none;
-                background: change-color($color-prime-dim, $alpha: 0.24);
+                color: $color-prime-contrast;
+                background: change-color(
+                    $color-prime-dim,
+                    $alpha: 0.24,
+                    $lightness: 78%
+                );
             }
         }
     }
