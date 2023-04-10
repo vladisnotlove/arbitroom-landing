@@ -132,16 +132,28 @@ const { className, menuItems, id } = Astro.props;
         margin: -0.5rem 0;
     }
     .side-menu__item {
+        position: relative;
         padding: 1rem 0.5rem;
         cursor: pointer;
-        transition: all $animation-normal;
 
-        &:hover {
-            //color: $color-prime-light;
-            transform: translateX(0.75rem);
+        &::after {
+            content: "";
+            position: absolute;
+            top: calc(54%);
+            left: 0;
+            width: 0;
+            height: 0.625rem;
+            background: $color-prime-main;
+            border-radius: 0.5rem;
+            transition: all $animation-slow;
+            z-index: -1;
         }
 
-        // @include animated-underaline(0.5rem, 0.5rem, $position: left 0.5rem);
+        &:hover {
+            &::after {
+                width: 100%;
+            }
+        }
     }
 
     .side-menu__footer {
@@ -167,16 +179,17 @@ const { className, menuItems, id } = Astro.props;
         align-items: center;
         padding: 0.5rem 1rem;
         color: $color-text-prime;
-        border: 1px solid $color-text-prime;
+        box-shadow: 0 0 0 1px $color-text-prime;
         border-radius: 2rem;
 
         // animation
         background: transparent;
         cursor: pointer;
-        transition: background $animation-fast;
+        transition: all $animation-normal;
 
         &:hover {
             background: $color-action-hover;
+            transition: all $animation-fast;
         }
     }
     .side-menu__meta {
