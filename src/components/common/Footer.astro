@@ -1,16 +1,14 @@
 ---
 import classNames from "classNames";
-import { t } from "../utils/i18next";
-import Trans from "../utils/i18next/Trans.astro";
-import Button from "./uiKit/Button.astro";
-import Container from "./uiKit/Container.astro";
-import Icon, { Props as IconProps } from "./uiKit/Icon/Icon.astro";
-import Text from "./uiKit/Text.astro";
-import socials from "../store/socials";
-import Logo from "./Logo.astro";
-import Section from "./uiKit/Section.astro";
-import AppBar from "./uiKit/AppBar.astro";
-import WithAOS from "./utils/WithAOS.astro";
+import { t, Trans } from "@utils/i18next";
+import Button from "@components/uiKit/Button.astro";
+import Container from "@components/uiKit/Container.astro";
+import Icon, { Props as IconProps } from "@components/uiKit/Icon/Icon.astro";
+import Text from "@components/uiKit/Text.astro";
+import socials from "@store/socials";
+import Logo from "@components/common/Logo.astro";
+import AppBar from "@components/uiKit/AppBar.astro";
+import WithAOS from "@components/utils/WithAOS.astro";
 
 export interface Props {
     className?: string;
@@ -108,7 +106,7 @@ const { className, menuItems } = Astro.props;
 </Container>
 
 <style lang="scss" is:global>
-    @import "../styles/variables";
+    @import "../../styles/variables";
 
     .footer {
         position: relative;
@@ -387,7 +385,7 @@ const { className, menuItems } = Astro.props;
 </style>
 
 <script>
-    import addOnOverflow from "../utils/addOnOverflow";
+    import addOnOverflow from "@utils/addOnOverflow";
 
     window.addEventListener("load", () => {
         const footer = document.getElementById("footer");

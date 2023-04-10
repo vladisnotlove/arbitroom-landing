@@ -1,11 +1,11 @@
 ---
 import classNames from "classNames";
-import Logo from "./Logo.astro";
-import AppBar from "./uiKit/AppBar.astro";
-import Container from "./uiKit/Container.astro";
-import { DrawerTrigger } from "./uiKit/Drawer";
-import Icon from "./uiKit/Icon";
-import Text from "./uiKit/Text.astro";
+import Logo from "@components/common/Logo.astro";
+import AppBar from "@components/uiKit/AppBar.astro";
+import Container from "@components/uiKit/Container.astro";
+import { DrawerTrigger } from "@components/uiKit/Drawer";
+import Icon from "@components/uiKit/Icon";
+import Text from "@components/uiKit/Text.astro";
 
 export interface Props {
     className?: string;
@@ -52,7 +52,7 @@ const { className, menuItems, sideMenuId } = Astro.props;
 </Container>
 
 <style lang="scss" is:global>
-    @import "../styles/mixins";
+    @import "../../styles/mixins";
 
     $header-gap: 1rem;
 
@@ -164,7 +164,7 @@ const { className, menuItems, sideMenuId } = Astro.props;
 </style>
 
 <script>
-    import addOnOverflow from "../utils/addOnOverflow";
+    import addOnOverflow from "@utils/addOnOverflow";
 
     window.addEventListener("load", () => {
         const header = document.getElementById("header");

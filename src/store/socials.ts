@@ -1,4 +1,4 @@
-import type { Props as IconProps } from "../components/uiKit/Icon/Icon.astro";
+import type { Props as IconProps } from "@components/uiKit/Icon/Icon.astro";
 import type { TKey } from "../utils/i18next/main";
 
 const socials: Array<{

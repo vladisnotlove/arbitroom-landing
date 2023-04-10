@@ -1,6 +1,6 @@
 ---
 import classNames from "classNames";
-import routes from "../store/routes";
+import routes from "@store/routes";
 
 export interface Props {
     className?: string;
@@ -14,7 +14,7 @@ const { className } = Astro.props;
 </a>
 
 <style lang="scss" is:global>
-    @import "../styles/variables";
+    @import "../../styles/variables";
 
     .logo {
         display: inline-block;

@@ -33,7 +33,7 @@ const { as: As = "div", className, drawerId, attrs } = Astro.props;
 </style>
 
 <script>
-    import toggleDrawer from "./toggleDrawer";
+    import toggleDrawer from "@components/uiKit/Drawer/toggleDrawer";
 
     window.addEventListener("load", () => {
         const triggers = document.querySelectorAll(".drawer-trigger");

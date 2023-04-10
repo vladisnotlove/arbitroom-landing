@@ -1,12 +1,12 @@
 ---
 import classNames from "classNames";
-import socials from "../store/socials";
-import { t } from "../utils/i18next";
-import Logo from "./Logo.astro";
-import AppBar from "./uiKit/AppBar.astro";
-import Drawer, { DrawerTrigger } from "./uiKit/Drawer";
-import Icon from "./uiKit/Icon";
-import Text from "./uiKit/Text.astro";
+import socials from "@store/socials";
+import { t } from "@utils/i18next";
+import Logo from "@components/common/Logo.astro";
+import AppBar from "@components/uiKit/AppBar.astro";
+import Drawer, { DrawerTrigger } from "@components/uiKit/Drawer";
+import Icon from "@components/uiKit/Icon";
+import Text from "@components/uiKit/Text.astro";
 
 export interface Props {
     className?: string;
@@ -86,7 +86,7 @@ const { className, menuItems, id } = Astro.props;
 </Drawer>
 
 <style lang="scss" is:global>
-    @import "../styles/mixins";
+    @import "../../styles/mixins";
 
     $side-menu-width: 280px;
 

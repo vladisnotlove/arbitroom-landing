@@ -35,8 +35,8 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
 </style>
 
 <script>
-    import addOnResize from "../../utils/addOnResize";
-    import drawLine from "../../utils/drawLine";
+    import addOnResize from "@utils/addOnResize";
+    import drawLine from "@utils/drawLine";
 
     window.addEventListener("load", () => {
         const connectors = document.querySelectorAll(".connector");

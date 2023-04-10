@@ -1,16 +1,16 @@
 ---
 import classNames from "classNames";
-import routes from "../store/routes";
-import { t } from "../utils/i18next";
-import Button from "./uiKit/Button.astro";
-import Connector from "./uiKit/Connector.astro";
-import Container from "./uiKit/Container.astro";
-import Paper from "./uiKit/Paper.astro";
-import Section from "./uiKit/Section.astro";
-import Text from "./uiKit/Text.astro";
-import WithAOS from "./utils/WithAOS.astro";
-import calculateCellDelay from "../utils/aos/calculateCellDelay";
-import variables from "../styles/variables";
+import routes from "@store/routes";
+import { t } from "@utils/i18next";
+import Button from "@components/uiKit/Button.astro";
+import Connector from "@components/uiKit/Connector.astro";
+import Container from "@components/uiKit/Container.astro";
+import Paper from "@components/uiKit/Paper.astro";
+import Section from "@components/uiKit/Section.astro";
+import Text from "@components/uiKit/Text.astro";
+import WithAOS from "@components/utils/WithAOS.astro";
+import calculateCellDelay from "@utils/aos/calculateCellDelay";
+import variables from "@styles/variables";
 
 export interface Props {
     className?: string;

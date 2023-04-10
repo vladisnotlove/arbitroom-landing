@@ -1,5 +1,5 @@
-import Vector from "../Vector"
-import type { Position, Anchor } from "./types";
+import Vector from "@utils/Vector"
+import type { Anchor } from "./types";
 import { anchorSideToDirection, getPositionBetween, getPositionsDiff, getPositionsLength } from "./helpers";
 
 // main type

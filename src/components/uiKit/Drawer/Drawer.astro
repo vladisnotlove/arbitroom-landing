@@ -1,7 +1,7 @@
 ---
 import classNames from "classNames";
-import Backdrop from "../Backdrop.astro";
-import Container from "../Container.astro";
+import Backdrop from "@components/uiKit/Backdrop.astro";
+import Container from "@components/uiKit/Container.astro";
 
 export interface Props {
     className?: string;
@@ -127,7 +127,7 @@ const { className, side = "right", id } = Astro.props;
 </style>
 
 <script>
-    import toggleDrawer from "./toggleDrawer";
+    import toggleDrawer from "@components/uiKit/Drawer/toggleDrawer";
 
     window.addEventListener("load", () => {
         const drawers = document.querySelectorAll(".drawer");

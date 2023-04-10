@@ -1,4 +1,4 @@
-import scssVariables from "../styles/variables.module.scss";
+import scssVariables from "@styles/variables.module.scss";
 
 const variables = {
     desktop: parseFloat(scssVariables["desktop"]),
