@@ -1,11 +1,13 @@
 ---
+import LinearGradient from "@components/uiKit/Icon/LinearGradient.astro";
 import classNames from "classNames";
 
 export interface Props {
     className?: string;
+    color?: "gradient";
 }
 
-const { className } = Astro.props;
+const { className, color } = Astro.props;
 ---
 
 <svg
@@ -18,16 +20,48 @@ const { className } = Astro.props;
     <path
         fill-rule="evenodd"
         clip-rule="evenodd"
+        fill={color === "gradient" ? "url(#paint0_radial_104_304)" : undefined}
         d="M17.7032 9.01392L14.3755 18.3473H19.003L21.6976 10.3024L24.3867 18.3473H29.0142L25.6864 9.01392H17.7032ZM30.3643 22.168L33.6696 31.4789H28.7677L25.6584 22.168H30.3643ZM13.0254 22.168L9.70325 31.5013H14.622L17.7313 22.168H13.0254Z"
     ></path>
     <path
         fill-rule="evenodd"
         clip-rule="evenodd"
+        fill={color === "gradient" ? "url(#paint1_radial_104_304)" : undefined}
         d="M36.0049 37.9888C39.2703 35.1219 41.5997 31.3406 42.6913 27.1347C43.783 22.9287 43.5867 18.4919 42.1277 14.3988C40.6688 10.3057 38.0145 6.74497 34.5086 4.17775C31.0027 1.61053 26.8068 0.15511 22.4643 0L24.1449 4.71148C27.2335 5.15744 30.1417 6.43799 32.5561 8.41506C34.9704 10.3921 36.7994 12.9907 37.8456 15.9307C38.8919 18.8706 39.1159 22.0404 38.4933 25.0983C37.8708 28.1561 36.4254 30.986 34.313 33.2829L35.9937 38L36.0049 37.9888ZM20.9068 0C16.5657 0.158296 12.372 1.61601 8.86865 4.18445C5.36527 6.75289 2.71352 10.3138 1.25663 14.4062C-0.200251 18.4987 -0.395183 22.9342 0.697072 27.1387C1.78933 31.3431 4.11847 35.1229 7.38302 37.9888L9.06369 33.2717C6.95128 30.9748 5.50589 28.1449 4.88336 25.087C4.26083 22.0292 4.48477 18.8594 5.53105 15.9195C6.57732 12.9795 8.40624 10.3809 10.8206 8.40386C13.235 6.42679 16.1432 5.14624 19.2318 4.70028L20.9068 0Z"
     ></path>
+    {
+        color === "gradient" && (
+            <defs xmlns="http://www.w3.org/2000/svg">
+                <radialGradient
+                    id="paint0_radial_104_304"
+                    cx="0"
+                    cy="0"
+                    r="1"
+                    gradientUnits="userSpaceOnUse"
+                    gradientTransform="translate(14.9863 -3.37321) rotate(70.4421) scale(35.1897 34.609)"
+                >
+                    <stop stop-color="#20FFFA" />
+                    <stop offset="0.716998" stop-color="#FF20FF" />
+                    <stop offset="1" stop-color="#FF741A" />
+                </radialGradient>
+                <radialGradient
+                    id="paint1_radial_104_304"
+                    cx="0"
+                    cy="0"
+                    r="1"
+                    gradientUnits="userSpaceOnUse"
+                    gradientTransform="translate(9.5638 -20.9322) rotate(69.1637) scale(59.9549 62.1418)"
+                >
+                    <stop stop-color="#20FFFA" />
+                    <stop offset="0.716998" stop-color="#FF20FF" />
+                    <stop offset="1" stop-color="#FF741A" />
+                </radialGradient>
+            </defs>
+        )
+    }
 </svg>
 
-<style lang="scss" is:global>
+<style is:global lang="scss">
     .logo-icon {
         fill: #ff6600;
     }
