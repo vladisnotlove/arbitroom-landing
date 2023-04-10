@@ -22,6 +22,8 @@ const { className, side = "right", id } = Astro.props;
 <style lang="scss" is:global>
     @import "../../../styles/mixins";
 
+    $drawer-shift: 80px;
+
     .drawer {
         display: flex;
 
@@ -33,14 +35,14 @@ const { className, side = "right", id } = Astro.props;
         z-index: $z-index-drawer;
         color: $color-text-prime;
 
-        transition: top 0s 0.1s;
+        transition: top 0s $animation-fast;
 
         &.left {
             justify-content: flex-start;
             .drawer__body {
                 min-width: 0;
                 padding-right: 2rem;
-                transform: translateX(-100%);
+                transform: translateX(-$drawer-shift);
             }
         }
 
@@ -49,7 +51,7 @@ const { className, side = "right", id } = Astro.props;
             .drawer__body {
                 min-width: 0;
                 padding-left: 2rem;
-                transform: translateX(100%);
+                transform: translateX($drawer-shift);
             }
         }
 
@@ -59,13 +61,15 @@ const { className, side = "right", id } = Astro.props;
 
             .drawer__backdrop {
                 opacity: 1;
-                transition: opacity 0.225s cubic-bezier(0.24, 0.45, 0.45, 0.99);
+                transition: opacity $animation-normal
+                    cubic-bezier(0.24, 0.45, 0.45, 0.99);
             }
 
             &.left {
                 .drawer__body {
                     transform: translateX(0);
-                    transition: transform 0.225s
+                    opacity: 1;
+                    transition: transform $animation-normal
                         cubic-bezier(0.24, 0.45, 0.45, 0.99);
                 }
             }
@@ -73,7 +77,8 @@ const { className, side = "right", id } = Astro.props;
             &.right {
                 .drawer__body {
                     transform: translateX(0);
-                    transition: transform 0.225s
+                    opacity: 1;
+                    transition: transform $animation-normal
                         cubic-bezier(0.24, 0.45, 0.45, 0.99);
                 }
             }
@@ -89,7 +94,8 @@ const { className, side = "right", id } = Astro.props;
         background: $color-overlay;
         opacity: 0;
         z-index: 1;
-        transition: opacity 0.105s cubic-bezier(0.75, 0, 0.81, 0.48);
+        transition: opacity $animation-fast cubic-bezier(0.75, 0, 0.81, 0.48),
+            opacity $animation-fast cubic-bezier(0.75, 0, 0.81, 0.48);
     }
 
     .drawer__body {
@@ -100,7 +106,10 @@ const { className, side = "right", id } = Astro.props;
         background: $color-background-upper1;
         overflow-y: scroll;
         z-index: 2;
-        transition: transform 0.105s cubic-bezier(0.75, 0, 0.81, 0.48);
+        opacity: 0;
+
+        transition: transform $animation-fast cubic-bezier(0.75, 0, 0.81, 0.48),
+            opacity $animation-fast cubic-bezier(0.75, 0, 0.81, 0.48);
 
         @include custom-scrollbar;
     }
