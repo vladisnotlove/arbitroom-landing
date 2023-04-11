@@ -114,8 +114,15 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
                     }
                 }, 200);
 
+                let timeouts: number[] = [];
+
                 children.forEach((child, index) => {
                     child.addEventListener("mouseenter", () => {
+                        timeouts.forEach((timeout) => {
+                            clearTimeout(timeout);
+                        });
+                        timeouts = [];
+
                         lines.forEach((line, lineIndex) => {
                             if (line === null) return;
                             if (lineIndex >= index) {
@@ -127,10 +134,13 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
                     });
 
                     child.addEventListener("mouseleave", () => {
-                        lines.forEach((line, lineIndex) => {
-                            if (line === null) return;
-                            line.classList.remove("active");
-                        });
+                        const timeout = setTimeout(() => {
+                            lines.forEach((line) => {
+                                if (line === null) return;
+                                line.classList.remove("active");
+                            });
+                        }, 400);
+                        timeouts.push(timeout);
                     });
                 });
             }, 400);

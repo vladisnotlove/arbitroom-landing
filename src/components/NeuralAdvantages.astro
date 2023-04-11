@@ -386,37 +386,40 @@ const neuralAdvantageCompanies = [
 
     @keyframes logo-move {
         0% {
-            transform: translate(-15px, 0) skew(0deg);
+            transform: translate(0px, 0) skew(10deg);
         }
-        10% {
-            transform: translate(-12px, 0) skew(5deg);
+        5% {
+            transform: translate(4px, 0) skew(10deg);
         }
-        20% {
-            transform: translate(-5px, 0) skew(10deg);
+        15% {
+            transform: translate(10px, 0) skew(10deg);
         }
-        30% {
-            transform: translate(5px, 0) skew(10deg);
+        25% {
+            transform: translate(12px, 0) skew(0deg);
         }
-        40% {
-            transform: translate(12px, 0) skew(10deg);
+        35% {
+            transform: translate(10px, 0) skew(-5deg);
         }
-        50% {
-            transform: translate(15px, 0) skew(0deg);
+        45% {
+            transform: translate(4px, 0) skew(-10deg);
         }
-        60% {
-            transform: translate(12px, 0) skew(-5deg);
+        55% {
+            transform: translate(-4px, 0) skew(-10deg);
         }
-        70% {
-            transform: translate(5px, 0) skew(-10deg);
+        65% {
+            transform: translate(-10px, 0) skew(-10deg);
         }
-        80% {
-            transform: translate(-5px, 0) skew(-10deg);
+        75% {
+            transform: translate(-12px, 0) skew(0deg);
         }
-        90% {
-            transform: translate(-12px, 0) skew(-10deg);
+        85% {
+            transform: translate(-10px, 0) skew(5deg);
+        }
+        95% {
+            transform: translate(-4px, 0) skew(10deg);
         }
         100% {
-            transform: translate(-15px, 0) skew(0deg);
+            transform: translate(0px, 0) skew(10deg);
         }
     }
 
@@ -664,48 +667,57 @@ const neuralAdvantageCompanies = [
             "logo-stretch",
         ];
 
-        for (let i = 0; i < variants.length; i++) {
-            const ri = randomInt(0, variants.length - 1);
-            const temp = variants[i];
-            variants[i] = variants[ri];
-            variants[ri] = temp;
-        }
+        // for (let i = 0; i < variants.length; i++) {
+        //     const ri = randomInt(0, variants.length - 1);
+        //     const temp = variants[i];
+        //     variants[i] = variants[ri];
+        //     variants[ri] = temp;
+        // }
 
         const imgs = document.querySelectorAll(
             ".neural-advantages__company-logo-wrapper > img"
         );
 
+        let salt = 0;
+
         imgs.forEach((img, index) => {
-            const anim = variants[index % variants.length];
+            if (index % variants.length === 0) {
+                let newSalt = randomInt(0, variants.length - 1);
+                for (let i = 0; i < 10 && newSalt === salt; i++) {
+                    newSalt = randomInt(0, variants.length - 1);
+                }
+                salt = newSalt;
+            }
+            const anim = variants[(index + salt) % variants.length];
             img.classList.add(anim);
         });
 
-        const cards = document.querySelectorAll(".neural-advantages__company");
+        // const cards = document.querySelectorAll(".neural-advantages__company");
 
-        cards.forEach((card) => {
-            card.addEventListener("mouseleave", () => {
-                const img = card.querySelector(
-                    ".neural-advantages__company-logo-wrapper > img"
-                );
+        // cards.forEach((card) => {
+        //     card.addEventListener("mouseleave", () => {
+        //         const img = card.querySelector(
+        //             ".neural-advantages__company-logo-wrapper > img"
+        //         );
 
-                if (!img) return;
+        //         if (!img) return;
 
-                // find current anim
-                let currentAnimIndex = variants.findIndex((anim) =>
-                    img.classList.contains(anim)
-                );
-                currentAnimIndex =
-                    currentAnimIndex === -1 ? 0 : currentAnimIndex;
+        //         // find current anim
+        //         let currentAnimIndex = variants.findIndex((anim) =>
+        //             img.classList.contains(anim)
+        //         );
+        //         currentAnimIndex =
+        //             currentAnimIndex === -1 ? 0 : currentAnimIndex;
 
-                // remove all anim classes
-                variants.forEach((anim) => {
-                    img.classList.remove(anim);
-                });
+        //         // remove all anim classes
+        //         variants.forEach((anim) => {
+        //             img.classList.remove(anim);
+        //         });
 
-                // add class of next anim
-                const nextAnimIndex = (currentAnimIndex + 1) % variants.length;
-                img.classList.add(variants[nextAnimIndex]);
-            });
-        });
+        //         // add class of next anim
+        //         const nextAnimIndex = (currentAnimIndex + 1) % variants.length;
+        //         img.classList.add(variants[nextAnimIndex]);
+        //     });
+        // });
     });
 </script>
