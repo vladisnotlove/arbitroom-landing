@@ -137,7 +137,21 @@ const { className, menuItems } = Astro.props;
         grid-area: i;
         position: relative;
         width: clamp(180px, 18.75vw, 360px);
+        animation: footer-img-fly 4s infinite ease-in-out;
     }
+
+    @keyframes footer-img-fly {
+        0% {
+            transform: translateY(-6px);
+        }
+        50% {
+            transform: translateY(6px);
+        }
+        100% {
+            transform: translateY(-6px);
+        }
+    }
+
     .footer__img {
         position: absolute;
         top: 50%;
@@ -248,6 +262,23 @@ const { className, menuItems } = Astro.props;
                 )
                 /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
             filter: blur(128px);
+
+            animation: footer-glow-pulse 8s infinite linear;
+        }
+    }
+
+    @keyframes footer-glow-pulse {
+        0% {
+            transform: scale(0.8);
+            opacity: 0.7;
+        }
+        50% {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(0.8);
+            opacity: 0.7;
         }
     }
 
