@@ -34,9 +34,11 @@ const { className, menuItems } = Astro.props;
             </Text>
         </WithAOS>
         <WithAOS animation={"fade-right"} delay={100}>
-            <Button size={"large"}>
-                {t("@common.join")}
-            </Button>
+            <div>
+                <Button size={"large"}>
+                    {t("@common.join")}
+                </Button>
+            </div>
         </WithAOS>
     </div>
     <WithAOS animation={"zoom-in"} delay={150}>

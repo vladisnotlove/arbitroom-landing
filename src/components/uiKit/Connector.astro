@@ -46,7 +46,7 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
                 connector.getAttribute("data-radius") || ""
             );
             const className = connector.getAttribute("data-line-class");
-            const children = connector.children;
+            const children = Array.from(connector.children);
 
             let lines: (Element | null)[] = new Array(children.length - 1).fill(
                 null
@@ -113,6 +113,26 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
                         drawLines();
                     }
                 }, 200);
+
+                children.forEach((child, index) => {
+                    child.addEventListener("mouseenter", () => {
+                        lines.forEach((line, lineIndex) => {
+                            if (line === null) return;
+                            if (lineIndex >= index) {
+                                line.classList.remove("active");
+                            } else {
+                                line.classList.add("active");
+                            }
+                        });
+                    });
+
+                    child.addEventListener("mouseleave", () => {
+                        lines.forEach((line, lineIndex) => {
+                            if (line === null) return;
+                            line.classList.remove("active");
+                        });
+                    });
+                });
             }, 400);
         });
     });

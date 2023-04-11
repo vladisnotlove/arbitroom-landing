@@ -82,24 +82,30 @@ const steps = [
                             },
                         ]}
                     >
-                        <Paper className={"guide__step"}>
-                            <div class="guide__step-image-wrapper">
-                                <img src={data.imgSrc} />
-                            </div>
-                            <Text
-                                className="guide__step-number"
-                                variant={"body1"}
-                                color="text-secondary"
-                            >
-                                {t("@common.step") + " " + (index + 1)}
-                            </Text>
-                            <Text
-                                className="guide__step-description"
-                                variant={"h5"}
-                            >
-                                {data.description}
-                            </Text>
-                        </Paper>
+                        <div>
+                            <Paper className={"guide__step"}>
+                                <div
+                                    class="guide__step-image-wrapper"
+                                    style={`animation-delay: -${index * 0.5}s`}
+                                >
+                                    <img src={data.imgSrc} />
+                                </div>
+                                <Text
+                                    className="guide__step-number"
+                                    variant={"body1"}
+                                    color="text-secondary"
+                                >
+                                    {t("@common.step") + " " + (index + 1)}
+                                </Text>
+                                <Text
+                                    className="guide__step-description"
+                                    variant={"h5"}
+                                >
+                                    <span>{data.description}</span>
+                                    <span>{data.description}</span>
+                                </Text>
+                            </Paper>
+                        </div>
                     </WithAOS>
                 ))
             }
@@ -159,11 +165,42 @@ const steps = [
             align-items: center;
             justify-content: center;
         }
+
+        &:hover {
+            cursor: pointer;
+            .guide__step-number {
+                color: $color-text-prime;
+            }
+
+            .guide__step-description {
+                & > span:nth-child(1) {
+                    background-size: 0 100%;
+                }
+
+                & > span:nth-child(2) {
+                    background-size: 100% 100%;
+                }
+            }
+        }
     }
+
+    @keyframes fly {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-6px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
     .guide__step-image-wrapper {
         position: relative;
         width: 80%;
         aspect-ratio: 2.21;
+        animation: fly 2.5s ease-in-out infinite;
 
         & > img {
             position: absolute;
@@ -174,8 +211,39 @@ const steps = [
             transform: translate(-50%, -50%);
         }
     }
+
+    .guide__step-number {
+        position: relative;
+        transition: all $animation-fast;
+        padding: 0 0.75rem;
+    }
+
     .guide__step-description {
+        position: relative;
         text-align: center;
+
+        & > span:first-child {
+            background-image: linear-gradient(
+                to right,
+                $color-text-prime 0%,
+                $color-text-prime 100%
+            );
+            background-repeat: no-repeat;
+            background-position: right;
+            background-size: 100% 100%;
+            @include background-clip-text;
+            transition: all 0.6s;
+        }
+
+        & > span:nth-child(2) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            @include gradient-primary-for-text;
+            background-repeat: no-repeat;
+            background-size: 0 100%;
+            transition: all 0.6s;
+        }
     }
 
     svg.guide__line {
@@ -183,6 +251,14 @@ const steps = [
         stroke-opacity: 0.24;
         stroke-width: 1;
         stroke-dasharray: 8 8;
+        transition: all $animation-slow;
+
+        &.active {
+            stroke: #fff;
+            stroke-opacity: 1;
+            stroke-dasharray: 8 10;
+            stroke-dashoffset: -64px;
+        }
     }
 
     @media (max-width: $small-desktop) {
