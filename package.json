@@ -13,15 +13,19 @@
   "dependencies": {
     "aos": "^2.3.4",
     "astro": "^2.0.6",
+    "chalk": "^5.2.0",
     "classnames": "^2.3.2",
     "flat": "^5.0.2",
+    "glob": "^10.0.0",
     "throttle-debounce": "^5.0.0",
     "url-join": "^5.0.0"
   },
   "devDependencies": {
     "@types/aos": "^3.0.4",
     "@types/flat": "^5.0.2",
+    "@types/node": "^18.15.11",
     "@types/throttle-debounce": "^5.0.0",
+    "astro-html-beautifier": "^1.0.4",
     "node-html-parser": "^6.1.4",
     "sass": "^1.58.0"
   }
