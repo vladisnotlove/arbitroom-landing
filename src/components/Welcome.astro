@@ -79,49 +79,11 @@ const { className } = Astro.props;
         position: relative;
         min-width: 0;
         margin-bottom: clamp(0px, 4vw, 76px);
-
-        &::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-
-            width: 79%;
-            aspect-ratio: 1.32;
-
-            background: radial-gradient(
-                    136.3% 147.46% at 22.04% -55.08%,
-                    rgba(32, 255, 250, 0.16) 0%,
-                    rgba(255, 32, 255, 0.16) 71.7%,
-                    rgba(255, 116, 26, 0.16) 100%
-                )
-                /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-            filter: blur(64px);
-            animation: glow-pulse 3s infinite ease-in-out;
-            animation-delay: -1.25s;
-            transform-origin: center;
-        }
     }
 
     .welcome__image {
         width: 100%;
         height: 100%;
-    }
-
-    @keyframes glow-pulse {
-        0% {
-            opacity: 0.5;
-            transform: translate(-50%, -50%) scale(0.7);
-        }
-        50% {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1.3);
-        }
-        100% {
-            opacity: 0.5;
-            transform: translate(-50%, -50%) scale(0.7);
-        }
     }
 
     @media (max-width: $desktop) {
@@ -201,10 +163,13 @@ const { className } = Astro.props;
                 align-items: flex-start;
             }
 
+            .welcome__image {
+                width: auto;
+            }
+
             .welcome__image-wrapper {
                 order: 1;
                 min-width: 0;
-                width: 400px;
                 max-height: clamp(100px, 25vh, 228px);
                 max-width: 100%;
                 min-height: 0;

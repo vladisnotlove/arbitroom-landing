@@ -1,0 +1,18 @@
+<svg width="297" height="116" viewBox="0 0 297 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_b_401_591)">
+<path d="M275 24L273.008 30.3764C271.016 36.7527 267.032 49.5055 263.048 56.0205C259.063 62.5356 255.079 62.8129 251.095 65.4305C247.111 68.048 243.127 73.0058 239.143 74.952C235.159 76.8982 231.175 75.8328 227.19 77.509C223.206 79.1851 219.222 83.6028 215.238 85.935C211.254 88.2672 207.27 88.514 203.286 87.2261C199.302 85.9381 195.317 83.1155 191.333 82.6585C187.349 82.2016 183.365 84.1102 179.381 83.0625C175.397 82.0147 171.413 78.0104 167.429 76.9749C163.444 75.9394 159.46 77.8726 155.476 77.5719C151.492 77.2712 147.508 74.7366 143.524 73.3462C139.54 71.9559 135.556 71.7098 131.571 73.5006C127.587 75.2914 123.603 79.1192 119.619 82.1248C115.635 85.1305 111.651 87.314 107.667 85.9121C103.683 84.5103 99.6984 79.5232 95.7143 77.9063C91.7302 76.2893 87.746 78.0426 83.7619 77.988C79.7778 77.9334 75.7936 76.0709 71.8095 75.6644C67.8254 75.2578 63.8413 76.3073 59.8571 75.9568C55.873 75.6063 51.8889 73.8559 47.9048 73.3731C43.9206 72.8902 39.9365 73.675 35.9524 74.0674C31.9682 74.4598 27.9841 74.4598 25.9921 74.4598H24" stroke="url(#paint0_radial_401_591)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<filter id="filter0_b_401_591" x="-64" y="-64" width="425" height="244" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="32"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_401_591"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_401_591" result="shape"/>
+</filter>
+<radialGradient id="paint0_radial_401_591" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(219.672 -11.2542) rotate(142.586) scale(155.329 233.703)">
+<stop stop-color="#20FFFA"/>
+<stop offset="0.716998" stop-color="#FF20FF"/>
+<stop offset="1" stop-color="#FF741A"/>
+</radialGradient>
+</defs>
+</svg>
