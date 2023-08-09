@@ -8,11 +8,12 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier .prettierrc.js --write"
   },
   "dependencies": {
     "aos": "^2.3.4",
-    "astro": "^2.0.6",
+    "astro": "^2.8.5",
     "chalk": "^5.2.0",
     "classnames": "^2.3.2",
     "flat": "^5.0.2",
@@ -27,6 +28,8 @@
     "@types/throttle-debounce": "^5.0.0",
     "astro-html-beautifier": "^1.0.4",
     "node-html-parser": "^6.1.4",
+    "prettier": "^3.0.0",
+    "prettier-plugin-astro": "^0.11.0",
     "sass": "^1.58.0"
   }
 }
