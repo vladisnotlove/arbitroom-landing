@@ -2,21 +2,21 @@
 
 /** @type {import("prettier").Options} */
 const config = {
-	trailingComma: 'all',
-	tabWidth: 4,
-	useTabs: true,
-	semi: false,
-	singleQuote: true,
+    trailingComma: "all",
+    tabWidth: 4,
+    //useTabs: true,
+    semi: true,
+    singleQuote: false,
 
-	plugins: [require.resolve('prettier-plugin-astro')],
-	overrides: [
-		{
-			files: '*.astro',
-			options: {
-				parser: 'astro',
-			},
-		},
-	],
+    plugins: [require.resolve("prettier-plugin-astro")],
+    overrides: [
+        {
+            files: "*.astro",
+            options: {
+                parser: "astro",
+            },
+        },
+    ],
 }
 
 module.exports = config
