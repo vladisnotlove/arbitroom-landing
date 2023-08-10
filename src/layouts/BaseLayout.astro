@@ -1,12 +1,12 @@
 ---
-import PageLoader from "@components/common/PageLoader.astro";
-import i18next from "@utils/i18next";
+import PageLoader from '@components/common/PageLoader.astro'
+import i18next from '@utils/i18next'
 
 export interface Props {
-	title: string;
+	title: string
 }
 
-const { title, theme } = Astro.props;
+const { title } = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -37,6 +37,9 @@ const { title, theme } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 
 		<title>{title}</title>
+
+		<!-- import fonts -->
+		<link rel="stylesheet" href="/_layout-assets/css/fonts.css" />
 	</head>
 	<body>
 		<PageLoader />
@@ -46,8 +49,8 @@ const { title, theme } = Astro.props;
 
 <style is:global lang="scss">
 	// global styles
-	@import "../styles/reset.scss";
-	@import "../styles/base.scss"; // already include "variables.scss"
+	@import '../styles/reset.scss';
+	@import '../styles/base.scss'; // already include "variables.scss"
 
 	body {
 		background: $color-background-upper1;
