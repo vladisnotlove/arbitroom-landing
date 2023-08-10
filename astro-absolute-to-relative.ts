@@ -35,11 +35,6 @@ export default function (): AstroIntegration {
                             const relativePathname = path.relative(path.dirname(htmlPath), pathnameInOS).replaceAll(path.sep, path.posix.sep);
                             const newLink = `${parts[0]}"${relativePathname}"`;
                             newHtml = newHtml ? newHtml.replace(link, newLink) : html.replace(link, newLink);
-
-                            console.log("---")
-                            console.log(path.dirname(htmlPath));
-                            console.log(pathnameInOS);
-                            console.log(relativePathname);
                         })
 
                         if (newHtml) {
