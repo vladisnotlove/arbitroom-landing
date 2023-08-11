@@ -159,6 +159,7 @@ const steps = [
         gap: 1rem;
         padding: 1.5rem 2rem;
         overflow: hidden;
+        height: 100%;
 
         &.with-action {
             display: flex;
@@ -246,7 +247,7 @@ const steps = [
         }
     }
 
-    svg.guide__line {
+    :global(svg.guide__line) {
         stroke: white;
         stroke-opacity: 0.24;
         stroke-width: 1;

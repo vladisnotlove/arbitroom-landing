@@ -43,13 +43,13 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
 
         connectors.forEach((connector) => {
             const radius = parseFloat(
-                connector.getAttribute("data-radius") || ""
+                connector.getAttribute("data-radius") || "",
             );
             const className = connector.getAttribute("data-line-class");
             const children = Array.from(connector.children);
 
             let lines: (Element | null)[] = new Array(children.length - 1).fill(
-                null
+                null,
             );
             let observer = new IntersectionObserver(
                 (entries) => {
@@ -63,7 +63,7 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
                     root: null,
                     rootMargin: "0px 100px 0px 100px",
                     threshold: [1],
-                }
+                },
             );
 
             const clearLines = () => {
@@ -134,7 +134,7 @@ const { className, classes = {}, lineOptions = {} } = Astro.props;
                     });
 
                     child.addEventListener("mouseleave", () => {
-                        const timeout = setTimeout(() => {
+                        const timeout = window.setTimeout(() => {
                             lines.forEach((line) => {
                                 if (line === null) return;
                                 line.classList.remove("active");
