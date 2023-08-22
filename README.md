@@ -1,29 +1,47 @@
-# Arbitroom landing
+# Arbitroom landing (партнерский)
 
-It is a project for the frontend static part of Arbitroom's landing. 
+Проект партнеского лендинга для Arbitroom
 
-Arbitroom is a platform for everyone that helps to make money on cryptocurrency.
-
-## Tech stack
+## Стэк технологий
 
 - astro
+- typescript
 
-## How to run
+## Структура проекта
 
-Only for development
+public - папка с ассетами (содержимое копируется в билд)
+
+src - исходный код
+
+- **components** - компоненты
+- **layouts** - обертки над страницами (по сути компоненты)
+- **pages** - страницы
+- **store** - различные часто используемые данные
+- **styles** - стили (reset, scss-переменные и пр)
+- **types** - ts-типы
+- **utils** - вспомогательные модули для компонент
+
+## Важные моменты
+
+- Файл public/_layout-assets/css/fonts.css не вынесен в src/styles, так как при компиляции ломаются ссылки в url(...)
+
+
+## Как запускать
+
+Запуск в dev режиме (только при разработке использовать)
+
 ```shell
 npm i
 npm run dev
 ```
 
-For production
+Компиляция для prod-а (билд будет находиться в папке /dist)
 
 ```shell
 npm i
-npm run build # build a static site in '/dist'
-npm run preview # run a local server to preview '/dist' 
+npm run build
+npm run preview # (не обязательно) для запуска локального сервера, чтобы просмотреть билд
 ```
 
-Then, add an inner of `/dist` to your server 
 
 
